@@ -6,26 +6,12 @@ import { Router } from '@angular/router';
   selector: 'app-student-sign-in',
   templateUrl: './student-sign-in.component.html',
   styleUrls: ['./student-sign-in.component.css'],
-  providers: [ UserService ]
 })
 
 export class StudentSignInComponent implements OnInit {
-  signin;
 
-  constructor(private userService: UserService, private router: Router) { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
-    this.signin = {
-      username:'',
-      password:'',
-    };
-  }
-  SignIn(){
-    this.userService.signinNewStudent(this.signin).subscribe(
-      response => {
-        this.router.navigateByUrl('student-page/mypage');
-      },
-      error => console.log('error', error)
-    )
   }
 }

@@ -137,8 +137,11 @@ STATICFILES_DIRS = [
 
 REST_FRAMEWORK = {
    'DEFAULT_AUTHENTICATION_CLASSES': (
-   'rest_framework.authentication.TokenAuthentication',
-   )
+       'rest_framework.authentication.TokenAuthentication',
+   ),
+#   'DEFAULT_PERMISSION_CLASSES': (
+#       'rest_framework.permissions.IsAuthenticated',
+#   )
 }
 
 AUTHENTICATION_BACKENDS = (
@@ -149,4 +152,4 @@ AUTHENTICATION_BACKENDS = (
 SOCIAL_AUTH_GITHUB_KEY = 'abed2d6bd220b1c01507'
 SOCIAL_AUTH_GITHUB_SECRET = 'ee1776778dd1280478b06fc13d220a521b5333a0'
 
-LOGIN_REDIRECT_URL = 'student'
+LOGIN_REDIRECT_URL = 'success-login'

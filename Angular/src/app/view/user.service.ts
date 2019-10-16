@@ -11,12 +11,24 @@ export class UserService {
     return this.http.post('./sstudents/', userData);
   }
 
+  signupNewCsee(userData): Observable<any> {
+    return this.http.post('./pprofessors/', userData);
+  }
+
   signinNewCsee(userData): Observable<any> {
     return this.http.post('./auth/', userData);
   }
 
   signinNewStudent(userData): Observable<any> {
-    return this.http.post('./auth/', userData);
+    return this.http.post('./auth2/', userData);
+  }
+  
+  registerHomework(userData): Observable<any> {
+    return this.http.post('./hhomeworks/', userData);
+  }
+
+  manageHomework(): Observable<any> {
+    return this.http.get('./hhomeworks/');
   }
 
 }

@@ -1,3 +1,6 @@
+html, body {
+    background-color: #F5F093;
+}
 mat-sidenav-container, mat-sidenav-content, mat-sidenav {
     height: 100%;
 }
