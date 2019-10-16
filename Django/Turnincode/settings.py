@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'social_django',
     'turninApp.apps.TurninappConfig',
+    'django_filters',
 ]
 
 MIDDLEWARE = [

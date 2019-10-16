@@ -10,6 +10,7 @@ from .serializers import *
 from .models import *
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
+from django.core import serializers
 
 def home(request):
     return render(request, 'home.html')
@@ -23,6 +24,16 @@ def csee(request):
 def fordocker():
     time.sleep(5);
     os.system('./docker/rundocker.sh')
+
+def search(request, homework):
+#    current_user = request.user
+#    print(current_user)
+#    if Student.objects.filter(student_id=current_user).exists():
+    hw = Homework.objects.get(hw_name=homework)
+    print(hw.hw_name)
+#    res = serializers.serialize('json',hw)
+    return HttpResponse(hw.hw_name, content_type="text/json-comment-filtered")
+    
 
 def run_code(request):
     repository_name = "hw1-MJ"    

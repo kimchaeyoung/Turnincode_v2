@@ -19,4 +19,8 @@ export class UserService {
     return this.http.post('./auth/', userData);
   }
 
+  searchStudent(): Observable<any> {
+    return this.http.get('./hhomeworks/');
+  }
+
 }

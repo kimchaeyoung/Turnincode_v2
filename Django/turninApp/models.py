@@ -10,7 +10,8 @@ class Student(models.Model):
         return self.student_name
 
 class Homework(models.Model):
-    hw_name = models.CharField(max_length=200)
+    hw_name = models.CharField(max_length=200) # same with repo name
     hw_link = models.CharField(max_length=200)
     hw_description = models.CharField(max_length=500)
 #    duedate = models.DateTimeField(blank=True, null=True)
+

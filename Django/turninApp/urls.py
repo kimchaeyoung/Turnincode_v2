@@ -22,5 +22,6 @@ urlpatterns = [
     path('result/', views.run_code, name='result'),
     path('auth/', ObtainAuthToken.as_view()),
     path('github/', views.github_login),
+    url(r'^student-page/search/searchinghw/(?P<homework>[^/]+)/$', views.search, name='search'),
     url(r'^auth/', include('social_django.urls', namespace='social')),
 ]
