@@ -3,10 +3,14 @@
     <input type="text" name="name" id="homeworkName" maxlength="140"
            required [(ngModel)]="register.hw_name"/>
 
-    <br><label for="homeworkName">link:</label>
-    <input type="text" name="link" id="homeworkLink" maxlength="140"
-           required [(ngModel)]="register.hw_link"/>
-
+    <br><label for="homeworkName">basecode_url:</label>
+    <input type="text" name="basecode_url" id="baseUrl" maxlength="140"
+           required [(ngModel)]="register.hw_base"/>
+ 
+    <br><label for="homeworkName">evaluation_url:</label>
+    <input type="text" name="evaluation_url" id="evalUrl" maxlength="140"
+           required [(ngModel)]="register.hw_eval"/>
+ 
     <br><label for="homeworkDescription">description:</label>
     <input type="text" name="description" id="homeworkDescription" maxlength="140"
            required [(ngModel)]="register.hw_description"/>

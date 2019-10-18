@@ -18,6 +18,7 @@ class Professor(models.Model):
 
 class Homework(models.Model):
     hw_name = models.CharField(max_length=200)
-    hw_link = models.CharField(max_length=200)
+    hw_base = models.CharField(max_length=200)
+    hw_eval = models.CharField(max_length=200)
     hw_description = models.CharField(max_length=500)
     hw_duedate = models.DateTimeField(blank=True, null=True)

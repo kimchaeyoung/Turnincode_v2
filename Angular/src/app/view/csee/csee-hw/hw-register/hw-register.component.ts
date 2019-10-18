@@ -16,7 +16,8 @@ export class HwRegisterComponent implements OnInit {
   ngOnInit() {
     this.register = {
       hw_name: '',
-      hw_link: '',
+      hw_base: '',
+      hw_eval: '',
       hw_description: '',
       hw_duedate: '',
     };
