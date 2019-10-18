@@ -16,8 +16,8 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 class StudentSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Student
-        fields = ('student_id', 'student_name', 'student_number', 'student_password')
-        extra_kwargs = {'student_password': {'write_only':True, 'required':True}}
+        fields = ('student_id', 'student_name', 'student_number')
+#        extra_kwargs = {'student_password': {'write_only':True, 'required':True}}
 
     def create(self, validated_data):
         student = Student.objects.create(**validated_data)

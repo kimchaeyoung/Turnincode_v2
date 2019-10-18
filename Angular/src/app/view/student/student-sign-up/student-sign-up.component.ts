@@ -19,7 +19,6 @@ export class StudentSignUpComponent implements OnInit{
       student_id: '',
       student_name: '',
       student_number: '',
-      student_password: ''
     };
   }
   SignUp(){

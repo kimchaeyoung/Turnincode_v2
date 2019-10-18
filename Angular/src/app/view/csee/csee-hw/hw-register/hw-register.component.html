@@ -1,5 +1,5 @@
 <h1> Homework Register </h1>
-    <label for="homeworkName">name:</label>
+    <label for="homeworkName">hw_name:</label>
     <input type="text" name="name" id="homeworkName" maxlength="140"
            required [(ngModel)]="register.hw_name"/>
 
@@ -12,6 +12,6 @@
            required [(ngModel)]="register.hw_description"/>
 
     <br><label for="homeworkDuedate">duedate:</label>
-    <input type="text" name="duedate" id="homeworkDuedate" maxlength="140"
+    <input type="datetime-local" name="duedate" id="homeworkDuedate" maxlength="140"
            required [(ngModel)]="register.hw_duedate"/>
     <br><button (click)="Register()"> Create! </button>
