@@ -10,9 +10,38 @@ from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.response import Response
 from django.shortcuts import redirect
 from django.http import HttpResponse
+import subprocess 
+import json
 
+sudotoken = "c355dacd928c9597dd7ec1f6122c4ec9f775906c"
 
 def signin(request):
+    
+    command = 'curl -u forCSEE:'+ sudotoken + ' https://api.github.com/user/repository_invitations'
+    command = command.split()
+    s = subprocess.check_output(command) 
+    s = s.decode('utf-8')
+    s = json.loads(s)
+
+    for i in s:
+      print(i['id'])
+      print(i['repository']['html_url'])
+
+      col_id = str(i['id'])
+      col_name = i['repository']['full_name']
+
+      command = 'curl --request PATCH -i -u forCSEE:' + sudotoken + ' https://api.github.com/user/repository_invitations/' + col_id
+      command = command.split()
+      subprocess.check_output(command)
+      
+      command = 'git clone https://forCSEE:' + sudotoken + '@github.com/' + col_name +'.git'
+      command = command.split()
+      subprocess.check_output(command)
+      
+      # .turnincode 유무 판단 
+      # 있으면, basecode url 이랑hw 모델의 base_url 과 같은것을 찾아서 학생과의 relationship을 구축 ! 
+      # 없으면, 교수라고 판단하고 아무것도 하지 않음. 
+
     return render(request, 'signin.html')
 
 def signup(request):
