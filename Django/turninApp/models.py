@@ -22,3 +22,11 @@ class Homework(models.Model):
     hw_eval = models.CharField(max_length=200)
     hw_description = models.CharField(max_length=500)
     hw_duedate = models.DateTimeField(blank=True, null=True)
+
+class Homework_Student(models.Model):
+    hw = models.ForeignKey(Homework, related_name = "homework", on_delete=models.CASCADE)
+    std = models.CharField(max_length=50)
+    score = models.CharField(max_length=100)    
+
+
+

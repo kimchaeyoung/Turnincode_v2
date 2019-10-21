@@ -12,12 +12,13 @@ from django.shortcuts import redirect
 from django.http import HttpResponse
 import subprocess 
 import json
+import os.path
 
-sudotoken = "c355dacd928c9597dd7ec1f6122c4ec9f775906c"
+sudotoken = "d3eb51fdf3e462bdc9ec6dc915fa62b7bc4fa2ab"
 
 def signin(request):
     
-    command = 'curl -u forCSEE:'+ sudotoken + ' https://api.github.com/user/repository_invitations'
+    command = 'curl -u forCSEE:' + sudotoken + ' https://api.github.com/user/repository_invitations'
     command = command.split()
     s = subprocess.check_output(command) 
     s = s.decode('utf-8')
@@ -29,6 +30,9 @@ def signin(request):
 
       col_id = str(i['id'])
       col_name = i['repository']['full_name']
+      col_repo = i['repository']['name']
+      user_id = i['repository']['owner']['login']
+
 
       command = 'curl --request PATCH -i -u forCSEE:' + sudotoken + ' https://api.github.com/user/repository_invitations/' + col_id
       command = command.split()
@@ -38,6 +42,19 @@ def signin(request):
       command = command.split()
       subprocess.check_output(command)
       
+      if os.path.exists(col_repo+'/.turnincode'):
+          print("student")
+          f = open(col_repo+'/.turnincode', 'r')
+          line = f.readline()
+          line = line.rstrip('\n')
+          if Homework.objects.filter(hw_base=line).exists():
+              h = Homework.objects.get(hw_base=line)
+              hs = Homework_Student(hw=h, std=user_id)
+              hs.save()
+          f.close() 
+      else:
+          print("professor")
+  
       # .turnincode 유무 판단 
       # 있으면, basecode url 이랑hw 모델의 base_url 과 같은것을 찾아서 학생과의 relationship을 구축 ! 
       # 없으면, 교수라고 판단하고 아무것도 하지 않음. 
