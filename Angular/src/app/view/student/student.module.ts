@@ -1,3 +1,8 @@
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatInputModule } from '@angular/material';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StudentSignInComponent } from './student-sign-in/student-sign-in.component';
@@ -26,6 +31,10 @@ export const ROUTES:Routes = [
     CommonModule,
     RouterModule.forRoot(ROUTES),
     FormsModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    BrowserAnimationsModule,
   ]
 })
 export class StudentModule { }

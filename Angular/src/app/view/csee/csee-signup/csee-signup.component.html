@@ -1,6 +1,10 @@
-<div style="text-align:center">
+<div style="text-align:center; margin-top:10%">
   <h1>Enter your info.</h1>
-  <input [(ngModel)]="signup.professor_id" placeholder="professor_id"><br>
-  <input [(ngModel)]="signup.professor_name" placeholder="professor_name"><br>
-  <button (click)="SignUp()"> Submit </button>
+  <mat-form-field>
+    <input matInput placeholder="professor id" [(ngModel)]="signup.professor_id">
+  </mat-form-field>
+  <br><mat-form-field>
+    <input matInput placeholder="professor name" [(ngModel)]="signup.professor_name">
+  </mat-form-field>
+  <br><button mat-raised-button color="primary" (click)="SignUp()"> Submit </button>
 </div>

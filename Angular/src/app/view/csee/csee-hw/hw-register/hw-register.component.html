@@ -1,21 +1,18 @@
-<h1> Homework Register </h1>
-    <label for="homeworkName">hw_name:</label>
-    <input type="text" name="name" id="homeworkName" maxlength="140"
-           required [(ngModel)]="register.hw_name"/>
-
-    <br><label for="homeworkName">basecode_url:</label>
-    <input type="text" name="basecode_url" id="baseUrl" maxlength="140"
-           required [(ngModel)]="register.hw_base"/>
- 
-    <br><label for="homeworkName">evaluation_url:</label>
-    <input type="text" name="evaluation_url" id="evalUrl" maxlength="140"
-           required [(ngModel)]="register.hw_eval"/>
- 
-    <br><label for="homeworkDescription">description:</label>
-    <input type="text" name="description" id="homeworkDescription" maxlength="140"
-           required [(ngModel)]="register.hw_description"/>
-
-    <br><label for="homeworkDuedate">duedate:</label>
-    <input type="datetime-local" name="duedate" id="homeworkDuedate" maxlength="140"
-           required [(ngModel)]="register.hw_duedate"/>
-    <br><button (click)="Register()"> Create! </button>
+<div style="text-align:center; margin-top:10%;" class="form">
+  <h1> Homework Register </h1>
+    <mat-form-field>
+      <input matInput placeholder="hw name" type="text" required [(ngModel)]="register.hw_name"/>
+    </mat-form-field>
+    <br><mat-form-field>
+      <input matInput placeholder="basecode url" type="text" required [(ngModel)]="register.hw_base"/>
+    </mat-form-field>    
+    <br><mat-form-field>
+      <input matInput placeholder="evaluation url" type="text" required [(ngModel)]="register.hw_eval"/>
+    </mat-form-field> 
+    <br><mat-form-field>
+      <input matInput placeholder="description" type="text" required [(ngModel)]="register.hw_description"/>
+    </mat-form-field> 
+    <br><mat-form-field>
+      <input matInput placeholder="duedate" type="text" required [(ngModel)]="register.hw_duedate"/>
+    </mat-form-field>
+    <br><button mat-raised-button color="primary" (click)="Register()"> Create! </button>

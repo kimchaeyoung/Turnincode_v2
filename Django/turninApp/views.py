@@ -17,7 +17,7 @@ import os.path
 sudotoken = "d3eb51fdf3e462bdc9ec6dc915fa62b7bc4fa2ab"
 
 def signin(request):
-    
+    '''    
     command = 'curl -u forCSEE:' + sudotoken + ' https://api.github.com/user/repository_invitations'
     command = command.split()
     s = subprocess.check_output(command) 
@@ -58,7 +58,7 @@ def signin(request):
       # .turnincode 유무 판단 
       # 있으면, basecode url 이랑hw 모델의 base_url 과 같은것을 찾아서 학생과의 relationship을 구축 ! 
       # 없으면, 교수라고 판단하고 아무것도 하지 않음. 
-
+    '''
     return render(request, 'signin.html')
 
 def signup(request):

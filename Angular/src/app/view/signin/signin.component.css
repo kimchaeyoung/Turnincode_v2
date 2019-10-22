@@ -1,3 +1,15 @@
+.teaser-txt {
+    margin-top: 10%;
+    margin-bottom: 2%;
+    font-size: 100px;
+    color: #CF4E37;
+}
+
+.fcolor {
+    font-size: 30px;
+    color: #CF4E37;
+}
+
 .font {
-    font-family: 'Lobster';
+    font-family: 'Libre Baskerville', serif;
 }
