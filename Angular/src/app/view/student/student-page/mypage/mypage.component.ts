@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-mypage',
@@ -6,10 +7,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./mypage.component.css']
 })
 export class MypageComponent implements OnInit {
-
-  constructor() { }
+  
+  hwlist = '';
+  result = '';
+  constructor(private http:HttpClient) { }
 
   ngOnInit() {
+    this.http.get('./student-mypage').subscribe(
+        response=> {
+            this.hwlist = response.toString();
+        },
+    )
   }
-
+  
+  runcode(){
+    this.http.get('./result').subscribe(
+        response=> {
+            this.result = response.toString();
+        },
+    )
+  }
 }

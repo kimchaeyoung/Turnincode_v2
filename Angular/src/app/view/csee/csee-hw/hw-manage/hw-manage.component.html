@@ -1,9 +1,9 @@
 <ul>
   <li *ngFor="let hw of hwlist; let i = index">
-    <h4>{{i}}: {{hw.hw_name}}</h4>
-    <p> {{hw.hw_ink}}</p>
-    <p> {{hw.hw_description}}</p>
-    <p> {{hw.hw_duedate}}</p>
+    <h4>{{i}}: <a href="./professor-page/homework/{{hw.hw_name}}"> {{hw.hw_name}} </a></h4>
+    <p> 과제코드 : {{hw.hw_base}}</p>
+    <p> 과제설명 : {{hw.hw_description}}</p>
+    <p> 과제기간 : {{hw.hw_duedate}}</p>
   </li>
 </ul>
 

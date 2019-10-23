@@ -27,7 +27,12 @@ urlpatterns = [
     path('signup', views.signup, name='signup'),
     path('success-login/', views.success_login, name='success-login'),
     path('student-page/', views.student_page, name='student-page'),
+    path('student-mypage/', views.student_mypage, name='student-mypage'),
     path('professor-page/', views.professor_page, name='professor-page'),
     path('auth/', ObtainAuthToken.as_view()),
     url(r'^auth/', include('social_django.urls', namespace='social')),
+    path('current_user/', views.current_user, name='current_user'),
+    path('result/', views.runcode, name='result'),
+    url(r'^professor-page/homework/(?P<hw_name>[^/]+)/$', views.hwlist),
 ]
+

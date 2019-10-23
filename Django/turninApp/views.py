@@ -9,15 +9,17 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.response import Response
 from django.shortcuts import redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
+from django.core import serializers
+from django.urls import reverse
 import subprocess 
 import json
 import os.path
 
-sudotoken = "d3eb51fdf3e462bdc9ec6dc915fa62b7bc4fa2ab"
+sudotoken = "ae0b707a1550ea86c126639a8eec5999921ca875"
 
 def signin(request):
-    '''    
+    
     command = 'curl -u forCSEE:' + sudotoken + ' https://api.github.com/user/repository_invitations'
     command = command.split()
     s = subprocess.check_output(command) 
@@ -58,7 +60,7 @@ def signin(request):
       # .turnincode 유무 판단 
       # 있으면, basecode url 이랑hw 모델의 base_url 과 같은것을 찾아서 학생과의 relationship을 구축 ! 
       # 없으면, 교수라고 판단하고 아무것도 하지 않음. 
-    '''
+
     return render(request, 'signin.html')
 
 def signup(request):
@@ -80,6 +82,14 @@ def success_login(request):
 def student_page(request):
     return render(request, 'student_page.html')
 
+def student_mypage(request):
+    homework = {}
+    current_user = request.user
+    if Homework_Student.objects.filter(std = current_user).exists():
+        hs = Homework_Student.objects.filter(std=current_user).last()
+        return JsonResponse(str(hs.hw.hw_name), safe=False)
+    return HttpResponse()
+
 def professor_page(request):
     current_user = request.user
     p = Professor.objects.get(professor_id=current_user)
@@ -88,7 +98,21 @@ def professor_page(request):
     else:
         return HttpResponse("You don't have any permission to access professor page. Please wait for authentication")
 
+def current_user(request):
+    current_user = request.user
+    return JsonResponse(str(current_user), safe=False)
 
+def runcode(request):
+    return JsonResponse(str("pass"), safe=False)
+
+def hwlist(request, hw_name):
+    hwlist = Homework_Student.objects.all()
+    slist = []
+    for i in hwlist:
+        if i.hw.hw_name == hw_name:
+            slist.append(i.std)
+        return HttpResponse(slist)            
+    return HttpResponse()
 '''
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all().order_by('-date_joined')

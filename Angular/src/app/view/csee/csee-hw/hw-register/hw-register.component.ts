@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../../user.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-hw-register',
@@ -11,10 +12,12 @@ import { Router } from '@angular/router';
 export class HwRegisterComponent implements OnInit {
   register;
 
-  constructor(private userService: UserService, private router:Router) { }
+  constructor(route: ActivatedRoute, private userService: UserService, private router:Router) { 
+  }
 
   ngOnInit() {
-    this.register = {
+      this.register = {
+      prof: 'Kchaeyoung',
       hw_name: '',
       hw_base: '',
       hw_eval: '',

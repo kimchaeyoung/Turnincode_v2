@@ -11,11 +11,18 @@ import { UserService } from '../../../user.service';
 export class HwManageComponent implements OnInit {
 
   hwlist: any =[];
+  current_user = '';
 
-  constructor(private userService: UserService) { 
+  constructor(private http:HttpClient, private userService: UserService) { 
   }
 
   ngOnInit() {
+    this.http.get('./current_user').subscribe(
+        response=> {
+          this.current_user = response.toString();
+        }
+    ) 
+
     this.userService.manageHomework().subscribe(
       response=> {
         this.hwlist=response;
@@ -24,3 +31,4 @@ export class HwManageComponent implements OnInit {
     )
   }
 }
+
