@@ -17,6 +17,7 @@ def code_white():
 
 def server_program():
     doc_host = socket.gethostname()
+#    doc_host = "222.239.251.48"
     doc_port = 4000  # initiate port no above 1024
 
 #    doc_socket = socket.socket()  # get instance
