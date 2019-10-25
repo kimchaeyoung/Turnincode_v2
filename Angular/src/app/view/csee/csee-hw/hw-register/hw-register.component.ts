@@ -11,24 +11,35 @@ import { HttpClient } from '@angular/common/http';
 })
 export class HwRegisterComponent implements OnInit {
   register;
+  hw_id = '';
+  hwinfo: any = [];
 
-  constructor(route: ActivatedRoute, private userService: UserService, private router:Router) { 
+  constructor(private http:HttpClient, route: ActivatedRoute, private userService: UserService, private router:Router) { 
+  this.hw_id = route.snapshot.params['id']; 
   }
 
   ngOnInit() {
+      this.http.get('./professor-page/getregister/'+this.hw_id).subscribe(
+	response=> {
+		this.hwinfo=response;
+	},
+	error => console.log('error',error)
+      )
       this.register = {
-      prof: 'Kchaeyoung',
-      hw_name: '',
-      hw_base: '',
-      hw_eval: '',
-      hw_description: '',
-      hw_duedate: '',
+	hw_name: '',
+      	hw_base: '',
+      	hw_eval: '',
+      	hw_description: '',
+      	hw_duedate: '',
+        hw_madeby: 'jhj1116',
     };
+
   }
+
   Register(){
     this.userService.registerHomework(this.register).subscribe(
       response => {
-        this.router.navigateByUrl('professor-page/manage');
+        this.router.navigateByUrl('professor-page');
       },
       error => console.log('error', error)
     )

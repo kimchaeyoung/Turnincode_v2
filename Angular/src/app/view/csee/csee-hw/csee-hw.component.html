@@ -1,5 +1,24 @@
-<div style="text-align:center">
-  <button mat-raised-button color="primary" routerLink="register"> Register </button>
-  <button mat-raised-button color="primary" routerLink="manage"> Manage </button>
-</div>
+<section>
+  <h3> homeworks </h3>
+    <hr/>
+    <div style="margin-top: 10px; margin-left: 10px" *ngFor="let hw of hwlist">
+      <div *ngIf="hw[1]!=null">
+      <div class="f">
+       <fa-icon [icon]="faBook"></fa-icon>&nbsp;{{hw[1]}}
+      </div>
+      </div>
+    </div>
+</section>
+<aside>
+  <h3> issue </h3>
+  <hr/>
+    <div style="margin-top: 10px; margin-right: 10px" *ngFor="let hw of hwlist">
+      <div *ngIf="hw[1]==null">
+       <div class="event f">
+       <fa-icon [icon]="faBook"></fa-icon>&nbsp; <a routerLink="register/{{hw[0]}}">{{hw[3]}}</a>
+       <a id="more"><fa-icon [icon]="faCaretDown"></fa-icon></a>
+      </div>
+      </div>
+    </div>
 <router-outlet></router-outlet>
+</aside>

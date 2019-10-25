@@ -12,14 +12,15 @@ import { FormsModule } from '@angular/forms';
 import { HwRegisterComponent } from './csee-hw/hw-register/hw-register.component';
 import { HwManageComponent } from './csee-hw/hw-manage/hw-manage.component';
 import { CseeSignupComponent } from './csee-signup/csee-signup.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 export const ROUTES:Routes = [
     { path: 'signup/csee', component: CseeSignupComponent },
+    { path: 'professor-page/register/:id', component: HwRegisterComponent }, 
     { 
       path: 'professor-page', 
       component: CseeHwComponent, 
       children: [ 
-          { path: 'register', component: HwRegisterComponent },
           { path: 'manage', component: HwManageComponent }
       ]
     }
@@ -35,6 +36,7 @@ export const ROUTES:Routes = [
     MatFormFieldModule,
     MatInputModule,
     BrowserAnimationsModule,
+    FontAwesomeModule,
   ]
 })
 export class CseeModule { }

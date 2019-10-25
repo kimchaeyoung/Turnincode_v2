@@ -23,12 +23,6 @@ export class HwManageComponent implements OnInit {
         }
     ) 
 
-    this.userService.manageHomework().subscribe(
-      response=> {
-        this.hwlist=response;
-      },
-      error => console.log('error', error)
-    )
   }
 }
 

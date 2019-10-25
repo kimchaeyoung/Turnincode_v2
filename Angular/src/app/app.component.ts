@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Angular';
+  current_user = '';
+
+  constructor(private http:HttpClient) {}
+  
+  ngOnInit() {
+      this.http.get('./current_user').subscribe(
+          response => {
+              this.current_user = response.toString();
+          },
+      )
+  }
 }

@@ -1,14 +1,18 @@
 html, body {
     background-color: #F5F093;
 }
-mat-sidenav-container, mat-sidenav-content, mat-sidenav {
-    height: 100%;
+header {
+    height: 80px;
+    background-color: #eef1f6;
 }
- 
-mat-sidenav {
-    width: 250px;
+.logo {
+    position: absolute;
+    margin-top: 0.5%;
+    margin-left: 5%;
+    float: left;
 }
- 
-main {
-    padding: 10px;
+.user {
+    float: right;
+    margin-top: 1%;
+    margin-right: 5%;
 }

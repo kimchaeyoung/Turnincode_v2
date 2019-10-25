@@ -172,7 +172,7 @@ var AppModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJjc2VlLWh3L2NzZWUtaHcuY29tcG9uZW50LmNzcyJ9 */"
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiIuLi9jc2VlL2NzZWUtaHcvY3NlZS1ody5jb21wb25lbnQuY3NzIn0= */"
 
 /***/ }),
 
@@ -183,7 +183,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<button routerLink=\"register\"> Register </button>\n<button routerLink=\"manage\"> Manage </button>\n\n\n<router-outlet></router-outlet>\n"
+module.exports = "<div style=\"text-align:center\">\n  <button mat-raised-button color=\"primary\" routerLink=\"register\"> Register </button>\n  <button mat-raised-button color=\"primary\" routerLink=\"manage\"> Manage </button>\n</div>\n<router-outlet></router-outlet>\n"
 
 /***/ }),
 
@@ -228,7 +228,7 @@ var CseeHwComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJjc2VlLWh3L2h3LW1hbmFnZS9ody1tYW5hZ2UuY29tcG9uZW50LmNzcyJ9 */"
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiIuLi9jc2VlL2NzZWUtaHcvaHctbWFuYWdlL2h3LW1hbmFnZS5jb21wb25lbnQuY3NzIn0= */"
 
 /***/ }),
 
@@ -239,7 +239,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ul>\n  <li *ngFor=\"let hw of hwlist; let i = index\">\n    <h4>{{i}}: {{hw.hw_name}}</h4>\n    <p> {{hw.hw_ink}}</p>\n    <p> {{hw.hw_description}}</p>\n    <p> {{hw.hw_duedate}}</p>\n  </li>\n</ul>\n\n"
+module.exports = "<ul>\n  <li *ngFor=\"let hw of hwlist; let i = index\">\n    <h4>{{i}}: <a href=\"./professor-page/homework/{{hw.hw_name}}\"> {{hw.hw_name}} </a></h4>\n    <p> 과제코드 : {{hw.hw_base}}</p>\n    <p> 과제설명 : {{hw.hw_description}}</p>\n    <p> 과제기간 : {{hw.hw_duedate}}</p>\n  </li>\n</ul>\n\n"
 
 /***/ }),
 
@@ -255,17 +255,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HwManageComponent", function() { return HwManageComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _user_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../user.service */ "./src/app/view/user.service.ts");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _user_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../user.service */ "./src/app/view/user.service.ts");
+
 
 
 
 var HwManageComponent = /** @class */ (function () {
-    function HwManageComponent(userService) {
+    function HwManageComponent(http, userService) {
+        this.http = http;
         this.userService = userService;
         this.hwlist = [];
+        this.current_user = '';
     }
     HwManageComponent.prototype.ngOnInit = function () {
         var _this = this;
+        this.http.get('./current_user').subscribe(function (response) {
+            _this.current_user = response.toString();
+        });
         this.userService.manageHomework().subscribe(function (response) {
             _this.hwlist = response;
         }, function (error) { return console.log('error', error); });
@@ -274,10 +281,10 @@ var HwManageComponent = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-hw-manage',
             template: __webpack_require__(/*! ./hw-manage.component.html */ "./src/app/view/csee/csee-hw/hw-manage/hw-manage.component.html"),
-            providers: [_user_service__WEBPACK_IMPORTED_MODULE_2__["UserService"]],
+            providers: [_user_service__WEBPACK_IMPORTED_MODULE_3__["UserService"]],
             styles: [__webpack_require__(/*! ./hw-manage.component.css */ "./src/app/view/csee/csee-hw/hw-manage/hw-manage.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_user_service__WEBPACK_IMPORTED_MODULE_2__["UserService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"], _user_service__WEBPACK_IMPORTED_MODULE_3__["UserService"]])
     ], HwManageComponent);
     return HwManageComponent;
 }());
@@ -293,7 +300,7 @@ var HwManageComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJjc2VlLWh3L2h3LXJlZ2lzdGVyL2h3LXJlZ2lzdGVyLmNvbXBvbmVudC5jc3MifQ== */"
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiIuLi9jc2VlL2NzZWUtaHcvaHctcmVnaXN0ZXIvaHctcmVnaXN0ZXIuY29tcG9uZW50LmNzcyJ9 */"
 
 /***/ }),
 
@@ -304,7 +311,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h1> Homework Register </h1>\n    <label for=\"homeworkName\">name:</label>\n    <input type=\"text\" name=\"name\" id=\"homeworkName\" maxlength=\"140\"\n           required [(ngModel)]=\"register.hw_name\"/>\n\n    <br><label for=\"homeworkName\">link:</label>\n    <input type=\"text\" name=\"link\" id=\"homeworkLink\" maxlength=\"140\"\n           required [(ngModel)]=\"register.hw_link\"/>\n\n    <br><label for=\"homeworkDescription\">description:</label>\n    <input type=\"text\" name=\"description\" id=\"homeworkDescription\" maxlength=\"140\"\n           required [(ngModel)]=\"register.hw_description\"/>\n\n    <br><label for=\"homeworkDuedate\">duedate:</label>\n    <input type=\"text\" name=\"duedate\" id=\"homeworkDuedate\" maxlength=\"140\"\n           required [(ngModel)]=\"register.hw_duedate\"/>\n    <br><button (click)=\"Register()\"> Create! </button>\n"
+module.exports = "<h1> Homework Register </h1>\n    <label for=\"homeworkName\">hw_name:</label>\n    <input type=\"text\" name=\"name\" id=\"homeworkName\" maxlength=\"140\"\n           required [(ngModel)]=\"register.hw_name\"/>\n\n    <br><label for=\"homeworkName\">basecode_url:</label>\n    <input type=\"text\" name=\"basecode_url\" id=\"baseUrl\" maxlength=\"140\"\n           required [(ngModel)]=\"register.hw_base\"/>\n \n    <br><label for=\"homeworkName\">evaluation_url:</label>\n    <input type=\"text\" name=\"evaluation_url\" id=\"evalUrl\" maxlength=\"140\"\n           required [(ngModel)]=\"register.hw_eval\"/>\n \n    <br><label for=\"homeworkDescription\">description:</label>\n    <input type=\"text\" name=\"description\" id=\"homeworkDescription\" maxlength=\"140\"\n           required [(ngModel)]=\"register.hw_description\"/>\n\n    <br><label for=\"homeworkDuedate\">duedate:</label>\n    <input type=\"datetime-local\" name=\"duedate\" id=\"homeworkDuedate\" maxlength=\"140\"\n           required [(ngModel)]=\"register.hw_duedate\"/>\n    <br><button (click)=\"Register()\"> Create! </button>\n"
 
 /***/ }),
 
@@ -327,14 +334,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var HwRegisterComponent = /** @class */ (function () {
-    function HwRegisterComponent(userService, router) {
+    function HwRegisterComponent(route, userService, router) {
         this.userService = userService;
         this.router = router;
     }
     HwRegisterComponent.prototype.ngOnInit = function () {
         this.register = {
+            prof: 'Kchaeyoung',
             hw_name: '',
-            hw_link: '',
+            hw_base: '',
+            hw_eval: '',
             hw_description: '',
             hw_duedate: '',
         };
@@ -342,7 +351,7 @@ var HwRegisterComponent = /** @class */ (function () {
     HwRegisterComponent.prototype.Register = function () {
         var _this = this;
         this.userService.registerHomework(this.register).subscribe(function (response) {
-            _this.router.navigateByUrl('csee/csee-hw/manage');
+            _this.router.navigateByUrl('professor-page/manage');
         }, function (error) { return console.log('error', error); });
     };
     HwRegisterComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -352,7 +361,7 @@ var HwRegisterComponent = /** @class */ (function () {
             providers: [_user_service__WEBPACK_IMPORTED_MODULE_2__["UserService"]],
             styles: [__webpack_require__(/*! ./hw-register.component.css */ "./src/app/view/csee/csee-hw/hw-register/hw-register.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_user_service__WEBPACK_IMPORTED_MODULE_2__["UserService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"], _user_service__WEBPACK_IMPORTED_MODULE_2__["UserService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]])
     ], HwRegisterComponent);
     return HwRegisterComponent;
 }());
@@ -368,7 +377,7 @@ var HwRegisterComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJjc2VlLWxvZ2luL2NzZWUtbG9naW4uY29tcG9uZW50LmNzcyJ9 */"
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiIuLi9jc2VlL2NzZWUtbG9naW4vY3NlZS1sb2dpbi5jb21wb25lbnQuY3NzIn0= */"
 
 /***/ }),
 
@@ -442,7 +451,7 @@ var CseeLoginComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJjc2VlLXNpZ251cC9jc2VlLXNpZ251cC5jb21wb25lbnQuY3NzIn0= */"
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiIuLi9jc2VlL2NzZWUtc2lnbnVwL2NzZWUtc2lnbnVwLmNvbXBvbmVudC5jc3MifQ== */"
 
 /***/ }),
 
@@ -453,7 +462,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div style=\"text-align:center\">\n  <h1>Enter your info.</h1>\n  <input [(ngModel)]=\"signup.professor_id\" placeholder=\"professor_id\"><br>\n  <input [(ngModel)]=\"signup.professor_name\" placeholder=\"professor_name\"><br>\n  <button (click)=\"SignUp()\"> Submit </button>\n</div>\n"
+module.exports = "<div style=\"text-align:center; margin-top:10%\">\n  <h1>Enter your info.</h1>\n  <mat-form-field>\n    <input matInput placeholder=\"professor id\" [(ngModel)]=\"signup.professor_id\">\n  </mat-form-field>\n  <br><mat-form-field>\n    <input matInput placeholder=\"professor name\" [(ngModel)]=\"signup.professor_name\">\n  </mat-form-field>\n  <br><button mat-raised-button color=\"primary\" (click)=\"SignUp()\"> Submit </button>\n</div>\n"
 
 /***/ }),
 
@@ -520,15 +529,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ROUTES", function() { return ROUTES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CseeModule", function() { return CseeModule; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
-/* harmony import */ var _csee_login_csee_login_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./csee-login/csee-login.component */ "./src/app/view/csee/csee-login/csee-login.component.ts");
-/* harmony import */ var _csee_hw_csee_hw_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./csee-hw/csee-hw.component */ "./src/app/view/csee/csee-hw/csee-hw.component.ts");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
-/* harmony import */ var _csee_hw_hw_register_hw_register_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./csee-hw/hw-register/hw-register.component */ "./src/app/view/csee/csee-hw/hw-register/hw-register.component.ts");
-/* harmony import */ var _csee_hw_hw_manage_hw_manage_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./csee-hw/hw-manage/hw-manage.component */ "./src/app/view/csee/csee-hw/hw-manage/hw-manage.component.ts");
-/* harmony import */ var _csee_signup_csee_signup_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./csee-signup/csee-signup.component */ "./src/app/view/csee/csee-signup/csee-signup.component.ts");
+/* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/platform-browser/animations */ "./node_modules/@angular/platform-browser/fesm5/animations.js");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
+/* harmony import */ var _angular_material_form_field__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/material/form-field */ "./node_modules/@angular/material/esm5/form-field.es5.js");
+/* harmony import */ var _angular_material_button__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/material/button */ "./node_modules/@angular/material/esm5/button.es5.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
+/* harmony import */ var _csee_login_csee_login_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./csee-login/csee-login.component */ "./src/app/view/csee/csee-login/csee-login.component.ts");
+/* harmony import */ var _csee_hw_csee_hw_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./csee-hw/csee-hw.component */ "./src/app/view/csee/csee-hw/csee-hw.component.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _csee_hw_hw_register_hw_register_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./csee-hw/hw-register/hw-register.component */ "./src/app/view/csee/csee-hw/hw-register/hw-register.component.ts");
+/* harmony import */ var _csee_hw_hw_manage_hw_manage_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./csee-hw/hw-manage/hw-manage.component */ "./src/app/view/csee/csee-hw/hw-manage/hw-manage.component.ts");
+/* harmony import */ var _csee_signup_csee_signup_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./csee-signup/csee-signup.component */ "./src/app/view/csee/csee-signup/csee-signup.component.ts");
+
+
+
+
 
 
 
@@ -540,13 +557,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var ROUTES = [
-    { path: 'signup/csee', component: _csee_signup_csee_signup_component__WEBPACK_IMPORTED_MODULE_9__["CseeSignupComponent"] },
+    { path: 'signup/csee', component: _csee_signup_csee_signup_component__WEBPACK_IMPORTED_MODULE_13__["CseeSignupComponent"] },
     {
         path: 'professor-page',
-        component: _csee_hw_csee_hw_component__WEBPACK_IMPORTED_MODULE_4__["CseeHwComponent"],
+        component: _csee_hw_csee_hw_component__WEBPACK_IMPORTED_MODULE_8__["CseeHwComponent"],
         children: [
-            { path: 'register', component: _csee_hw_hw_register_hw_register_component__WEBPACK_IMPORTED_MODULE_7__["HwRegisterComponent"] },
-            { path: 'manage', component: _csee_hw_hw_manage_hw_manage_component__WEBPACK_IMPORTED_MODULE_8__["HwManageComponent"] }
+            { path: 'register', component: _csee_hw_hw_register_hw_register_component__WEBPACK_IMPORTED_MODULE_11__["HwRegisterComponent"] },
+            { path: 'manage', component: _csee_hw_hw_manage_hw_manage_component__WEBPACK_IMPORTED_MODULE_12__["HwManageComponent"] }
         ]
     }
 ];
@@ -554,12 +571,16 @@ var CseeModule = /** @class */ (function () {
     function CseeModule() {
     }
     CseeModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
-            declarations: [_csee_login_csee_login_component__WEBPACK_IMPORTED_MODULE_3__["CseeLoginComponent"], _csee_hw_csee_hw_component__WEBPACK_IMPORTED_MODULE_4__["CseeHwComponent"], _csee_hw_hw_register_hw_register_component__WEBPACK_IMPORTED_MODULE_7__["HwRegisterComponent"], _csee_hw_hw_manage_hw_manage_component__WEBPACK_IMPORTED_MODULE_8__["HwManageComponent"], _csee_signup_csee_signup_component__WEBPACK_IMPORTED_MODULE_9__["CseeSignupComponent"]],
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_5__["NgModule"])({
+            declarations: [_csee_login_csee_login_component__WEBPACK_IMPORTED_MODULE_7__["CseeLoginComponent"], _csee_hw_csee_hw_component__WEBPACK_IMPORTED_MODULE_8__["CseeHwComponent"], _csee_hw_hw_register_hw_register_component__WEBPACK_IMPORTED_MODULE_11__["HwRegisterComponent"], _csee_hw_hw_manage_hw_manage_component__WEBPACK_IMPORTED_MODULE_12__["HwManageComponent"], _csee_signup_csee_signup_component__WEBPACK_IMPORTED_MODULE_13__["CseeSignupComponent"]],
             imports: [
-                _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"],
-                _angular_router__WEBPACK_IMPORTED_MODULE_5__["RouterModule"].forRoot(ROUTES),
-                _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormsModule"],
+                _angular_common__WEBPACK_IMPORTED_MODULE_6__["CommonModule"],
+                _angular_router__WEBPACK_IMPORTED_MODULE_9__["RouterModule"].forRoot(ROUTES),
+                _angular_forms__WEBPACK_IMPORTED_MODULE_10__["FormsModule"],
+                _angular_material_button__WEBPACK_IMPORTED_MODULE_4__["MatButtonModule"],
+                _angular_material_form_field__WEBPACK_IMPORTED_MODULE_3__["MatFormFieldModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatInputModule"],
+                _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_1__["BrowserAnimationsModule"],
             ]
         })
     ], CseeModule);
@@ -577,7 +598,7 @@ var CseeModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".font {\n    font-family: 'Lobster';\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uL3NpZ25pbi9zaWduaW4uY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLHNCQUFzQjtBQUMxQiIsImZpbGUiOiIuLi9zaWduaW4vc2lnbmluLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuZm9udCB7XG4gICAgZm9udC1mYW1pbHk6ICdMb2JzdGVyJztcbn1cbiJdfQ== */"
+module.exports = ".contents {\n    background: rgb(238,174,202);\n    background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);\n    height: 380px;\n    margin-top: 20px;\n}\nheader {\n    height: 30px;\n}\n.teaser-txt {\n    margin-top: 50px;\n    margin-bottom: 2px;\n    font-size: 70px;\n    color: white;\n}\n.fcolor {\n    font-size: 20px;\n    color: white;\n}\n.font {\n    font-family: 'Libre Baskerville', serif;\n    margin-left: 5%;\n}\n.footer {\n    background-color: black;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNpZ25pbi5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksNEJBQTRCO0lBQzVCLHFGQUFxRjtJQUNyRixhQUFhO0lBQ2IsZ0JBQWdCO0FBQ3BCO0FBQ0E7SUFDSSxZQUFZO0FBQ2hCO0FBQ0E7SUFDSSxnQkFBZ0I7SUFDaEIsa0JBQWtCO0lBQ2xCLGVBQWU7SUFDZixZQUFZO0FBQ2hCO0FBRUE7SUFDSSxlQUFlO0lBQ2YsWUFBWTtBQUNoQjtBQUVBO0lBQ0ksdUNBQXVDO0lBQ3ZDLGVBQWU7QUFDbkI7QUFDQTtJQUNJLHVCQUF1QjtBQUMzQiIsImZpbGUiOiJzaWduaW4uY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5jb250ZW50cyB7XG4gICAgYmFja2dyb3VuZDogcmdiKDIzOCwxNzQsMjAyKTtcbiAgICBiYWNrZ3JvdW5kOiByYWRpYWwtZ3JhZGllbnQoY2lyY2xlLCByZ2JhKDIzOCwxNzQsMjAyLDEpIDAlLCByZ2JhKDE0OCwxODcsMjMzLDEpIDEwMCUpO1xuICAgIGhlaWdodDogMzgwcHg7XG4gICAgbWFyZ2luLXRvcDogMjBweDtcbn1cbmhlYWRlciB7XG4gICAgaGVpZ2h0OiAzMHB4O1xufVxuLnRlYXNlci10eHQge1xuICAgIG1hcmdpbi10b3A6IDUwcHg7XG4gICAgbWFyZ2luLWJvdHRvbTogMnB4O1xuICAgIGZvbnQtc2l6ZTogNzBweDtcbiAgICBjb2xvcjogd2hpdGU7XG59XG5cbi5mY29sb3Ige1xuICAgIGZvbnQtc2l6ZTogMjBweDtcbiAgICBjb2xvcjogd2hpdGU7XG59XG5cbi5mb250IHtcbiAgICBmb250LWZhbWlseTogJ0xpYnJlIEJhc2tlcnZpbGxlJywgc2VyaWY7XG4gICAgbWFyZ2luLWxlZnQ6IDUlO1xufVxuLmZvb3RlciB7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogYmxhY2s7XG59XG4iXX0= */"
 
 /***/ }),
 
@@ -588,7 +609,7 @@ module.exports = ".font {\n    font-family: 'Lobster';\n}\n\n/*# sourceMappingUR
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div style=\"text-align:center; margin-top: 30px;\">\n   <link href=\"//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext\" rel=\"stylesheet\" type=\"text/css\">\n   <h1 class=\"font\"> Turnincode </h1>\n</div>\n"
+module.exports = "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<link href=\"https://fonts.googleapis.com/css?family=Libre+Baskerville&display=swap\" rel=\"stylesheet\">\n  <div>\n    <header>\n      <h2>T </h2>\n    </header>\n  </div>\n  <div class=\"contents\">\n  <div class=\"font\">\n    <a class=\"teaser-txt\"> turnincode. </a>\n    <br><a class=\"fcolor\"> grade your homework automatically. </a>\n  </div>\n  </div>\n  <footer>\n    <p> follow us! </p>\n  </footer>\n"
 
 /***/ }),
 
@@ -633,7 +654,7 @@ var SigninComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiIuLi9zaWdudXAvc2lnbnVwLmNvbXBvbmVudC5jc3MifQ== */"
+module.exports = ".center {\n    font-size: 40px;\n    margin-top: 15%;\n    text-align: center;\n}\n.inline {\n    display: inline;\n}\n.button1 {\n    margin: 10px;\n    padding: 20px 40px;\n}\n.button2 {\n    padding: 20px 40px;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uL3NpZ251cC9zaWdudXAuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLGVBQWU7SUFDZixlQUFlO0lBQ2Ysa0JBQWtCO0FBQ3RCO0FBQ0E7SUFDSSxlQUFlO0FBQ25CO0FBQ0E7SUFDSSxZQUFZO0lBQ1osa0JBQWtCO0FBQ3RCO0FBQ0E7SUFDSSxrQkFBa0I7QUFDdEIiLCJmaWxlIjoiLi4vc2lnbnVwL3NpZ251cC5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmNlbnRlciB7XG4gICAgZm9udC1zaXplOiA0MHB4O1xuICAgIG1hcmdpbi10b3A6IDE1JTtcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XG59XG4uaW5saW5lIHtcbiAgICBkaXNwbGF5OiBpbmxpbmU7XG59XG4uYnV0dG9uMSB7XG4gICAgbWFyZ2luOiAxMHB4O1xuICAgIHBhZGRpbmc6IDIwcHggNDBweDtcbn1cbi5idXR0b24yIHtcbiAgICBwYWRkaW5nOiAyMHB4IDQwcHg7XG59XG4iXX0= */"
 
 /***/ }),
 
@@ -644,7 +665,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h3>Sign Up</h3>\n  <h5>choose your mode</h5>\n  <button routerLink=\"student-signup\"> student </button>\n  <button routerLink=\"csee\"> professor </button>\n\n"
+module.exports = "<div class=\"center\">\n  <h1>Who Are You</h1>\n  <div class=\"inline\">\n    <br><button class=\"button1\" mat-raised-button color=\"primary\" routerLink=\"student-signup\"> student </button>\n    <button class=\"button2\" mat-raised-button color=\"primary\" routerLink=\"csee\"> professor </button>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -700,7 +721,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  mypage works!\n</p>\n"
+module.exports = "\n<ul>\n  <li>\n    <h4> hw name : {{hwlist}}</h4>\n    <button (click)=\"runcode()\"> 과제채점 </button>\n    <h5> {{result}} </h5>\n  <li>\n</ul>\n"
 
 /***/ }),
 
@@ -716,12 +737,27 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MypageComponent", function() { return MypageComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+
 
 
 var MypageComponent = /** @class */ (function () {
-    function MypageComponent() {
+    function MypageComponent(http) {
+        this.http = http;
+        this.hwlist = '';
+        this.result = '';
     }
     MypageComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.http.get('./student-mypage').subscribe(function (response) {
+            _this.hwlist = response.toString();
+        });
+    };
+    MypageComponent.prototype.runcode = function () {
+        var _this = this;
+        this.http.get('./result').subscribe(function (response) {
+            _this.result = response.toString();
+        });
     };
     MypageComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -729,7 +765,7 @@ var MypageComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./mypage.component.html */ "./src/app/view/student/student-page/mypage/mypage.component.html"),
             styles: [__webpack_require__(/*! ./mypage.component.css */ "./src/app/view/student/student-page/mypage/mypage.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]])
     ], MypageComponent);
     return MypageComponent;
 }());
@@ -756,7 +792,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<button routerLink=\"mypage\"> Mypage </button>\n\n<router-outlet></router-outlet>\n"
+module.exports = "<div style=\"text-align:center\">\n  <button mat-raised-button color=\"primary\" routerLink=\"mypage\"> Mypage </button>\n</div>\n<router-outlet></router-outlet>\n"
 
 /***/ }),
 
@@ -871,7 +907,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div style=\"text-align:center\">\n  <h1>Enter your info.</h1>\n  <input [(ngModel)]=\"signup.student_id\" placeholder=\"student_id\"><br>\n  <input [(ngModel)]=\"signup.student_name\" placeholder=\"student_name\"><br>\n  <input [(ngModel)]=\"signup.student_number\" placeholder=\"student_number\"><br>\n  <input [(ngModel)]=\"signup.student_password\" placeholder=\"student_password\" type=\"password\"><br>\n  <button (click)=\"SignUp()\"> Submit </button>\n</div>\n"
+module.exports = "<div style=\"text-align:center; margin-top:10%\">\n  <h1>Enter your info.</h1>\n  <mat-form-field>\n    <input matInput placeholder=\"github id\" [(ngModel)]=\"signup.student_id\">\n  </mat-form-field>\n  <br><mat-form-field>\n    <input matInput placeholder=\"student name\" [(ngModel)]=\"signup.student_name\">\n  </mat-form-field>\n  <br><mat-form-field>\n    <input matInput placeholder=\"student number\" [(ngModel)]=\"signup.student_number\">\n  </mat-form-field>  \n  <br><button button mat-raised-button color=\"primary\" (click)=\"SignUp()\"> Submit </button>\n</div>\n"
 
 /***/ }),
 
@@ -903,7 +939,6 @@ var StudentSignUpComponent = /** @class */ (function () {
             student_id: '',
             student_name: '',
             student_number: '',
-            student_password: ''
         };
     };
     StudentSignUpComponent.prototype.SignUp = function () {
@@ -940,14 +975,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ROUTES", function() { return ROUTES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StudentModule", function() { return StudentModule; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
-/* harmony import */ var _student_sign_in_student_sign_in_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./student-sign-in/student-sign-in.component */ "./src/app/view/student/student-sign-in/student-sign-in.component.ts");
-/* harmony import */ var _student_sign_up_student_sign_up_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./student-sign-up/student-sign-up.component */ "./src/app/view/student/student-sign-up/student-sign-up.component.ts");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
-/* harmony import */ var _student_page_student_page_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./student-page/student-page.component */ "./src/app/view/student/student-page/student-page.component.ts");
-/* harmony import */ var _student_page_mypage_mypage_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./student-page/mypage/mypage.component */ "./src/app/view/student/student-page/mypage/mypage.component.ts");
+/* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/platform-browser/animations */ "./node_modules/@angular/platform-browser/fesm5/animations.js");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
+/* harmony import */ var _angular_material_form_field__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/material/form-field */ "./node_modules/@angular/material/esm5/form-field.es5.js");
+/* harmony import */ var _angular_material_button__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/material/button */ "./node_modules/@angular/material/esm5/button.es5.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
+/* harmony import */ var _student_sign_in_student_sign_in_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./student-sign-in/student-sign-in.component */ "./src/app/view/student/student-sign-in/student-sign-in.component.ts");
+/* harmony import */ var _student_sign_up_student_sign_up_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./student-sign-up/student-sign-up.component */ "./src/app/view/student/student-sign-up/student-sign-up.component.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _student_page_student_page_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./student-page/student-page.component */ "./src/app/view/student/student-page/student-page.component.ts");
+/* harmony import */ var _student_page_mypage_mypage_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./student-page/mypage/mypage.component */ "./src/app/view/student/student-page/mypage/mypage.component.ts");
+
+
+
+
 
 
 
@@ -958,12 +1001,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var ROUTES = [
-    { path: 'signup/student-signup', component: _student_sign_up_student_sign_up_component__WEBPACK_IMPORTED_MODULE_4__["StudentSignUpComponent"] },
+    { path: 'signup/student-signup', component: _student_sign_up_student_sign_up_component__WEBPACK_IMPORTED_MODULE_8__["StudentSignUpComponent"] },
     {
         path: 'student-page',
-        component: _student_page_student_page_component__WEBPACK_IMPORTED_MODULE_7__["StudentPageComponent"],
+        component: _student_page_student_page_component__WEBPACK_IMPORTED_MODULE_11__["StudentPageComponent"],
         children: [
-            { path: 'mypage', component: _student_page_mypage_mypage_component__WEBPACK_IMPORTED_MODULE_8__["MypageComponent"] },
+            { path: 'mypage', component: _student_page_mypage_mypage_component__WEBPACK_IMPORTED_MODULE_12__["MypageComponent"] },
         ]
     }
 ];
@@ -971,12 +1014,16 @@ var StudentModule = /** @class */ (function () {
     function StudentModule() {
     }
     StudentModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
-            declarations: [_student_sign_in_student_sign_in_component__WEBPACK_IMPORTED_MODULE_3__["StudentSignInComponent"], _student_sign_up_student_sign_up_component__WEBPACK_IMPORTED_MODULE_4__["StudentSignUpComponent"], _student_page_student_page_component__WEBPACK_IMPORTED_MODULE_7__["StudentPageComponent"], _student_page_mypage_mypage_component__WEBPACK_IMPORTED_MODULE_8__["MypageComponent"]],
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_5__["NgModule"])({
+            declarations: [_student_sign_in_student_sign_in_component__WEBPACK_IMPORTED_MODULE_7__["StudentSignInComponent"], _student_sign_up_student_sign_up_component__WEBPACK_IMPORTED_MODULE_8__["StudentSignUpComponent"], _student_page_student_page_component__WEBPACK_IMPORTED_MODULE_11__["StudentPageComponent"], _student_page_mypage_mypage_component__WEBPACK_IMPORTED_MODULE_12__["MypageComponent"]],
             imports: [
-                _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"],
-                _angular_router__WEBPACK_IMPORTED_MODULE_5__["RouterModule"].forRoot(ROUTES),
-                _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormsModule"],
+                _angular_common__WEBPACK_IMPORTED_MODULE_6__["CommonModule"],
+                _angular_router__WEBPACK_IMPORTED_MODULE_9__["RouterModule"].forRoot(ROUTES),
+                _angular_forms__WEBPACK_IMPORTED_MODULE_10__["FormsModule"],
+                _angular_material_button__WEBPACK_IMPORTED_MODULE_4__["MatButtonModule"],
+                _angular_material_form_field__WEBPACK_IMPORTED_MODULE_3__["MatFormFieldModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatInputModule"],
+                _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_1__["BrowserAnimationsModule"],
             ]
         })
     ], StudentModule);
@@ -1048,13 +1095,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ROUTES", function() { return ROUTES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ViewModule", function() { return ViewModule; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _csee_csee_module__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./csee/csee.module */ "./src/app/view/csee/csee.module.ts");
-/* harmony import */ var _student_student_module__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./student/student.module */ "./src/app/view/student/student.module.ts");
-/* harmony import */ var _signup_signup_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./signup/signup.component */ "./src/app/view/signup/signup.component.ts");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var _signin_signin_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./signin/signin.component */ "./src/app/view/signin/signin.component.ts");
+/* harmony import */ var _angular_material_button__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/material/button */ "./node_modules/@angular/material/esm5/button.es5.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _csee_csee_module__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./csee/csee.module */ "./src/app/view/csee/csee.module.ts");
+/* harmony import */ var _student_student_module__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./student/student.module */ "./src/app/view/student/student.module.ts");
+/* harmony import */ var _signup_signup_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./signup/signup.component */ "./src/app/view/signup/signup.component.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _signin_signin_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./signin/signin.component */ "./src/app/view/signin/signin.component.ts");
+
 
 
 
@@ -1064,23 +1113,24 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var ROUTES = [
-    { path: '', component: _signin_signin_component__WEBPACK_IMPORTED_MODULE_7__["SigninComponent"] },
-    { path: 'signup', component: _signup_signup_component__WEBPACK_IMPORTED_MODULE_5__["SignupComponent"] }
+    { path: '', component: _signin_signin_component__WEBPACK_IMPORTED_MODULE_8__["SigninComponent"] },
+    { path: 'signup', component: _signup_signup_component__WEBPACK_IMPORTED_MODULE_6__["SignupComponent"] }
 ];
 var ViewModule = /** @class */ (function () {
     function ViewModule() {
     }
     ViewModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"])({
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["NgModule"])({
             imports: [
-                _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClientModule"],
-                _csee_csee_module__WEBPACK_IMPORTED_MODULE_3__["CseeModule"],
-                _student_student_module__WEBPACK_IMPORTED_MODULE_4__["StudentModule"],
-                _angular_router__WEBPACK_IMPORTED_MODULE_6__["RouterModule"].forRoot(ROUTES),
+                _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClientModule"],
+                _csee_csee_module__WEBPACK_IMPORTED_MODULE_4__["CseeModule"],
+                _student_student_module__WEBPACK_IMPORTED_MODULE_5__["StudentModule"],
+                _angular_router__WEBPACK_IMPORTED_MODULE_7__["RouterModule"].forRoot(ROUTES),
+                _angular_material_button__WEBPACK_IMPORTED_MODULE_1__["MatButtonModule"]
             ],
             declarations: [
-                _signup_signup_component__WEBPACK_IMPORTED_MODULE_5__["SignupComponent"],
-                _signin_signin_component__WEBPACK_IMPORTED_MODULE_7__["SigninComponent"]
+                _signup_signup_component__WEBPACK_IMPORTED_MODULE_6__["SignupComponent"],
+                _signin_signin_component__WEBPACK_IMPORTED_MODULE_8__["SigninComponent"]
             ]
         })
     ], ViewModule);
@@ -1155,7 +1205,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_2__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/jihye/newturnin/Angular/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /home/jihye/turnin/Turnincode_v2/Angular/src/main.ts */"./src/main.ts");
 
 
 /***/ })

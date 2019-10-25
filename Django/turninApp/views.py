@@ -16,7 +16,7 @@ import subprocess
 import json
 import os.path
 
-sudotoken = "ae0b707a1550ea86c126639a8eec5999921ca875"
+sudotoken = "bf944e6d8a2a03ab772c3588c0ce719bf1537b7d"
 
 def signin(request):
     
@@ -43,20 +43,23 @@ def signin(request):
       command = 'git clone https://forCSEE:' + sudotoken + '@github.com/' + col_name +'.git'
       command = command.split()
       subprocess.check_output(command)
-      
-      if os.path.exists(col_repo+'/.turnincode'):
+     
+      f = open(col_repo+'/.turnincode', 'r')
+      line = f.readline()
+      line = line.rstrip('\n')
+            
+      if Student.objects.filter(student_id=user_id).exists():
           print("student")
-          f = open(col_repo+'/.turnincode', 'r')
-          line = f.readline()
-          line = line.rstrip('\n')
           if Homework.objects.filter(hw_base=line).exists():
               h = Homework.objects.get(hw_base=line)
               hs = Homework_Student(hw=h, std=user_id)
               hs.save()
-          f.close() 
-      else:
+      elif Professor.objects.filter(professor_id=user_id).exists():
+          eval_repo = i['repository']['html_url'] + '.git'
+          h = Homework(hw_base=line, hw_eval=eval_repo, hw_madeby=user_id)
+          h.save()
           print("professor")
-  
+      f.close()
       # .turnincode 유무 판단 
       # 있으면, basecode url 이랑hw 모델의 base_url 과 같은것을 찾아서 학생과의 relationship을 구축 ! 
       # 없으면, 교수라고 판단하고 아무것도 하지 않음. 
@@ -83,11 +86,14 @@ def student_page(request):
     return render(request, 'student_page.html')
 
 def student_mypage(request):
-    homework = {}
     current_user = request.user
     if Homework_Student.objects.filter(std = current_user).exists():
-        hs = Homework_Student.objects.filter(std=current_user).last()
-        return JsonResponse(str(hs.hw.hw_name), safe=False)
+        hs = Homework_Student.objects.filter(std=current_user)
+        hwlist = []
+        for h in hs:
+            hinfo = [h.hw.hw_base]
+            hwlist.append(hinfo)
+        return JsonResponse(hwlist, safe=False)
     return HttpResponse()
 
 def professor_page(request):
@@ -120,6 +126,25 @@ class UserViewSet(viewsets.ModelViewSet):
 #    authentication_classes = (TokenAuthentication, )
 #    permission_classes = (IsAuthenticated, )
 '''
+def updatehw(request, hw_id):
+    h = Homework.objects.get(id=hw_id)
+    hw = [h.hw_base, h.hw_eval, h.hw_madeby]
+    return JsonResponse(hw, safe=False)
+    
+
+def gethw(request):
+    user = request.user
+    print(user)
+    hs = Homework.objects.filter(hw_madeby=user)
+    if hs.exists():
+        hwlist = []
+        for h in hs:
+            hw = [ h.id, h.hw_name, h.hw_base, h.hw_eval, h.hw_description, h.hw_duedate ]
+            hwlist.append(hw)
+        return JsonResponse(hwlist, safe=False)
+    else:
+        print("not exist")
+    return HttpResponse()
 
 class StudentViewSet(viewsets.ModelViewSet):
     queryset = Student.objects.all()

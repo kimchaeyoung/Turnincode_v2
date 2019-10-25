@@ -17,11 +17,12 @@ class Professor(models.Model):
         return self.professor_id
 
 class Homework(models.Model):
-    hw_name = models.CharField(max_length=200)
+    hw_name = models.CharField(max_length=200, null=True)
     hw_base = models.CharField(max_length=200)
     hw_eval = models.CharField(max_length=200)
-    hw_description = models.CharField(max_length=500)
+    hw_description = models.CharField(max_length=500, null=True)
     hw_duedate = models.DateTimeField(blank=True, null=True)
+    hw_madeby = models.CharField(max_length=50)
 
 class Homework_Student(models.Model):
     hw = models.ForeignKey(Homework, related_name = "homework", on_delete=models.CASCADE)

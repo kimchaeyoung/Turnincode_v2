@@ -36,7 +36,7 @@ class ProfessorSerializer(serializers.HyperlinkedModelSerializer):
 class HomeworkSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Homework
-        fields = ('hw_name', 'hw_base', 'hw_eval', 'hw_description', 'hw_duedate')
+        fields = ('hw_name', 'hw_base', 'hw_eval', 'hw_description', 'hw_duedate', 'hw_madeby')
 
     def create(self, validated_data):
         homework = Homework.objects.create(**validated_data)

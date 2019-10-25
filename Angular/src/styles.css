@@ -3,10 +3,7 @@
 html, body {
   margin: 0;
   height: 100%;
-  color: #CF4E37;
-  background-color: #EBE2CF;
+  color: #c6b4d8;
+  font-family: 'Libre Baskerville', serif;
 }
-body { font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

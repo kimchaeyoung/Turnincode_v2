@@ -1,6 +1,29 @@
 <style>
+a {
+    -webkit-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+    -moz-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+    -ms-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+    -o-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+    transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+    display: block;
+    margin: 20px auto;
+    text-decoration: none;
+    border-radius: 4px;
+    padding: 20px 30px;
+}
+
+a.button {
+    color: rgba(30, 22, 54, 0.6);
+    box-shadow: rgba(30, 22, 54, 0.4) 0 0px 0px 2px inset;
+}
+
+a.button:hover {
+    color: rgba(255, 255, 255, 0.85);
+    box-shadow: rgba(238,174,202,0.2) 0 0px 0px 40px inset;
+
+}
 .example_b {
-color: #CF4E37 !important;
+color: #6a6271 !important;
 text-transform: uppercase;
 text-decoration: none;
 background: white;
@@ -16,14 +39,9 @@ text-shadow: 0px 0px 6px rgba(255, 255, 255, 1);
 -moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
 transition: all 0.4s ease 0s;
 }
-.footer {
-   border-top: 2px double #CF4E37;
-   position: absolute;
-   left: 0;
-   bottom: 15%;
-   width: 100%;
-   color: #CF4E37;
-   text-align: right;
+footer {
+height: 800px;
+background-color: white;
 }
 </style>
 {% load static %}
@@ -34,20 +52,19 @@ transition: all 0.4s ease 0s;
     <title>Student</title>
     <base href="/">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-  </head>
-  <body>
+    <script src="https://kit.fontawesome.com/d6dd2c6584.js" crossorigin="anonymous"></script>
     <app-root></app-root>
     <script type="text/javascript" src="{% static 'runtime.js' %}"></script>
     <script type="text/javascript" src="{% static 'polyfills.js' %}"></script>
     <script type="text/javascript" src="{% static 'styles.js' %}"></script>
     <script type="text/javascript" src="{% static 'vendor.js' %}"></script>
     <script type="text/javascript" src="{% static 'main.js' %}"></script>
+  </head>
+  <body>
+    <div style="text-align: center;">
   </body>
+  <footer>
+    <a onclick="window.location.href='{% url 'social:begin' 'github' %}'" class="button">Sign In!</a>
+  </footer>
 </html>
-<div style="letter-spacing: 10px;  margin-top:7%; margin-left: 5%;">
-      <br><a class="example_b" onclick="window.location.href='{% url 'social:begin' 'github' %}'"><span>Sign In</a><br>
-</div>
-<div class="footer">
-  <p style="margin-right: 5px">Turnincode helps you to manage your programming class homework with Github. Experience our convenient system!<br><br>Copyright 2019. Chaeyoung Kim, Jihye Oh, Hyejin Jeong, Minji Ha All Rights Reserved.</p>
-</div>
 

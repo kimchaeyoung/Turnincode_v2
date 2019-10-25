@@ -11,6 +11,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { StudentPageComponent } from './student-page/student-page.component';
 import { MypageComponent } from './student-page/mypage/mypage.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 export const ROUTES:Routes = [
     { path: 'signup/student-signup', component: StudentSignUpComponent },    
@@ -35,6 +36,7 @@ export const ROUTES:Routes = [
     MatFormFieldModule,
     MatInputModule,
     BrowserAnimationsModule,
+    FontAwesomeModule,
   ]
 })
 export class StudentModule { }

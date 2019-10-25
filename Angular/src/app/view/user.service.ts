@@ -27,8 +27,4 @@ export class UserService {
     return this.http.post('./hhomeworks/', userData);
   }
 
-  manageHomework(): Observable<any> {
-    return this.http.get('./hhomeworks/');
-  }
-
 }
