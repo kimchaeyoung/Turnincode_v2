@@ -23,8 +23,8 @@ export class UserService {
     return this.http.post('./auth2/', userData);
   }
   
-  registerHomework(userData): Observable<any> {
-    return this.http.post('./hhomeworks/', userData);
+  registerHomework(userData, hw_id): Observable<any> {
+    return this.http.put('./hhomeworks/' + hw_id + '/', userData);
   }
 
 }

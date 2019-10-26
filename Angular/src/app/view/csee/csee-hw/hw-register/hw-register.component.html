@@ -3,11 +3,9 @@
     <input type="text" name="name" id="homeworkName" maxlength="140"
            required [(ngModel)]="register.hw_name"/>
 
-    <br><label for="homeworkName">basecode_url:</label>
-    <h3>{{hwinfo[0]}}</h3>
+    <br><label for="homeworkName">basecode_url: {{hw_base}} </label>
  
-    <br><label for="homeworkName">evaluation_url:</label>
-    <h3>{{hwinfo[1]}}</h3>
+    <br><label for="homeworkName">evaluation_url: {{hw_eval}} </label>
  
     <br><label for="homeworkDescription">description:</label>
     <input type="text" name="description" id="homeworkDescription" maxlength="140"
