@@ -4,7 +4,7 @@
     <div style="margin-top: 10px; margin-left: 10px" *ngFor="let hw of hwlist">
       <div *ngIf="hw[1]!=null">
       <div class="f">
-       <fa-icon [icon]="faBook"></fa-icon>&nbsp;{{hw[1]}}
+       <fa-icon [icon]="faBook"></fa-icon>&nbsp; <a routerLink="scoreboard/{{hw[1]}}">{{hw[1]}}</a>
       </div>
       </div>
     </div>
@@ -17,6 +17,7 @@
        <div class="event f">
        <fa-icon [icon]="faBook"></fa-icon>&nbsp; <a routerLink="register/{{hw[0]}}">{{hw[3]}}</a>
        <a id="more">&nbsp; <fa-icon [icon]="faCaretDown"></fa-icon></a>
+       <hr/>
       </div>
       </div>
     </div>

@@ -63,7 +63,7 @@ var AppRoutingModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "html, body {\n    background-color: #F5F093;\n}\nmat-sidenav-container, mat-sidenav-content, mat-sidenav {\n    height: 100%;\n}\nmat-sidenav {\n    width: 250px;\n}\nmain {\n    padding: 10px;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uL2FwcC5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0kseUJBQXlCO0FBQzdCO0FBQ0E7SUFDSSxZQUFZO0FBQ2hCO0FBRUE7SUFDSSxZQUFZO0FBQ2hCO0FBRUE7SUFDSSxhQUFhO0FBQ2pCIiwiZmlsZSI6Ii4uLy4uL2FwcC5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiaHRtbCwgYm9keSB7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogI0Y1RjA5Mztcbn1cbm1hdC1zaWRlbmF2LWNvbnRhaW5lciwgbWF0LXNpZGVuYXYtY29udGVudCwgbWF0LXNpZGVuYXYge1xuICAgIGhlaWdodDogMTAwJTtcbn1cbiBcbm1hdC1zaWRlbmF2IHtcbiAgICB3aWR0aDogMjUwcHg7XG59XG4gXG5tYWluIHtcbiAgICBwYWRkaW5nOiAxMHB4O1xufVxuIl19 */"
+module.exports = "html, body {\n    background-color: #F5F093;\n}\nheader {\n    height: 80px;\n    background-color: #eef1f6;\n}\n.logo {\n    position: absolute;\n    margin-top: 0.5%;\n    margin-left: 5%;\n    float: left;\n}\n.user {\n    float: right;\n    margin-top: 1%;\n    margin-right: 5%;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFwcC5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0kseUJBQXlCO0FBQzdCO0FBQ0E7SUFDSSxZQUFZO0lBQ1oseUJBQXlCO0FBQzdCO0FBQ0E7SUFDSSxrQkFBa0I7SUFDbEIsZ0JBQWdCO0lBQ2hCLGVBQWU7SUFDZixXQUFXO0FBQ2Y7QUFDQTtJQUNJLFlBQVk7SUFDWixjQUFjO0lBQ2QsZ0JBQWdCO0FBQ3BCIiwiZmlsZSI6ImFwcC5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiaHRtbCwgYm9keSB7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogI0Y1RjA5Mztcbn1cbmhlYWRlciB7XG4gICAgaGVpZ2h0OiA4MHB4O1xuICAgIGJhY2tncm91bmQtY29sb3I6ICNlZWYxZjY7XG59XG4ubG9nbyB7XG4gICAgcG9zaXRpb246IGFic29sdXRlO1xuICAgIG1hcmdpbi10b3A6IDAuNSU7XG4gICAgbWFyZ2luLWxlZnQ6IDUlO1xuICAgIGZsb2F0OiBsZWZ0O1xufVxuLnVzZXIge1xuICAgIGZsb2F0OiByaWdodDtcbiAgICBtYXJnaW4tdG9wOiAxJTtcbiAgICBtYXJnaW4tcmlnaHQ6IDUlO1xufVxuIl19 */"
 
 /***/ }),
 
@@ -74,7 +74,7 @@ module.exports = "html, body {\n    background-color: #F5F093;\n}\nmat-sidenav-c
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n<router-outlet></router-outlet>\n\n"
+module.exports = "<head>\n<script src=\"https://kit.fontawesome.com/d6dd2c6584.js\" crossorigin=\"anonymous\"></script>\n</head>\n<header>\n    <div style=\"display:inline\">\n    <a class=\"logo\" routerLink=\"/\"><img src=\"https://img.icons8.com/ios/40/000000/enter-key.png\"></a>\n    <div class=\"user\">\n      <i class=\"fas fa-bell fa-2x\"></i>\n       Hi, {{current_user}}\n    </div>\n    </div>\n</header>\n\n<router-outlet></router-outlet>\n\n"
 
 /***/ }),
 
@@ -90,18 +90,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppComponent", function() { return AppComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+
 
 
 var AppComponent = /** @class */ (function () {
-    function AppComponent() {
-        this.title = 'Angular';
+    function AppComponent(http) {
+        this.http = http;
+        this.current_user = '';
     }
+    AppComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.http.get('./current_user').subscribe(function (response) {
+            _this.current_user = response.toString();
+        });
+    };
     AppComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-root',
             template: __webpack_require__(/*! ./app.component.html */ "./src/app/app.component.html"),
             styles: [__webpack_require__(/*! ./app.component.css */ "./src/app/app.component.css")]
-        })
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]])
     ], AppComponent);
     return AppComponent;
 }());
@@ -172,7 +182,7 @@ var AppModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiIuLi9jc2VlL2NzZWUtaHcvY3NlZS1ody5jb21wb25lbnQuY3NzIn0= */"
+module.exports = "section {\n    height: 100%;\n    width: 20%;\n    float: left;\n    border: 1px solid #eef1f6;\n}\naside {\n    height: 100%;\n    width: 79.5%;\n    float: right;\n    border: 1px solid #eef1f6;\n}\n.event {\n    text-align: center;\n    height: 50px;\n}\nh3 {\n    font-size: 30px;\n}\n.f {\n    font-size: 15px;\n}\n\n\n\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInZpZXcvY3NlZS9jc2VlLWh3L2NzZWUtaHcuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLFlBQVk7SUFDWixVQUFVO0lBQ1YsV0FBVztJQUNYLHlCQUF5QjtBQUM3QjtBQUNBO0lBQ0ksWUFBWTtJQUNaLFlBQVk7SUFDWixZQUFZO0lBQ1oseUJBQXlCO0FBQzdCO0FBQ0E7SUFDSSxrQkFBa0I7SUFDbEIsWUFBWTtBQUNoQjtBQUNBO0lBQ0ksZUFBZTtBQUNuQjtBQUVBO0lBQ0ksZUFBZTtBQUNuQiIsImZpbGUiOiJ2aWV3L2NzZWUvY3NlZS1ody9jc2VlLWh3LmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyJzZWN0aW9uIHtcbiAgICBoZWlnaHQ6IDEwMCU7XG4gICAgd2lkdGg6IDIwJTtcbiAgICBmbG9hdDogbGVmdDtcbiAgICBib3JkZXI6IDFweCBzb2xpZCAjZWVmMWY2O1xufVxuYXNpZGUge1xuICAgIGhlaWdodDogMTAwJTtcbiAgICB3aWR0aDogNzkuNSU7XG4gICAgZmxvYXQ6IHJpZ2h0O1xuICAgIGJvcmRlcjogMXB4IHNvbGlkICNlZWYxZjY7XG59XG4uZXZlbnQge1xuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgICBoZWlnaHQ6IDUwcHg7XG59XG5oMyB7XG4gICAgZm9udC1zaXplOiAzMHB4O1xufVxuXG4uZiB7XG4gICAgZm9udC1zaXplOiAxNXB4O1xufVxuXG5cblxuIl19 */"
 
 /***/ }),
 
@@ -183,7 +193,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div style=\"text-align:center\">\n  <button mat-raised-button color=\"primary\" routerLink=\"register\"> Register </button>\n  <button mat-raised-button color=\"primary\" routerLink=\"manage\"> Manage </button>\n</div>\n<router-outlet></router-outlet>\n"
+module.exports = "<section>\n  <h3> homeworks </h3>\n    <hr/>\n    <div style=\"margin-top: 10px; margin-left: 10px\" *ngFor=\"let hw of hwlist\">\n      <div *ngIf=\"hw[1]!=null\">\n      <div class=\"f\">\n       <fa-icon [icon]=\"faBook\"></fa-icon>&nbsp; <a routerLink=\"scoreboard/{{hw[1]}}\">{{hw[1]}}</a>\n      </div>\n      </div>\n    </div>\n</section>\n<aside>\n  <h3> issue </h3>\n  <hr/>\n    <div style=\"margin-top: 10px; margin-right: 10px\" *ngFor=\"let hw of hwlist\">\n      <div *ngIf=\"hw[1]==null\">\n       <div class=\"event f\">\n       <fa-icon [icon]=\"faBook\"></fa-icon>&nbsp; <a routerLink=\"register/{{hw[0]}}\">{{hw[3]}}</a>\n       <a id=\"more\">&nbsp; <fa-icon [icon]=\"faCaretDown\"></fa-icon></a>\n       <hr/>\n      </div>\n      </div>\n    </div>\n<router-outlet></router-outlet>\n</aside>\n"
 
 /***/ }),
 
@@ -199,12 +209,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CseeHwComponent", function() { return CseeHwComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+
+
 
 
 var CseeHwComponent = /** @class */ (function () {
-    function CseeHwComponent() {
+    function CseeHwComponent(http) {
+        this.http = http;
+        this.faBook = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faBook"];
+        this.faCaretDown = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faCaretDown"];
+        this.hwlist = [];
     }
     CseeHwComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.http.get('./gethw').subscribe(function (response) {
+            _this.hwlist = response;
+        }, function (error) { return console.log('error', error); });
     };
     CseeHwComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -212,7 +234,7 @@ var CseeHwComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./csee-hw.component.html */ "./src/app/view/csee/csee-hw/csee-hw.component.html"),
             styles: [__webpack_require__(/*! ./csee-hw.component.css */ "./src/app/view/csee/csee-hw/csee-hw.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"]])
     ], CseeHwComponent);
     return CseeHwComponent;
 }());
@@ -228,7 +250,7 @@ var CseeHwComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiIuLi9jc2VlL2NzZWUtaHcvaHctbWFuYWdlL2h3LW1hbmFnZS5jb21wb25lbnQuY3NzIn0= */"
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJ2aWV3L2NzZWUvY3NlZS1ody9ody1tYW5hZ2UvaHctbWFuYWdlLmNvbXBvbmVudC5jc3MifQ== */"
 
 /***/ }),
 
@@ -239,7 +261,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ul>\n  <li *ngFor=\"let hw of hwlist; let i = index\">\n    <h4>{{i}}: <a href=\"./professor-page/homework/{{hw.hw_name}}\"> {{hw.hw_name}} </a></h4>\n    <p> 과제코드 : {{hw.hw_base}}</p>\n    <p> 과제설명 : {{hw.hw_description}}</p>\n    <p> 과제기간 : {{hw.hw_duedate}}</p>\n  </li>\n</ul>\n\n"
+module.exports = "<h3> Scoreboard </h3>\n  <hr/>\n  <div *ngFor= \"let score of scorelist\">\n    <h4> Student name : {{score[0]}} </h4>\n    <h4> Score : {{score[1]}} </h4>\n  </div>\n\n<head>\n    <title>My Scoreboard</title>\n\n    <link href=\"css/bootstrap.min.css\" rel=\"stylesheet\">\n    <link href=\"css/app.css\" rel=\"stylesheet\">\n    <link href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css\" rel='stylesheet' type='text/css'>\n\n    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->\n    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->\n    <!--[if lt IE 9]>\n      <script src=\"https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js\"></script>\n      <script src=\"https://oss.maxcdn.com/respond/1.4.2/respond.min.js\"></script>\n    <![endif]-->\n  </head>\n  <body>\n    <div class=\"container\">\n      <div class=\"row\">\n        <div class=\"col-xs-12 col-sm-8 col-sm-push-2\">\n          <h1 class=\"text-center\">My Scoreboard</h1>\n          <hr/>\n          <p>Give a gamer some points</p>\n          <br/>\n        </div>\n      </div>\n    </div>\n\n\n<!-- NEW TABLE SECTION -->\n<div class=\"container\">\n  <table class=\"table table-bordered table-striped table-hover\" id=\"user_table\">\n    <tr>\n      <th>ID</th>\n      <th>Name</th>\n      <th>Points</th>\n    </tr>\n    <!-- LOAD USER INFO HERE -->\n  </table>\n  <div class=\"panel-footer\">\n    <form class=\"form-inline\">\n      <div class=\"form-group\">\n        <label for=\"\">ID</label>\n        <input type=\"text\">\n      </div>\n      <button class=\"btn btn-addpoints\"type=\"\">Add +5 Points</button>\n    </form>\n  </div>\n</div>\n<!-- END OF NEW TABLE SECTION -->\n\n    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->\n    <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js\"></script>\n    <!-- Include all compiled plugins (below), or include individual files as needed -->\n    <script src=\"js/bootstrap.min.js\"></script>\n    <script src=\"js/web3.min.js\"></script>\n    <script src=\"js/truffle-contract.js\"></script>\n    <script src=\"js/app.js\"></script>\n  </body>\n\n"
 
 /***/ }),
 
@@ -256,35 +278,31 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var _user_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../user.service */ "./src/app/view/user.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 
 
 
 
 var HwManageComponent = /** @class */ (function () {
-    function HwManageComponent(http, userService) {
+    function HwManageComponent(http, route) {
         this.http = http;
-        this.userService = userService;
-        this.hwlist = [];
-        this.current_user = '';
+        this.hw_id = '';
+        this.scorelist = [];
+        this.hw_id = route.snapshot.params['id'];
     }
     HwManageComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.http.get('./current_user').subscribe(function (response) {
-            _this.current_user = response.toString();
+        this.http.get('./professor-page/getscoreboard/' + this.hw_id).subscribe(function (response) {
+            _this.scorelist = response;
         });
-        this.userService.manageHomework().subscribe(function (response) {
-            _this.hwlist = response;
-        }, function (error) { return console.log('error', error); });
     };
     HwManageComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-hw-manage',
             template: __webpack_require__(/*! ./hw-manage.component.html */ "./src/app/view/csee/csee-hw/hw-manage/hw-manage.component.html"),
-            providers: [_user_service__WEBPACK_IMPORTED_MODULE_3__["UserService"]],
             styles: [__webpack_require__(/*! ./hw-manage.component.css */ "./src/app/view/csee/csee-hw/hw-manage/hw-manage.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"], _user_service__WEBPACK_IMPORTED_MODULE_3__["UserService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"]])
     ], HwManageComponent);
     return HwManageComponent;
 }());
@@ -300,7 +318,7 @@ var HwManageComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiIuLi9jc2VlL2NzZWUtaHcvaHctcmVnaXN0ZXIvaHctcmVnaXN0ZXIuY29tcG9uZW50LmNzcyJ9 */"
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJ2aWV3L2NzZWUvY3NlZS1ody9ody1yZWdpc3Rlci9ody1yZWdpc3Rlci5jb21wb25lbnQuY3NzIn0= */"
 
 /***/ }),
 
@@ -311,7 +329,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h1> Homework Register </h1>\n    <label for=\"homeworkName\">hw_name:</label>\n    <input type=\"text\" name=\"name\" id=\"homeworkName\" maxlength=\"140\"\n           required [(ngModel)]=\"register.hw_name\"/>\n\n    <br><label for=\"homeworkName\">basecode_url:</label>\n    <input type=\"text\" name=\"basecode_url\" id=\"baseUrl\" maxlength=\"140\"\n           required [(ngModel)]=\"register.hw_base\"/>\n \n    <br><label for=\"homeworkName\">evaluation_url:</label>\n    <input type=\"text\" name=\"evaluation_url\" id=\"evalUrl\" maxlength=\"140\"\n           required [(ngModel)]=\"register.hw_eval\"/>\n \n    <br><label for=\"homeworkDescription\">description:</label>\n    <input type=\"text\" name=\"description\" id=\"homeworkDescription\" maxlength=\"140\"\n           required [(ngModel)]=\"register.hw_description\"/>\n\n    <br><label for=\"homeworkDuedate\">duedate:</label>\n    <input type=\"datetime-local\" name=\"duedate\" id=\"homeworkDuedate\" maxlength=\"140\"\n           required [(ngModel)]=\"register.hw_duedate\"/>\n    <br><button (click)=\"Register()\"> Create! </button>\n"
+module.exports = "<div style=\"text-align:center; margin-top:10%;\" class=\"form\">\n   <h1> Homework Register </h1>\n     <mat-form-field>\n       <input matInput placeholder=\"hw name\" type=\"text\" required [(ngModel)]=\"register.hw_name\"/>\n     </mat-form-field>\n     <br><mat-form-field>\n       <br><label for=\"homeworkName\">basecode_url: {{hw_base}} </label> \n     </mat-form-field>    \n     <br><mat-form-field>\n       <br><label for=\"homeworkName\">evaluation_url: {{hw_eval}} </label>\n     </mat-form-field> \n     <br><mat-form-field>\n       <input matInput placeholder=\"description\" type=\"text\" required [(ngModel)]=\"register.hw_description\"/>\n     </mat-form-field> \n     <br><mat-form-field>\n       <input matInput placeholder=\"duedate\" type=\"datetime-local\" required [(ngModel)]=\"register.hw_duedate\"/>\n     </mat-form-field>\n     <br><button mat-raised-button color=\"primary\" (click)=\"Register()\"> Create! </button>\n"
 
 /***/ }),
 
@@ -329,29 +347,46 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _user_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../user.service */ "./src/app/view/user.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+
 
 
 
 
 var HwRegisterComponent = /** @class */ (function () {
-    function HwRegisterComponent(route, userService, router) {
+    function HwRegisterComponent(http, route, userService, router) {
+        var _this = this;
+        this.http = http;
         this.userService = userService;
         this.router = router;
+        this.hw_id = '';
+        this.hw_base = '';
+        this.hw_eval = '';
+        this.hw_madeby = '';
+        this.hw_id = route.snapshot.params['id'];
+        this.http.get('./professor-page/getregister/' + this.hw_id).subscribe(function (response) {
+            _this.hw_base = response[0];
+            _this.hw_eval = response[1];
+            _this.hw_madeby = response[2];
+        }, function (error) { return console.log('error', error); });
     }
     HwRegisterComponent.prototype.ngOnInit = function () {
         this.register = {
-            prof: 'Kchaeyoung',
             hw_name: '',
             hw_base: '',
             hw_eval: '',
             hw_description: '',
             hw_duedate: '',
+            hw_madeby: '',
         };
     };
     HwRegisterComponent.prototype.Register = function () {
         var _this = this;
-        this.userService.registerHomework(this.register).subscribe(function (response) {
-            _this.router.navigateByUrl('professor-page/manage');
+        this.register.hw_base = this.hw_base;
+        this.register.hw_eval = this.hw_eval;
+        this.register.hw_madeby = this.hw_madeby;
+        this.userService.registerHomework(this.register, this.hw_id).subscribe(function (response) {
+            _this.router.navigateByUrl('professor-page');
         }, function (error) { return console.log('error', error); });
     };
     HwRegisterComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -361,7 +396,7 @@ var HwRegisterComponent = /** @class */ (function () {
             providers: [_user_service__WEBPACK_IMPORTED_MODULE_2__["UserService"]],
             styles: [__webpack_require__(/*! ./hw-register.component.css */ "./src/app/view/csee/csee-hw/hw-register/hw-register.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"], _user_service__WEBPACK_IMPORTED_MODULE_2__["UserService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClient"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"], _user_service__WEBPACK_IMPORTED_MODULE_2__["UserService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]])
     ], HwRegisterComponent);
     return HwRegisterComponent;
 }());
@@ -377,7 +412,7 @@ var HwRegisterComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiIuLi9jc2VlL2NzZWUtbG9naW4vY3NlZS1sb2dpbi5jb21wb25lbnQuY3NzIn0= */"
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJ2aWV3L2NzZWUvY3NlZS1sb2dpbi9jc2VlLWxvZ2luLmNvbXBvbmVudC5jc3MifQ== */"
 
 /***/ }),
 
@@ -451,7 +486,7 @@ var CseeLoginComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiIuLi9jc2VlL2NzZWUtc2lnbnVwL2NzZWUtc2lnbnVwLmNvbXBvbmVudC5jc3MifQ== */"
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJ2aWV3L2NzZWUvY3NlZS1zaWdudXAvY3NlZS1zaWdudXAuY29tcG9uZW50LmNzcyJ9 */"
 
 /***/ }),
 
@@ -462,7 +497,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div style=\"text-align:center; margin-top:10%\">\n  <h1>Enter your info.</h1>\n  <mat-form-field>\n    <input matInput placeholder=\"professor id\" [(ngModel)]=\"signup.professor_id\">\n  </mat-form-field>\n  <br><mat-form-field>\n    <input matInput placeholder=\"professor name\" [(ngModel)]=\"signup.professor_name\">\n  </mat-form-field>\n  <br><button mat-raised-button color=\"primary\" (click)=\"SignUp()\"> Submit </button>\n</div>\n"
+module.exports = "<div style=\"text-align:center; margin-top:10%; font-size:25px\">\n  <h1>Enter your info.</h1>\n  <mat-form-field>\n    <input matInput placeholder=\"professor id\" [(ngModel)]=\"signup.professor_id\">\n  </mat-form-field>\n  <br><mat-form-field>\n    <input matInput placeholder=\"professor name\" [(ngModel)]=\"signup.professor_name\">\n  </mat-form-field>\n  <br><button style=\"padding: 10px 30px\" mat-raised-button color=\"primary\" (click)=\"SignUp()\"> Submit </button>\n</div>\n"
 
 /***/ }),
 
@@ -542,6 +577,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _csee_hw_hw_register_hw_register_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./csee-hw/hw-register/hw-register.component */ "./src/app/view/csee/csee-hw/hw-register/hw-register.component.ts");
 /* harmony import */ var _csee_hw_hw_manage_hw_manage_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./csee-hw/hw-manage/hw-manage.component */ "./src/app/view/csee/csee-hw/hw-manage/hw-manage.component.ts");
 /* harmony import */ var _csee_signup_csee_signup_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./csee-signup/csee-signup.component */ "./src/app/view/csee/csee-signup/csee-signup.component.ts");
+/* harmony import */ var _fortawesome_angular_fontawesome__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @fortawesome/angular-fontawesome */ "./node_modules/@fortawesome/angular-fontawesome/fesm5/angular-fontawesome.js");
+
 
 
 
@@ -558,13 +595,11 @@ __webpack_require__.r(__webpack_exports__);
 
 var ROUTES = [
     { path: 'signup/csee', component: _csee_signup_csee_signup_component__WEBPACK_IMPORTED_MODULE_13__["CseeSignupComponent"] },
+    { path: 'professor-page/register/:id', component: _csee_hw_hw_register_hw_register_component__WEBPACK_IMPORTED_MODULE_11__["HwRegisterComponent"] },
+    { path: 'professor-page/scoreboard/:id', component: _csee_hw_hw_manage_hw_manage_component__WEBPACK_IMPORTED_MODULE_12__["HwManageComponent"] },
     {
         path: 'professor-page',
         component: _csee_hw_csee_hw_component__WEBPACK_IMPORTED_MODULE_8__["CseeHwComponent"],
-        children: [
-            { path: 'register', component: _csee_hw_hw_register_hw_register_component__WEBPACK_IMPORTED_MODULE_11__["HwRegisterComponent"] },
-            { path: 'manage', component: _csee_hw_hw_manage_hw_manage_component__WEBPACK_IMPORTED_MODULE_12__["HwManageComponent"] }
-        ]
     }
 ];
 var CseeModule = /** @class */ (function () {
@@ -581,6 +616,7 @@ var CseeModule = /** @class */ (function () {
                 _angular_material_form_field__WEBPACK_IMPORTED_MODULE_3__["MatFormFieldModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatInputModule"],
                 _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_1__["BrowserAnimationsModule"],
+                _fortawesome_angular_fontawesome__WEBPACK_IMPORTED_MODULE_14__["FontAwesomeModule"],
             ]
         })
     ], CseeModule);
@@ -598,7 +634,7 @@ var CseeModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".contents {\n    background: rgb(238,174,202);\n    background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);\n    height: 380px;\n    margin-top: 20px;\n}\nheader {\n    height: 30px;\n}\n.teaser-txt {\n    margin-top: 50px;\n    margin-bottom: 2px;\n    font-size: 70px;\n    color: white;\n}\n.fcolor {\n    font-size: 20px;\n    color: white;\n}\n.font {\n    font-family: 'Libre Baskerville', serif;\n    margin-left: 5%;\n}\n.footer {\n    background-color: black;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNpZ25pbi5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksNEJBQTRCO0lBQzVCLHFGQUFxRjtJQUNyRixhQUFhO0lBQ2IsZ0JBQWdCO0FBQ3BCO0FBQ0E7SUFDSSxZQUFZO0FBQ2hCO0FBQ0E7SUFDSSxnQkFBZ0I7SUFDaEIsa0JBQWtCO0lBQ2xCLGVBQWU7SUFDZixZQUFZO0FBQ2hCO0FBRUE7SUFDSSxlQUFlO0lBQ2YsWUFBWTtBQUNoQjtBQUVBO0lBQ0ksdUNBQXVDO0lBQ3ZDLGVBQWU7QUFDbkI7QUFDQTtJQUNJLHVCQUF1QjtBQUMzQiIsImZpbGUiOiJzaWduaW4uY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5jb250ZW50cyB7XG4gICAgYmFja2dyb3VuZDogcmdiKDIzOCwxNzQsMjAyKTtcbiAgICBiYWNrZ3JvdW5kOiByYWRpYWwtZ3JhZGllbnQoY2lyY2xlLCByZ2JhKDIzOCwxNzQsMjAyLDEpIDAlLCByZ2JhKDE0OCwxODcsMjMzLDEpIDEwMCUpO1xuICAgIGhlaWdodDogMzgwcHg7XG4gICAgbWFyZ2luLXRvcDogMjBweDtcbn1cbmhlYWRlciB7XG4gICAgaGVpZ2h0OiAzMHB4O1xufVxuLnRlYXNlci10eHQge1xuICAgIG1hcmdpbi10b3A6IDUwcHg7XG4gICAgbWFyZ2luLWJvdHRvbTogMnB4O1xuICAgIGZvbnQtc2l6ZTogNzBweDtcbiAgICBjb2xvcjogd2hpdGU7XG59XG5cbi5mY29sb3Ige1xuICAgIGZvbnQtc2l6ZTogMjBweDtcbiAgICBjb2xvcjogd2hpdGU7XG59XG5cbi5mb250IHtcbiAgICBmb250LWZhbWlseTogJ0xpYnJlIEJhc2tlcnZpbGxlJywgc2VyaWY7XG4gICAgbWFyZ2luLWxlZnQ6IDUlO1xufVxuLmZvb3RlciB7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogYmxhY2s7XG59XG4iXX0= */"
+module.exports = ".contents {\n    background: rgb(238,174,202);\n    background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);\n    height: 380px;\n    width: 100%;\n}\n.teaser-txt {\n    margin-bottom: 2px;\n    font-size: 70px;\n    color: white;\n}\n.fcolor {\n    font-size: 20px;\n    color: white;\n}\n.font {\n    margin-top: 10%;\n    float: right;\n    font-family: 'Libre Baskerville', serif;\n    margin-right: 10%;\n}\n*, *:before, *:after {\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n  position: relative;\n  }\nh1 {\n  display: inline-block;\n  color: white;\n  font-family: 'Righteous', serif;\n  font-size: 6em; \n  text-shadow: .015em .015em 0 radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);\n  }\nh1:after {\n    content: attr(data-shadow);\n    position: absolute;\n    top: .06em; left: .06em;\n    z-index: -1;\n    text-shadow: none;\n    background-image:\n      linear-gradient(\n        45deg,\n        transparent 45%,\n        hsla(48,20%,90%,1) 45%,\n        hsla(48,20%,90%,1) 55%,\n        transparent 0\n        );\n    background-size: .05em .05em;\n    -webkit-background-clip: text;\n    -webkit-text-fill-color: transparent;\n  \n    -webkit-animation: shad-anim 15s linear infinite;\n  \n            animation: shad-anim 15s linear infinite;\n    }\n@-webkit-keyframes shad-anim {\n  0% {background-position: 0 0}\n  0% {background-position: 100% -100%}\n  }\n@keyframes shad-anim {\n  0% {background-position: 0 0}\n  0% {background-position: 100% -100%}\n  }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInZpZXcvc2lnbmluL3NpZ25pbi5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksNEJBQTRCO0lBQzVCLHFGQUFxRjtJQUNyRixhQUFhO0lBQ2IsV0FBVztBQUNmO0FBQ0E7SUFDSSxrQkFBa0I7SUFDbEIsZUFBZTtJQUNmLFlBQVk7QUFDaEI7QUFFQTtJQUNJLGVBQWU7SUFDZixZQUFZO0FBQ2hCO0FBRUE7SUFDSSxlQUFlO0lBQ2YsWUFBWTtJQUNaLHVDQUF1QztJQUN2QyxpQkFBaUI7QUFDckI7QUFJQTtFQUNFLFNBQVM7RUFDVCxVQUFVO0VBQ1Ysc0JBQXNCO0VBQ3RCLGtCQUFrQjtFQUNsQjtBQUVGO0VBQ0UscUJBQXFCO0VBQ3JCLFlBQVk7RUFDWiwrQkFBK0I7RUFDL0IsY0FBYztFQUNkLHNHQUFzRztFQUN0RztBQUNBO0lBQ0UsMEJBQTBCO0lBQzFCLGtCQUFrQjtJQUNsQixVQUFVLEVBQUUsV0FBVztJQUN2QixXQUFXO0lBQ1gsaUJBQWlCO0lBQ2pCOzs7Ozs7O1NBT0s7SUFDTCw0QkFBNEI7SUFDNUIsNkJBQTZCO0lBQzdCLG9DQUFvQzs7SUFFcEMsZ0RBQXdDOztZQUF4Qyx3Q0FBd0M7SUFDeEM7QUFFSjtFQUNFLElBQUksd0JBQXdCO0VBQzVCLElBQUksK0JBQStCO0VBQ25DO0FBSEY7RUFDRSxJQUFJLHdCQUF3QjtFQUM1QixJQUFJLCtCQUErQjtFQUNuQyIsImZpbGUiOiJ2aWV3L3NpZ25pbi9zaWduaW4uY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5jb250ZW50cyB7XG4gICAgYmFja2dyb3VuZDogcmdiKDIzOCwxNzQsMjAyKTtcbiAgICBiYWNrZ3JvdW5kOiByYWRpYWwtZ3JhZGllbnQoY2lyY2xlLCByZ2JhKDIzOCwxNzQsMjAyLDEpIDAlLCByZ2JhKDE0OCwxODcsMjMzLDEpIDEwMCUpO1xuICAgIGhlaWdodDogMzgwcHg7XG4gICAgd2lkdGg6IDEwMCU7XG59XG4udGVhc2VyLXR4dCB7XG4gICAgbWFyZ2luLWJvdHRvbTogMnB4O1xuICAgIGZvbnQtc2l6ZTogNzBweDtcbiAgICBjb2xvcjogd2hpdGU7XG59XG5cbi5mY29sb3Ige1xuICAgIGZvbnQtc2l6ZTogMjBweDtcbiAgICBjb2xvcjogd2hpdGU7XG59XG5cbi5mb250IHtcbiAgICBtYXJnaW4tdG9wOiAxMCU7XG4gICAgZmxvYXQ6IHJpZ2h0O1xuICAgIGZvbnQtZmFtaWx5OiAnTGlicmUgQmFza2VydmlsbGUnLCBzZXJpZjtcbiAgICBtYXJnaW4tcmlnaHQ6IDEwJTtcbn1cblxuQGltcG9ydCB1cmwoaHR0cHM6Ly9mb250cy5nb29nbGVhcGlzLmNvbS9jc3M/ZmFtaWx5PVJpZ2h0ZW91cyk7XG5cbiosICo6YmVmb3JlLCAqOmFmdGVyIHtcbiAgbWFyZ2luOiAwO1xuICBwYWRkaW5nOiAwO1xuICBib3gtc2l6aW5nOiBib3JkZXItYm94O1xuICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gIH1cblxuaDEge1xuICBkaXNwbGF5OiBpbmxpbmUtYmxvY2s7XG4gIGNvbG9yOiB3aGl0ZTtcbiAgZm9udC1mYW1pbHk6ICdSaWdodGVvdXMnLCBzZXJpZjtcbiAgZm9udC1zaXplOiA2ZW07IFxuICB0ZXh0LXNoYWRvdzogLjAxNWVtIC4wMTVlbSAwIHJhZGlhbC1ncmFkaWVudChjaXJjbGUsIHJnYmEoMjM4LDE3NCwyMDIsMSkgMCUsIHJnYmEoMTQ4LDE4NywyMzMsMSkgMTAwJSk7XG4gIH1cbiAgaDE6YWZ0ZXIge1xuICAgIGNvbnRlbnQ6IGF0dHIoZGF0YS1zaGFkb3cpO1xuICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICB0b3A6IC4wNmVtOyBsZWZ0OiAuMDZlbTtcbiAgICB6LWluZGV4OiAtMTtcbiAgICB0ZXh0LXNoYWRvdzogbm9uZTtcbiAgICBiYWNrZ3JvdW5kLWltYWdlOlxuICAgICAgbGluZWFyLWdyYWRpZW50KFxuICAgICAgICA0NWRlZyxcbiAgICAgICAgdHJhbnNwYXJlbnQgNDUlLFxuICAgICAgICBoc2xhKDQ4LDIwJSw5MCUsMSkgNDUlLFxuICAgICAgICBoc2xhKDQ4LDIwJSw5MCUsMSkgNTUlLFxuICAgICAgICB0cmFuc3BhcmVudCAwXG4gICAgICAgICk7XG4gICAgYmFja2dyb3VuZC1zaXplOiAuMDVlbSAuMDVlbTtcbiAgICAtd2Via2l0LWJhY2tncm91bmQtY2xpcDogdGV4dDtcbiAgICAtd2Via2l0LXRleHQtZmlsbC1jb2xvcjogdHJhbnNwYXJlbnQ7XG4gIFxuICAgIGFuaW1hdGlvbjogc2hhZC1hbmltIDE1cyBsaW5lYXIgaW5maW5pdGU7XG4gICAgfVxuXG5Aa2V5ZnJhbWVzIHNoYWQtYW5pbSB7XG4gIDAlIHtiYWNrZ3JvdW5kLXBvc2l0aW9uOiAwIDB9XG4gIDAlIHtiYWNrZ3JvdW5kLXBvc2l0aW9uOiAxMDAlIC0xMDAlfVxuICB9XG4iXX0= */"
 
 /***/ }),
 
@@ -609,7 +645,7 @@ module.exports = ".contents {\n    background: rgb(238,174,202);\n    background
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<link href=\"https://fonts.googleapis.com/css?family=Libre+Baskerville&display=swap\" rel=\"stylesheet\">\n  <div>\n    <header>\n      <h2>T </h2>\n    </header>\n  </div>\n  <div class=\"contents\">\n  <div class=\"font\">\n    <a class=\"teaser-txt\"> turnincode. </a>\n    <br><a class=\"fcolor\"> grade your homework automatically. </a>\n  </div>\n  </div>\n  <footer>\n    <p> follow us! </p>\n  </footer>\n"
+module.exports = "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<link href=\"https://fonts.googleapis.com/css?family=Libre+Baskerville&display=swap\" rel=\"stylesheet\">\n  <div class=\"contents\">\n    <div class=\"font\">\n      <br><a class=\"teaser-txt\"> turnincode. </a>\n      <br><a class=\"fcolor\"> grade your homework automatically. </a>\n    </div>\n  </div>\n\n"
 
 /***/ }),
 
@@ -654,7 +690,7 @@ var SigninComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".center {\n    font-size: 40px;\n    margin-top: 15%;\n    text-align: center;\n}\n.inline {\n    display: inline;\n}\n.button1 {\n    margin: 10px;\n    padding: 20px 40px;\n}\n.button2 {\n    padding: 20px 40px;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uL3NpZ251cC9zaWdudXAuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLGVBQWU7SUFDZixlQUFlO0lBQ2Ysa0JBQWtCO0FBQ3RCO0FBQ0E7SUFDSSxlQUFlO0FBQ25CO0FBQ0E7SUFDSSxZQUFZO0lBQ1osa0JBQWtCO0FBQ3RCO0FBQ0E7SUFDSSxrQkFBa0I7QUFDdEIiLCJmaWxlIjoiLi4vc2lnbnVwL3NpZ251cC5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmNlbnRlciB7XG4gICAgZm9udC1zaXplOiA0MHB4O1xuICAgIG1hcmdpbi10b3A6IDE1JTtcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XG59XG4uaW5saW5lIHtcbiAgICBkaXNwbGF5OiBpbmxpbmU7XG59XG4uYnV0dG9uMSB7XG4gICAgbWFyZ2luOiAxMHB4O1xuICAgIHBhZGRpbmc6IDIwcHggNDBweDtcbn1cbi5idXR0b24yIHtcbiAgICBwYWRkaW5nOiAyMHB4IDQwcHg7XG59XG4iXX0= */"
+module.exports = ".center {\n    font-size: 40px;\n    margin-top: 10%;\n    text-align: center;\n}\n.inline {\n    display: inline;\n}\n.button1 {\n    margin: 80px;\n}\n.button2 {\n    margin: 80px;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInZpZXcvc2lnbnVwL3NpZ251cC5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksZUFBZTtJQUNmLGVBQWU7SUFDZixrQkFBa0I7QUFDdEI7QUFDQTtJQUNJLGVBQWU7QUFDbkI7QUFDQTtJQUNJLFlBQVk7QUFDaEI7QUFDQTtJQUNJLFlBQVk7QUFDaEIiLCJmaWxlIjoidmlldy9zaWdudXAvc2lnbnVwLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuY2VudGVyIHtcbiAgICBmb250LXNpemU6IDQwcHg7XG4gICAgbWFyZ2luLXRvcDogMTAlO1xuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcbn1cbi5pbmxpbmUge1xuICAgIGRpc3BsYXk6IGlubGluZTtcbn1cbi5idXR0b24xIHtcbiAgICBtYXJnaW46IDgwcHg7XG59XG4uYnV0dG9uMiB7XG4gICAgbWFyZ2luOiA4MHB4O1xufVxuIl19 */"
 
 /***/ }),
 
@@ -665,7 +701,7 @@ module.exports = ".center {\n    font-size: 40px;\n    margin-top: 15%;\n    tex
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"center\">\n  <h1>Who Are You</h1>\n  <div class=\"inline\">\n    <br><button class=\"button1\" mat-raised-button color=\"primary\" routerLink=\"student-signup\"> student </button>\n    <button class=\"button2\" mat-raised-button color=\"primary\" routerLink=\"csee\"> professor </button>\n  </div>\n</div>\n"
+module.exports = "<!DOCTYPE html>\n<html>\n<head>\n<meta name='viewport' content='width=device-width, initial-scale=1'>\n<script src=\"https://kit.fontawesome.com/d6dd2c6584.js\" crossorigin=\"anonymous\"></script>\n<link href=\"https://fonts.googleapis.com/css?family=Libre+Baskerville&display=swap\" rel=\"stylesheet\">\n</head>\n<body>\n<div class=\"center\">\n  <h2>Who Are You?</h2>\n  <br><div class=\"inline\">\n    <a class=\"button1\" routerLink=\"student-signup\"><fa-icon [icon]=\"faUser\" size=\"5x\" [styles]=\"{'color': '#6a6271'}\"></fa-icon></a>\n    <a class=\"button2\" routerLink=\"csee\"><fa-icon [icon]=\"faSchool\" size=\"5x\" [styles]=\"{'color': '#6a6271'}\"></fa-icon></a>\n  </div>\n</div>\n</body>\n</html>\n"
 
 /***/ }),
 
@@ -681,10 +717,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SignupComponent", function() { return SignupComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+
+
 
 
 var SignupComponent = /** @class */ (function () {
     function SignupComponent() {
+        this.faUser = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faUser"];
+        this.faSchool = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__["faSchool"];
     }
     SignupComponent.prototype.ngOnInit = function () {
     };
@@ -710,7 +751,7 @@ var SignupComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiIuLi9zdHVkZW50L3N0dWRlbnQtcGFnZS9teXBhZ2UvbXlwYWdlLmNvbXBvbmVudC5jc3MifQ== */"
+module.exports = ".divide {\n    margin-top: 2px;\n    border-bottom: 1px solid #eef1f6;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInZpZXcvc3R1ZGVudC9zdHVkZW50LXBhZ2UvbXlwYWdlL215cGFnZS5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksZUFBZTtJQUNmLGdDQUFnQztBQUNwQyIsImZpbGUiOiJ2aWV3L3N0dWRlbnQvc3R1ZGVudC1wYWdlL215cGFnZS9teXBhZ2UuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5kaXZpZGUge1xuICAgIG1hcmdpbi10b3A6IDJweDtcbiAgICBib3JkZXItYm90dG9tOiAxcHggc29saWQgI2VlZjFmNjtcbn1cbiJdfQ== */"
 
 /***/ }),
 
@@ -721,7 +762,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n<ul>\n  <li>\n    <h4> hw name : {{hwlist}}</h4>\n    <button (click)=\"runcode()\"> 과제채점 </button>\n    <h5> {{result}} </h5>\n  <li>\n</ul>\n"
+module.exports = "<h3> test </h3>\n"
 
 /***/ }),
 
@@ -781,7 +822,7 @@ var MypageComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiIuLi9zdHVkZW50L3N0dWRlbnQtcGFnZS9zdHVkZW50LXBhZ2UuY29tcG9uZW50LmNzcyJ9 */"
+module.exports = "section {\n    height: 80%;\n    width: 20%;\n    float: left;\n    border: 1px solid #eef1f6;\n}\naside {\n    height: 80%;\n    width: 79.5%;\n    float: right;\n    border: 1px solid #eef1f6;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInZpZXcvc3R1ZGVudC9zdHVkZW50LXBhZ2Uvc3R1ZGVudC1wYWdlLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7SUFDSSxXQUFXO0lBQ1gsVUFBVTtJQUNWLFdBQVc7SUFDWCx5QkFBeUI7QUFDN0I7QUFDQTtJQUNJLFdBQVc7SUFDWCxZQUFZO0lBQ1osWUFBWTtJQUNaLHlCQUF5QjtBQUM3QiIsImZpbGUiOiJ2aWV3L3N0dWRlbnQvc3R1ZGVudC1wYWdlL3N0dWRlbnQtcGFnZS5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsic2VjdGlvbiB7XG4gICAgaGVpZ2h0OiA4MCU7XG4gICAgd2lkdGg6IDIwJTtcbiAgICBmbG9hdDogbGVmdDtcbiAgICBib3JkZXI6IDFweCBzb2xpZCAjZWVmMWY2O1xufVxuYXNpZGUge1xuICAgIGhlaWdodDogODAlO1xuICAgIHdpZHRoOiA3OS41JTtcbiAgICBmbG9hdDogcmlnaHQ7XG4gICAgYm9yZGVyOiAxcHggc29saWQgI2VlZjFmNjtcbn1cbiJdfQ== */"
 
 /***/ }),
 
@@ -792,7 +833,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div style=\"text-align:center\">\n  <button mat-raised-button color=\"primary\" routerLink=\"mypage\"> Mypage </button>\n</div>\n<router-outlet></router-outlet>\n"
+module.exports = "<section>\n  <h3> homeworks </h3>\n    <div style=\"margin-top: 10px; margin-left: 10px\" *ngFor=\"let hw of hwlist\">\n       <fa-icon [icon]=\"faBook\"></fa-icon>&nbsp;{{hw}}\n    </div>\n</section>\n<aside>\n  <router-outlet></router-outlet>\n</aside>\n"
 
 /***/ }),
 
@@ -808,12 +849,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StudentPageComponent", function() { return StudentPageComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+
+
 
 
 var StudentPageComponent = /** @class */ (function () {
-    function StudentPageComponent() {
+    function StudentPageComponent(http) {
+        this.http = http;
+        this.faBook = _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_3__["faBook"];
+        this.hwlist = [];
     }
     StudentPageComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.http.get('./student-mypage').subscribe(function (response) {
+            _this.hwlist = response;
+        });
     };
     StudentPageComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -821,7 +873,7 @@ var StudentPageComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./student-page.component.html */ "./src/app/view/student/student-page/student-page.component.html"),
             styles: [__webpack_require__(/*! ./student-page.component.css */ "./src/app/view/student/student-page/student-page.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]])
     ], StudentPageComponent);
     return StudentPageComponent;
 }());
@@ -837,7 +889,7 @@ var StudentPageComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".font {\n  font-family: 'Lobster';\n}\n.left {\n  float: right;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uL3N0dWRlbnQvc3R1ZGVudC1zaWduLWluL3N0dWRlbnQtc2lnbi1pbi5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0Usc0JBQXNCO0FBQ3hCO0FBQ0E7RUFDRSxZQUFZO0FBQ2QiLCJmaWxlIjoiLi4vc3R1ZGVudC9zdHVkZW50LXNpZ24taW4vc3R1ZGVudC1zaWduLWluLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuZm9udCB7XG4gIGZvbnQtZmFtaWx5OiAnTG9ic3Rlcic7XG59XG4ubGVmdCB7XG4gIGZsb2F0OiByaWdodDtcbn1cbiJdfQ== */"
+module.exports = ".font {\n  font-family: 'Lobster';\n}\n.left {\n  float: right;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInZpZXcvc3R1ZGVudC9zdHVkZW50LXNpZ24taW4vc3R1ZGVudC1zaWduLWluLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxzQkFBc0I7QUFDeEI7QUFDQTtFQUNFLFlBQVk7QUFDZCIsImZpbGUiOiJ2aWV3L3N0dWRlbnQvc3R1ZGVudC1zaWduLWluL3N0dWRlbnQtc2lnbi1pbi5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmZvbnQge1xuICBmb250LWZhbWlseTogJ0xvYnN0ZXInO1xufVxuLmxlZnQge1xuICBmbG9hdDogcmlnaHQ7XG59XG4iXX0= */"
 
 /***/ }),
 
@@ -896,7 +948,7 @@ var StudentSignInComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiIuLi9zdHVkZW50L3N0dWRlbnQtc2lnbi11cC9zdHVkZW50LXNpZ24tdXAuY29tcG9uZW50LmNzcyJ9 */"
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJ2aWV3L3N0dWRlbnQvc3R1ZGVudC1zaWduLXVwL3N0dWRlbnQtc2lnbi11cC5jb21wb25lbnQuY3NzIn0= */"
 
 /***/ }),
 
@@ -907,7 +959,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div style=\"text-align:center; margin-top:10%\">\n  <h1>Enter your info.</h1>\n  <mat-form-field>\n    <input matInput placeholder=\"github id\" [(ngModel)]=\"signup.student_id\">\n  </mat-form-field>\n  <br><mat-form-field>\n    <input matInput placeholder=\"student name\" [(ngModel)]=\"signup.student_name\">\n  </mat-form-field>\n  <br><mat-form-field>\n    <input matInput placeholder=\"student number\" [(ngModel)]=\"signup.student_number\">\n  </mat-form-field>  \n  <br><button button mat-raised-button color=\"primary\" (click)=\"SignUp()\"> Submit </button>\n</div>\n"
+module.exports = "<div style=\"text-align:center; margin-top:10%; font-size:25px\">\n  <h1>Enter your info.</h1>\n  <mat-form-field>\n    <input matInput placeholder=\"github id\" [(ngModel)]=\"signup.student_id\">\n  </mat-form-field>\n  <br><mat-form-field>\n    <input matInput placeholder=\"student name\" [(ngModel)]=\"signup.student_name\">\n  </mat-form-field>\n  <br><mat-form-field>\n    <input matInput placeholder=\"student number\" [(ngModel)]=\"signup.student_number\">\n  </mat-form-field>  \n  <br><button style=\"padding: 10px 30px\" mat-raised-button color=\"primary\" (click)=\"SignUp()\"> Submit </button>\n</div>\n"
 
 /***/ }),
 
@@ -987,6 +1039,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
 /* harmony import */ var _student_page_student_page_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./student-page/student-page.component */ "./src/app/view/student/student-page/student-page.component.ts");
 /* harmony import */ var _student_page_mypage_mypage_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./student-page/mypage/mypage.component */ "./src/app/view/student/student-page/mypage/mypage.component.ts");
+/* harmony import */ var _fortawesome_angular_fontawesome__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @fortawesome/angular-fontawesome */ "./node_modules/@fortawesome/angular-fontawesome/fesm5/angular-fontawesome.js");
+
 
 
 
@@ -1024,6 +1078,7 @@ var StudentModule = /** @class */ (function () {
                 _angular_material_form_field__WEBPACK_IMPORTED_MODULE_3__["MatFormFieldModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatInputModule"],
                 _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_1__["BrowserAnimationsModule"],
+                _fortawesome_angular_fontawesome__WEBPACK_IMPORTED_MODULE_13__["FontAwesomeModule"],
             ]
         })
     ], StudentModule);
@@ -1066,11 +1121,8 @@ var UserService = /** @class */ (function () {
     UserService.prototype.signinNewStudent = function (userData) {
         return this.http.post('./auth2/', userData);
     };
-    UserService.prototype.registerHomework = function (userData) {
-        return this.http.post('./hhomeworks/', userData);
-    };
-    UserService.prototype.manageHomework = function () {
-        return this.http.get('./hhomeworks/');
+    UserService.prototype.registerHomework = function (userData, hw_id) {
+        return this.http.put('./hhomeworks/' + hw_id + '/', userData);
     };
     UserService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
@@ -1103,6 +1155,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _signup_signup_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./signup/signup.component */ "./src/app/view/signup/signup.component.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _signin_signin_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./signin/signin.component */ "./src/app/view/signin/signin.component.ts");
+/* harmony import */ var _fortawesome_angular_fontawesome__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @fortawesome/angular-fontawesome */ "./node_modules/@fortawesome/angular-fontawesome/fesm5/angular-fontawesome.js");
+
 
 
 
@@ -1126,7 +1180,8 @@ var ViewModule = /** @class */ (function () {
                 _csee_csee_module__WEBPACK_IMPORTED_MODULE_4__["CseeModule"],
                 _student_student_module__WEBPACK_IMPORTED_MODULE_5__["StudentModule"],
                 _angular_router__WEBPACK_IMPORTED_MODULE_7__["RouterModule"].forRoot(ROUTES),
-                _angular_material_button__WEBPACK_IMPORTED_MODULE_1__["MatButtonModule"]
+                _angular_material_button__WEBPACK_IMPORTED_MODULE_1__["MatButtonModule"],
+                _fortawesome_angular_fontawesome__WEBPACK_IMPORTED_MODULE_9__["FontAwesomeModule"]
             ],
             declarations: [
                 _signup_signup_component__WEBPACK_IMPORTED_MODULE_6__["SignupComponent"],
@@ -1205,7 +1260,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_2__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/jihye/turnin/Turnincode_v2/Angular/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /home/cykim/Turnincode_v2/Angular/src/main.ts */"./src/main.ts");
 
 
 /***/ })

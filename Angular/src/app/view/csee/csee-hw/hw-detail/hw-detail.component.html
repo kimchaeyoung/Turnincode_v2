@@ -1,0 +1,10 @@
+<h3> student info </h3>
+  <hr/>
+  <h4> name : {{detail[0]}} </h4>
+  <h4> student_number : {{detail[1]}} </h4>
+  <div *ngFor="let info of detail  | slice:1">
+    <div *ngIf="info[0]!=null">
+      <p> 여기엔 학생이 채점한 날짜를 알려주고 싶음 </p>
+      <p> score = {{info[0]}}</p>
+    </div>
+  </div>

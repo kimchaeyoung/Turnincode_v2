@@ -16,7 +16,7 @@ import subprocess
 import json
 import os.path
 
-sudotoken = "edf4924c3c9343b4e5728c07d1148c3cbae978e2"
+sudotoken = "98088df7aeb0e7c6dd5348dbbadddf1e42682c90"
 
 def signin(request):
     
@@ -91,7 +91,7 @@ def student_mypage(request):
         hs = Homework_Student.objects.filter(std=current_user)
         hwlist = []
         for h in hs:
-            hinfo = [h.hw.hw_base]
+            hinfo = [h.hw.hw_name]
             hwlist.append(hinfo)
         return JsonResponse(hwlist, safe=False)
     return HttpResponse()
@@ -111,14 +111,28 @@ def current_user(request):
 def runcode(request):
     return JsonResponse(str("pass"), safe=False)
 
-def hwlist(request, hw_name):
+def getscore(request, hw_name):
     hwlist = Homework_Student.objects.all()
-    slist = []
+    scorelist = []
     for i in hwlist:
         if i.hw.hw_name == hw_name:
-            slist.append(i.std)
-        return HttpResponse(slist)            
-    return HttpResponse()
+            score = Homework_Student.objects.filter(std=i.std).last().score 
+            slist = [i.std , score] 
+            scorelist.append(slist)
+        scorelist = list(set(map(tuple, scorelist)))   
+    return JsonResponse(scorelist, safe=False)
+
+def getscdetail(request, hw_name, std_id):
+    hwlist = Homework_Student.objects.filter(std=std_id)
+    stdinfo = Student.objects.get(student_id = std_id)
+    scoredetail = [stdinfo.student_name, stdinfo.student_number]
+    for i in hwlist:
+        if i.hw.hw_name == hw_name:
+            slist = [i.score]
+            scoredetail.append(slist)
+            
+    return JsonResponse(scoredetail, safe=False)
+
 '''
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all().order_by('-date_joined')

@@ -1,9 +1,12 @@
-<ul>
-  <li *ngFor="let hw of hwlist; let i = index">
-    <h4>{{i}}: <a href="./professor-page/homework/{{hw.hw_name}}"> {{hw.hw_name}} </a></h4>
-    <p> 과제코드 : {{hw.hw_base}}</p>
-    <p> 과제설명 : {{hw.hw_description}}</p>
-    <p> 과제기간 : {{hw.hw_duedate}}</p>
-  </li>
-</ul>
-
+<h3> Scoreboard </h3>
+  <hr/>
+ <table width = "80%">
+ <thead> <tr> <th> Student name </th> <th> Score </th> </tr> </thead>
+   <hr/>
+ <tbody *ngFor = "let score of scorelist">
+     <tr>
+       <th> <a routerLink = "{{score[0]}}"> {{score[0]}} </a> </th>
+       <th> {{score[1]}} </th>
+     </tr>
+ </tbody>
+</table>

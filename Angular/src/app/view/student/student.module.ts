@@ -19,7 +19,7 @@ export const ROUTES:Routes = [
       path: 'student-page',
       component: StudentPageComponent,
       children: [
-          { path: 'mypage', component: MypageComponent },
+          { path: 'detail/:id', component: MypageComponent },
       ]
     }
 ]

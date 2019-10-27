@@ -1,25 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { UserService } from '../../../user.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-hw-manage',
   templateUrl: './hw-manage.component.html',
   styleUrls: ['./hw-manage.component.css'],
-  providers: [ UserService ]
 })
 export class HwManageComponent implements OnInit {
 
-  hwlist: any =[];
-  current_user = '';
+  hw_id = '';
+  scorelist: any =[];
 
-  constructor(private http:HttpClient, private userService: UserService) { 
+  constructor(private http:HttpClient, route: ActivatedRoute) { 
+    this.hw_id = route.snapshot.params['id']
   }
 
   ngOnInit() {
-    this.http.get('./current_user').subscribe(
+    this.http.get('./professor-page/getscoreboard/'+this.hw_id).subscribe(
         response=> {
-          this.current_user = response.toString();
+          this.scorelist = response;
         }
     ) 
 

@@ -1,7 +1,7 @@
 <section>
   <h3> homeworks </h3>
     <div style="margin-top: 10px; margin-left: 10px" *ngFor="let hw of hwlist">
-       <fa-icon [icon]="faBook"></fa-icon>&nbsp;{{hw}}
+       <fa-icon [icon]="faBook"></fa-icon>&nbsp; <a routerLink="detail/{{hw}}">{{hw}}</a>
     </div>
 </section>
 <aside>
