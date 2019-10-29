@@ -30,4 +30,3 @@ class Homework_Student(models.Model):
     score = models.CharField(max_length=100)    
 
 
-

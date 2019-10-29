@@ -16,7 +16,7 @@ import subprocess
 import json
 import os.path
 
-sudotoken = "98088df7aeb0e7c6dd5348dbbadddf1e42682c90"
+sudotoken = "b81ea16b6bcefcdd4e24269a79971e2585b67617"
 
 def signin(request):
     
@@ -91,8 +91,9 @@ def student_mypage(request):
         hs = Homework_Student.objects.filter(std=current_user)
         hwlist = []
         for h in hs:
-            hinfo = [h.hw.hw_name]
+            hinfo = [h.hw.id, h.hw.hw_name]
             hwlist.append(hinfo)
+        hwlist = list(set(map(tuple, hwlist)))
         return JsonResponse(hwlist, safe=False)
     return HttpResponse()
 
@@ -108,8 +109,13 @@ def current_user(request):
     current_user = request.user
     return JsonResponse(str(current_user), safe=False)
 
-def runcode(request):
-    return JsonResponse(str("pass"), safe=False)
+def runcode(request, hw_id):
+    current_user = request.user
+    h = Homework.objects.get(id=hw_id)
+    hs = Homework_Student.objects.filter(std=current_user, hw=h)
+
+    current_score = hs.last().score
+    return JsonResponse(str(current_score), safe=False)
 
 def getscore(request, hw_name):
     hwlist = Homework_Student.objects.all()
@@ -145,6 +151,17 @@ def updatehw(request, hw_id):
     hw = [h.hw_base, h.hw_eval, h.hw_madeby]
     return JsonResponse(hw, safe=False)
     
+def student_getinfo(request, hw_id):
+    h = Homework.objects.get(id=hw_id)
+    hs = Homework_Student.objects.filter(hw=h, std=request.user)
+    hslist = [h.hw_name, h.hw_base, h.hw_description, h.hw_duedate]
+    hw = []
+    for i in hs:
+        hw.append(i.score)
+    hslist.append(hw)    
+
+    return JsonResponse(hslist, safe=False)
+
 
 def gethw(request):
     user = request.user

@@ -1,1 +1,14 @@
-<h3> test </h3>
+<button (click)="runcode()"> 과제채점 </button>
+<span> {{current_result}} </span>
+<hr/>
+<h2> Homework Information </h2>
+<h3> {{hw_name}} </h3>
+<h3> {{hw_base}} </h3>
+<h3> {{hw_description}} </h3>
+<h3> {{hw_duedate}} </h3>
+<hr/>
+<h2> Commit history </h2>
+<div *ngFor="let s of hw_score">
+    <h3> {{s}}</h3>
+</div>
+
