@@ -1,0 +1,12 @@
+<h3> Scoreboard </h3>
+  <hr/>
+ <table width = "80%">
+ <thead> <tr> <th> Student name </th> <th> Score </th> </tr> </thead>
+   <hr/>
+ <tbody *ngFor = "let score of scorelist">
+     <tr>
+       <th> <a routerLink = "{{score[0]}}"> {{score[0]}} </a> </th>
+       <th> {{score[1]}} </th>
+     </tr>
+ </tbody>
+</table>

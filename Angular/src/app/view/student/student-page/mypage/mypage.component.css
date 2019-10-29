@@ -1,0 +1,32 @@
+
+body {
+    color: #726272;
+}
+hr {
+    margin-left: 0px;
+    width: 70%;
+}
+.l {
+    float: left;
+}
+.mar1 {
+   margin-top: 3%;
+   margin-left: 2%;
+   width: 70%;
+}
+.mar2 {
+    margin-top: 5%;
+    margin-left: 2%;
+}
+.bold {
+    font-weight: bold;
+    color: #584259;
+}
+.r {
+    float: right;
+    margin-left: 5%;
+}
+.divide {
+    margin-top: 2px;
+    border-bottom: 1px solid #eef1f6;
+}

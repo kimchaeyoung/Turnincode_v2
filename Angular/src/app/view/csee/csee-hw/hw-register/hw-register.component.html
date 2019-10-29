@@ -1,0 +1,18 @@
+<div style="text-align:center; margin-top:10%;" class="form">
+   <h1> Homework Register </h1>
+     <mat-form-field>
+       <input matInput placeholder="hw name" type="text" required [(ngModel)]="register.hw_name"/>
+     </mat-form-field>
+     <br><mat-form-field>
+       <br><label for="homeworkName">basecode_url: {{hw_base}} </label> 
+     </mat-form-field>    
+     <br><mat-form-field>
+       <br><label for="homeworkName">evaluation_url: {{hw_eval}} </label>
+     </mat-form-field> 
+     <br><mat-form-field>
+       <input matInput placeholder="description" type="text" required [(ngModel)]="register.hw_description"/>
+     </mat-form-field> 
+     <br><mat-form-field>
+       <input matInput placeholder="duedate" type="datetime-local" required [(ngModel)]="register.hw_duedate"/>
+     </mat-form-field>
+     <br><button mat-raised-button color="primary" (click)="Register()"> Create! </button>

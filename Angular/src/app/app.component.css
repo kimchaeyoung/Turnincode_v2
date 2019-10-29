@@ -1,0 +1,18 @@
+html, body {
+    background-color: #F5F093;
+}
+header {
+    height: 80px;
+    background-color: #eef1f6;
+}
+.logo {
+    position: absolute;
+    margin-top: 0.5%;
+    margin-left: 5%;
+    float: left;
+}
+.user {
+    float: right;
+    margin-top: 1%;
+    margin-right: 5%;
+}
