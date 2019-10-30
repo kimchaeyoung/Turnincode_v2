@@ -16,7 +16,8 @@ import subprocess
 import json
 import os.path
 
-sudotoken = "b81ea16b6bcefcdd4e24269a79971e2585b67617"
+#sudotoken = "b81ea16b6bcefcdd4e24269a79971e2585b67617"
+sudotoken = "beafdc67dbd4dd1376c1ac33f09326cf2786739f"
 
 def signin(request):
     
@@ -47,7 +48,8 @@ def signin(request):
       f = open(col_repo+'/.turnincode', 'r')
       line = f.readline()
       line = line.rstrip('\n')
-            
+      print(line)      
+      
       if Student.objects.filter(student_id=user_id).exists():
           print("student")
           if Homework.objects.filter(hw_base=line).exists():
@@ -112,9 +114,27 @@ def current_user(request):
 def runcode(request, hw_id):
     current_user = request.user
     h = Homework.objects.get(id=hw_id)
-    hs = Homework_Student.objects.filter(std=current_user, hw=h)
+    hw_name = str(h.hw_name)
+    std_name = str(current_user)
 
-    current_score = hs.last().score
+    cmd = "./docker/trigger " + std_name
+    MyOut = subprocess.Popen("./docker/trigger.py " + std_name + " " + hw_name + " " + sudotoken, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
+
+    stdout, stderr = MyOut.communicate()
+
+    if stdout is not None:
+        stdout = stdout.decode('utf-8')
+        print(stdout)
+        hs = Homework_Student(hw=h, std=std_name, score=stdout)
+        hs.save()
+
+#    if stderr != '':
+#        stderr = stderr.decode('utf-8')
+#        hs.score = stderr
+#        hs.save()
+#        print(stderr)
+
+    current_score = hs.score
     return JsonResponse(str(current_score), safe=False)
 
 def getscore(request, hw_name):
