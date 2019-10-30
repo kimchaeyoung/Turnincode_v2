@@ -1,21 +1,20 @@
 <section>
-  <h3> homeworks </h3>
-    <hr/>
-    <div style="margin-top: 10px; margin-left: 10px" *ngFor="let hw of hwlist">
+  <h3 style="color:#87BA32; margin-left:15px"> Homeworks </h3>
+    <div style="margin-top: 10px; margin-left: 15px" *ngFor="let hw of hwlist">
       <div *ngIf="hw[1]!=null">
       <div class="f">
-       <fa-icon [icon]="faBook"></fa-icon>&nbsp; <a routerLink="scoreboard/{{hw[1]}}">{{hw[1]}}</a>
+       <fa-icon [icon]="faBook"></fa-icon>&nbsp; <a class="router" routerLink="scoreboard/{{hw[1]}}">{{hw[1]}}</a>
       </div>
       </div>
     </div>
 </section>
 <aside>
-  <h3> issue </h3>
+  <h3 style="margin-left: 15px"> Issue </h3>
   <hr/>
     <div style="margin-top: 10px; margin-right: 10px" *ngFor="let hw of hwlist">
       <div *ngIf="hw[1]==null">
        <div class="event f">
-       <fa-icon [icon]="faBook"></fa-icon>&nbsp; <a routerLink="register/{{hw[0]}}">{{hw[3]}}</a>
+       <fa-icon [icon]="faBook"></fa-icon>&nbsp; <a class="router2" routerLink="register/{{hw[0]}}">{{hw[3]}}</a>
        <a id="more">&nbsp; <fa-icon [icon]="faCaretDown"></fa-icon></a>
        <hr/>
       </div>

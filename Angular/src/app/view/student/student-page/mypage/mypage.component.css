@@ -1,6 +1,5 @@
-
-body {
-    color: #726272;
+body{
+    color : black;
 }
 hr {
     margin-left: 0px;
@@ -12,15 +11,23 @@ hr {
 .mar1 {
    margin-top: 3%;
    margin-left: 2%;
-   width: 70%;
+   height: 40%;
 }
 .mar2 {
-    margin-top: 5%;
+    margin-top: 2%;
     margin-left: 2%;
 }
-.bold {
+.mar3 {
+    margin-top: 3%;
+    margin-left: 2%;
+}
+
+h3.bold {
+    font-size : 20pt;
     font-weight: bold;
-    color: #584259;
+}
+p.bold{
+    font-size : 12pt;
 }
 .r {
     float: right;
@@ -29,4 +36,11 @@ hr {
 .divide {
     margin-top: 2px;
     border-bottom: 1px solid #eef1f6;
+}
+.terminal{
+    margin-top: 3%;
+    background-color: black;
+    width: 70%;
+    height: 300px;
+    color: white;
 }

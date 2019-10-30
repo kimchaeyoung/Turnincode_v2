@@ -2,7 +2,9 @@ section {
     height: 100%;
     width: 20%;
     float: left;
-    border: 1px solid #eef1f6;
+    color: white;
+    background-color: #292929;
+    
 }
 aside {
     height: 100%;
@@ -13,6 +15,16 @@ aside {
 .event {
     text-align: center;
     height: 50px;
+}
+.router {
+  font-size: 20px;
+  color : white;
+  text-decoration: none
+}
+.router2 {
+  font-size: 20px;
+  color : black;
+  text-decoration: none;
 }
 h3 {
     font-size: 30px;

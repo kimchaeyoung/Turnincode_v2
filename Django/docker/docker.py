@@ -8,7 +8,6 @@ import os
 def code_red():
     print("red")
 
-
 def code_yellow():
     os.chdir("../new") 
     os.system("gcc main.c 2> error.txt")
@@ -28,28 +27,27 @@ def code_blue():
 def code_white():
     print("white")
 
-#exit_code
-def code_balck():
-    cmd = "rm -rf new"
-    os.system(cmd)
+#finish this turn
+def code_close():
+    if os.path.exists("new") == True:
+        os.system("rm -rf new")
     
 def server_program():
     host = socket.gethostname()
-#    host = '222.239.251.48'
-    port = 4000  # initiate port no above 1024
+    port = 4000
 
-    server_socket = socket.socket()  # get instance
-    server_socket.bind((host, port))  # bind host address and port together
-#    server_socket.bind(('',port))
+    server_socket = socket.socket()
+    server_socket.bind((host, port))
 
     server_socket.listen(2)
-    conn, address = server_socket.accept()  # accept new connection
+    conn, address = server_socket.accept()
     print("Connection from: " + str(address))
     code = 'start'
     while True:
         code = conn.recv(1024).decode()
         if not code:
-            print("no data")
+            print(":::end connection:::")
+            code_close()
             conn.close()
             server_socket.listen(2)
             conn, address = server_socket.accept()

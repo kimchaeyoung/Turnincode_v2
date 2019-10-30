@@ -1,17 +1,23 @@
-<div class="mar1">
-  <span class="r"> your result: {{current_result}} </span>
-  <button class="l" style="padding: 5px 30px" mat-raised-button color="primary" (click)="runcode()"> 과제채점 </button>
-</div>
-<br><div class="mar2">
-  <h2 class="size bold"> Homework Information </h2>
+<div class="mar2">
+  <h2> Homework Information </h2>
   <hr/>
-  <h3 class="bold"> Homework Name </h3>
-  <h4> {{hw_name}} </h4>
-  <h3 class="bold"> Homework Base Url </h3>
-  <h4> {{hw_base}} </h4>
-  <h3 class="bold"> Homework Duedate </h3>
-  <h4> {{hw_duedate}} </h4>
-  <br/><br/><h2 class="size bold"> Commit history </h2>
+  <h3 class="bold"> {{hw_name}} </h3> 
+  <p class="bold"> <strong> Base Url </strong> {{hw_base}} </p>
+  <p class="bold"> <strong> Duedate </strong> {{hw_duedate}} </p>
+</div>
+
+<div class="mar1">
+  <div>
+  <button class="l" style="padding: 5px 30px" mat-raised-button color="primary" (click)="runcode()"> 과제채점 </button>
+  </div>
+  <br/>
+ <div class="terminal">
+    <span style="margin-left: 3%; font-size:20px"> result {{current_result}} </span>
+  </div>
+</div><br/>
+
+<br/><div class="mar3">
+  <h2 class="size bold"> Commit history </h2>
   <hr/>
   <div *ngFor="let s of hw_score">
     <h4> {{s}}</h4>

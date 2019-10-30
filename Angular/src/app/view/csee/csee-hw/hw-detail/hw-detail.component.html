@@ -1,10 +1,23 @@
-<h3> student info </h3>
-  <hr/>
-  <h4> name : {{detail[0]}} </h4>
-  <h4> student_number : {{detail[1]}} </h4>
-  <div *ngFor="let info of detail  | slice:1">
-    <div *ngIf="info[0]!=null">
-      <p> 여기엔 학생이 채점한 날짜를 알려주고 싶음 </p>
-      <p> score = {{info[0]}}</p>
-    </div>
-  </div>
+<h3> {{detail[1]}}  {{detail[0]}} </h3>
+<h2> {{detail[2]}} </h2>
+  <table width = "100%">
+  <thead>
+    <tr class="trow">
+      <th> 날짜 </th>
+      <th> commit number </th>
+      <th> score </th>
+    </tr>
+  </thead>
+  <br/>
+  <tbody *ngFor="let info of detail[3]">
+    <tr>
+      <th> </th>
+      <th> bea3iskdfa</th>
+      <th> <a *ngIf="info.length < 10; else elseCase"> {{info}} </a>
+          <ng-template #elseCase>
+            <b>error</b>
+          </ng-template>
+      </th>
+    </tr>
+  </tbody>
+  </table>

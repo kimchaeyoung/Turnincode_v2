@@ -16,8 +16,7 @@ import subprocess
 import json
 import os.path
 
-#sudotoken = "b81ea16b6bcefcdd4e24269a79971e2585b67617"
-sudotoken = "beafdc67dbd4dd1376c1ac33f09326cf2786739f"
+sudotoken = "4911aa457bb87995604547a36f7718c2c93b0506"
 
 def signin(request):
     
@@ -118,21 +117,22 @@ def runcode(request, hw_id):
     std_name = str(current_user)
 
     cmd = "./docker/trigger " + std_name
-    MyOut = subprocess.Popen("./docker/trigger.py " + std_name + " " + hw_name + " " + sudotoken, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
+    MyOut = subprocess.Popen(
+            "./docker/trigger.py " + std_name + " " + hw_name + " " + sudotoken,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            shell=True)
 
     stdout, stderr = MyOut.communicate()
 
-    if stdout is not None:
+    if stdout is None:
+        print("::ERROR::trigger did not pass result::")
+
+    elif stdout is not None:
         stdout = stdout.decode('utf-8')
         print(stdout)
         hs = Homework_Student(hw=h, std=std_name, score=stdout)
         hs.save()
-
-#    if stderr != '':
-#        stderr = stderr.decode('utf-8')
-#        hs.score = stderr
-#        hs.save()
-#        print(stderr)
 
     current_score = hs.score
     return JsonResponse(str(current_score), safe=False)
@@ -142,8 +142,9 @@ def getscore(request, hw_name):
     scorelist = []
     for i in hwlist:
         if i.hw.hw_name == hw_name:
+            s = Student.objects.get(student_id=i.std)
             score = Homework_Student.objects.filter(std=i.std).last().score 
-            slist = [i.std , score] 
+            slist = [s.student_number, s.student_name, s.student_id , score] 
             scorelist.append(slist)
         scorelist = list(set(map(tuple, scorelist)))   
     return JsonResponse(scorelist, safe=False)
@@ -151,11 +152,13 @@ def getscore(request, hw_name):
 def getscdetail(request, hw_name, std_id):
     hwlist = Homework_Student.objects.filter(std=std_id)
     stdinfo = Student.objects.get(student_id = std_id)
-    scoredetail = [stdinfo.student_name, stdinfo.student_number]
+    scoredetail = [stdinfo.student_name, stdinfo.student_number, hwlist.last().score]
+    slist = []
     for i in hwlist:
         if i.hw.hw_name == hw_name:
-            slist = [i.score]
-            scoredetail.append(slist)
+            slist.append(i.score)
+    slist = list(reversed(slist))
+    scoredetail.append(slist)
             
     return JsonResponse(scoredetail, safe=False)
 
@@ -178,6 +181,7 @@ def student_getinfo(request, hw_id):
     hw = []
     for i in hs:
         hw.append(i.score)
+    hw = list(reversed(hw)) 
     hslist.append(hw)    
 
     return JsonResponse(hslist, safe=False)

@@ -2,14 +2,19 @@ html, body {
     background-color: #F5F093;
 }
 header {
-    height: 80px;
-    background-color: #eef1f6;
+    height: 60px;
+    background-color: #E0E1DF;
 }
 .logo {
-    position: absolute;
-    margin-top: 0.5%;
+    margin-top: 1px;
     margin-left: 5%;
+    margin-bottom: 1%;
+    position: absolute;
     float: left;
+    font-family: 'Pacifico', cursive;
+    text-decoration: none;
+    font-size: 30px;
+    color: black;
 }
 .user {
     float: right;

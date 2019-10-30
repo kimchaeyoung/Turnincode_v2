@@ -1,0 +1,19 @@
+h3{
+  font-size: 30px;
+}
+.router{
+  font-size: 20px;
+  color: black;
+  text-decoration: none;
+}
+
+.trow{
+  color: white;
+  height: 40px;
+  background-color: #292929;
+}
+
+.tbottom{
+  border-bottom: 2px solid black;
+}
+

@@ -22,9 +22,7 @@ export class HwRegisterComponent implements OnInit {
 	response=> {
                 this.hw_base = response[0];
                 this.hw_eval = response[1];
-                this.hw_madeby = response[2];
-              
-              
+                this.hw_madeby = response[2];             
 	},
 	error => console.log('error',error)
       ) 
