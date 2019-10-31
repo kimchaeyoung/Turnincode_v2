@@ -3,6 +3,7 @@ from django.conf.urls import url, include
 from rest_framework import routers
 from . import views
 from rest_framework.authtoken.views import ObtainAuthToken
+from django.contrib.auth import views as auth_views
 
 '''
 router = routers.DefaultRouter()
@@ -36,6 +37,8 @@ urlpatterns = [
     url(r'^professor-page/getscorestd/(?P<hw_name>[^/]+)/(?P<std_id>[^/]+)/$', views.getscdetail),
     path('auth/', ObtainAuthToken.as_view()),
     url(r'^auth/', include('social_django.urls', namespace='social')),
+    path('accounts/', include('django.contrib.auth.urls')),  
+    url(r'^accounts/logout/', auth_views.LogoutView, name='logout'),
     path('current_user/', views.current_user, name='current_user'),
     url(r'^result/(?P<hw_id>[^/]+)/$', views.runcode, name='result'),
 ]

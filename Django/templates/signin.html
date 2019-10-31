@@ -53,6 +53,8 @@ footer {
   <footer>
     {% if not user.is_authenticated %}
       <div id="signin" class="button" onclick="window.location.href='{% url 'social:begin' 'github' %}'" >Sign In!</div>
+    {% else %}
+      <div id="signin" class="button" onclick="window.location.href='{% url 'logout' %}'" >Sign Out!</div> 
     {% endif %}
   </footer>
 </html>

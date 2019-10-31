@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'turninApp.apps.TurninappConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,7 +42,6 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'corsheaders',
     'social_django',
-    'turninApp.apps.TurninappConfig',
 ]
 
 MIDDLEWARE = [
@@ -153,3 +153,5 @@ SOCIAL_AUTH_GITHUB_KEY = 'b42121cc53376ba493d2'
 SOCIAL_AUTH_GITHUB_SECRET = 'fd63f284dd934b5b42cdab30464172596e6e0a5d'
 
 LOGIN_REDIRECT_URL = 'success-login'
+LOGOUT_URL = 'logout'
+LOGOUT_REDIRECT_URL = 'signin'
