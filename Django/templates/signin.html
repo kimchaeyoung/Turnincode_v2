@@ -51,7 +51,9 @@ footer {
     <div style="text-align: center;">
   </body>
   <footer>
-    <div id="signin" class="button" onclick="window.location.href='{% url 'social:begin' 'github' %}'" >Sign In!</div>
+    {% if not user.is_authenticated %}
+      <div id="signin" class="button" onclick="window.location.href='{% url 'social:begin' 'github' %}'" >Sign In!</div>
+    {% endif %}
   </footer>
 </html>
 

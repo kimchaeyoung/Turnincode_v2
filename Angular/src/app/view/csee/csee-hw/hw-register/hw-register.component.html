@@ -1,20 +1,15 @@
-<div style="text-align:center; margin-top:10%" clss="form">
+<div style="margin:40%; margin-top:10%">
 <h1> Homework Register </h1>
-     <label for="homeworkName">hw_name:</label>
-     <input type="text" name="name" id="homeworkName" maxlength="140"
-            required [(ngModel)]="register.hw_name"/>
-
-     <br><label for="homeworkName">basecode_url: {{hw_base}} </label>
-
-     <br><label for="homeworkName">evaluation_url: {{hw_eval}} </label>
-
-     <br><label for="homeworkDescription">description:</label>
-     <input type="text" name="description" id="homeworkDescription" maxlength="140"
-            required [(ngModel)]="register.hw_description"/>
-
-     <br><label for="homeworkDuedate">duedate:</label>
-     <input type="datetime-local" name="duedate" id="homeworkDuedate" maxlength="140"
-            required [(ngModel)]="register.hw_duedate"/>
-
+     <br> basecode_url: {{hw_base}}
+     <br><br> evaluation_url: {{hw_eval}} 
+     <br><mat-form-field>
+       <input matInput placeholder="name" [(ngModel)]="register.hw_name">
+     </mat-form-field>
+     <br><mat-form-field>
+       <input matInput placeholder="description" [(ngModel)]="register.hw_description">
+     </mat-form-field>
+     <br><mat-form-field>
+       <input matInput placeholder="duedate" [(ngModel)]="register.hw_duedate">
+     </mat-form-field>
      <br><button mat-raised-button color="primary" (click)="Register()"> Create! </button>
 </div>
