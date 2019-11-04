@@ -16,7 +16,7 @@ import subprocess
 import json
 import os.path
 
-sudotoken = "105b359718845e3eba100365e47a71edbb056de7"
+sudotoken = "cb0cbdb586e9355bb89b257a8870fde64e49ca1d"
 
 def signin(request):
     

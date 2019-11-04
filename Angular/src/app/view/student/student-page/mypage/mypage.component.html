@@ -12,15 +12,28 @@
   </div>
   <br/>
  <div class="terminal">
-    <span style="margin-left: 3%; font-size:20px"> result {{current_result}} </span>
+    <br/><span style="margin-top: 3%; margin-left: 3%; font-size:20px"><a style="color:green; text-decoration:none">{{current_user}}@turnincode:</a>~$ ./result <br>pass{{current_result}} </span>
   </div>
 </div><br/>
 
-<br/><div class="mar3">
+<div class="mar3">
   <h2 class="size bold"> Commit history </h2>
-  <hr/>
-  <div *ngFor="let s of hw_score">
-    <h4> {{s}}</h4>
-  </div>
+  <table width = "70%">
+    <thead>
+    <tr class="trow">
+      <th> 날짜 </th>
+      <th> commit number </th>
+      <th> score </th>
+    </tr>
+    </thead>
+    <br/>
+  <tbody *ngFor="let s of hw_score">
+    <tr>
+      <th> </th>
+      <th> bea3iskdfa</th>
+      <th> {{s}}</th>
+    </tr>
+  </tbody>
+  </table>
 </div>
 

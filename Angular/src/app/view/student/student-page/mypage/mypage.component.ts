@@ -15,6 +15,7 @@ export class MypageComponent implements OnInit {
   hw_duedate = '';
   hw_score: any = [];
   current_result = '';
+  current_user = '';
 
   constructor(private http:HttpClient, route: ActivatedRoute, private router:Router) {
 	this.hw_id = route.snapshot.params['id'];
@@ -27,7 +28,12 @@ export class MypageComponent implements OnInit {
 			this.hw_score = response[4];
 		},
 		error => console.log('error', error)
-	)
+	);
+        this.http.get('./current_user').subscribe(
+            response => {
+                this.current_user = response.toString();
+            },
+        );
   }
 
   ngOnInit() {

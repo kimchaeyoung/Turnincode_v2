@@ -21,7 +21,10 @@ hr {
     margin-top: 3%;
     margin-left: 2%;
 }
-
+.trow {
+    color: white;
+    background-color: #292929;
+}
 h3.bold {
     font-size : 20pt;
     font-weight: bold;
