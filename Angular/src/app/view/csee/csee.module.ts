@@ -17,10 +17,20 @@ import { HwDetailComponent } from './csee-hw/hw-detail/hw-detail.component';
 
 export const ROUTES:Routes = [
     { path: 'signup/csee', component: CseeSignupComponent },
-    { path: 'professor-page/register/:id', component: HwRegisterComponent }, 
-    { path: 'professor-page/scoreboard/:id', component: HwManageComponent },
-    { path: 'professor-page/scoreboard/:id/:std_id', component: HwDetailComponent }, 
-    { path: 'professor-page', component: CseeHwComponent }
+    {
+      path: 'professor-page',
+      redirectTo : '/professor-page/register',
+      pathMatch : 'full'
+    },
+    { 
+      path: 'professor-page', 
+      component: CseeHwComponent,
+      children : [
+          { path: 'register', component: HwRegisterComponent},    
+          { path: 'scoreboard/:id', component: HwManageComponent },
+          { path: 'scoreboard/:id/:std_id', component: HwDetailComponent },
+      ]
+    },
 ]
 
 @NgModule({

@@ -28,5 +28,5 @@ class Homework_Student(models.Model):
     hw = models.ForeignKey(Homework, related_name = "homework", on_delete=models.CASCADE)
     std = models.CharField(max_length=50)
     score = models.CharField(max_length=100)    
-
+    commit_history = models.CharField(max_length=100)
 

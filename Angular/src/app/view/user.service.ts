@@ -24,7 +24,7 @@ export class UserService {
   }
   
   registerHomework(userData, hw_id): Observable<any> {
-    return this.http.put('./hhomeworks/' + hw_id + '/', userData);
+    return this.http.patch('./hhomeworks/' + hw_id + '/', userData);
   }
 
 }

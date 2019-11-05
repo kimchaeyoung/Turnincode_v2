@@ -8,6 +8,7 @@ import os
 def code_red():
     print("red")
 
+
 def code_yellow():
     os.chdir("../new") 
     os.system("gcc main.c 2> error.txt")
@@ -27,10 +28,11 @@ def code_blue():
 def code_white():
     print("white")
 
-#finish this turn
-def code_close():
-    if os.path.exists("new") == True:
-        os.system("rm -rf new")
+#exit_code
+def code_black():
+    cmd = "rm -rf new"
+    os.system(cmd)
+    os.system("mkdir new")
     
 def server_program():
     host = socket.gethostname()
@@ -46,8 +48,8 @@ def server_program():
     while True:
         code = conn.recv(1024).decode()
         if not code:
-            print(":::end connection:::")
-            code_close()
+            print("no data")
+            code_black()
             conn.close()
             server_socket.listen(2)
             conn, address = server_socket.accept()
@@ -69,7 +71,7 @@ def server_program():
             code_white()
             code = 'white'
 
-    conn.close()  # close the connection
+    conn.close()
 
 
 if __name__ == '__main__':

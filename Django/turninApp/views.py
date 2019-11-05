@@ -16,7 +16,7 @@ import subprocess
 import json
 import os.path
 
-sudotoken = "105b359718845e3eba100365e47a71edbb056de7"
+sudotoken = "62bbfb2ca9b7d87a28bb100c6ac6f47add6aa414"
 
 def signin(request):
     
@@ -124,17 +124,27 @@ def runcode(request, hw_id):
             shell=True)
 
     stdout, stderr = MyOut.communicate()
-
+    current_score = None
     if stdout is None:
         print("::ERROR::trigger did not pass result::")
 
     elif stdout is not None:
         stdout = stdout.decode('utf-8')
-        print(stdout)
-        hs = Homework_Student(hw=h, std=std_name, score=stdout)
-        hs.save()
 
-    current_score = hs.score
+        stdout = stdout.split("\n")
+        commit_history = stdout[0] 
+        current_score = stdout[1]
+
+        if Homework_Student.objects.get(hw=h, std=std_name).score == '':
+            hs = Homework_Student.objects.get(hw=h, std=std_name)
+            hs.score = current_score
+            hs.commit_history = commit_history
+            hs.save()
+        else:
+            hs = Homework_Student(hw=h, std=std_name, score=current_score, commit_history=commit_history)  
+            hs.save()
+
+    print("current score : " , current_score)
     return JsonResponse(str(current_score), safe=False)
 
 def getscore(request, hw_name):
@@ -156,7 +166,7 @@ def getscdetail(request, hw_name, std_id):
     slist = []
     for i in hwlist:
         if i.hw.hw_name == hw_name:
-            slist.append(i.score)
+            slist.append([i.score, i.commit_history])
     slist = list(reversed(slist))
     scoredetail.append(slist)
             
@@ -169,24 +179,30 @@ class UserViewSet(viewsets.ModelViewSet):
 #    authentication_classes = (TokenAuthentication, )
 #    permission_classes = (IsAuthenticated, )
 '''
-def updatehw(request, hw_id):
-    h = Homework.objects.get(id=hw_id)
-    hw = [h.hw_base, h.hw_eval, h.hw_madeby]
-    return JsonResponse(hw, safe=False)
-    
+   
 def student_getinfo(request, hw_id):
     h = Homework.objects.get(id=hw_id)
     hs = Homework_Student.objects.filter(hw=h, std=request.user)
     hslist = [h.hw_name, h.hw_base, h.hw_description, h.hw_duedate]
     hw = []
     for i in hs:
-        hw.append(i.score)
+        hw.append([i.score, i.commit_history])
     hw = list(reversed(hw)) 
     hslist.append(hw)    
 
     return JsonResponse(hslist, safe=False)
 
-
+def updatehw(request):
+    user = request.user
+    h = Homework.objects.filter(hw_name= None, hw_madeby = user)
+    if h.exists():
+        hwlist = []
+        for i in h:
+            hw = [ i.id, i.hw_name, i.hw_base, i.hw_eval, i.hw_madeby ]
+            hwlist.append(hw)
+        return JsonResponse(hwlist, safe=False)
+    return HttpResponse()
+ 
 def gethw(request):
     user = request.user
     print(user)

@@ -12,8 +12,8 @@
   <tbody *ngFor="let info of detail[3]">
     <tr>
       <th> </th>
-      <th> bea3iskdfa</th>
-      <th> <a *ngIf="info.length < 10; else elseCase"> {{info}} </a>
+      <th> {{info[1]}}</th>
+      <th> <a *ngIf="info.length < 10; else elseCase"> {{info[0]}} </a>
           <ng-template #elseCase>
             <b>error</b>
           </ng-template>

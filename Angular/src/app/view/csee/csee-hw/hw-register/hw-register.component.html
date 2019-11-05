@@ -1,15 +1,18 @@
-<div style="margin:40%; margin-top:10%">
+<div style="margin-top:1%">
 <h1> Homework Register </h1>
-     <br> basecode_url: {{hw_base}}
-     <br><br> evaluation_url: {{hw_eval}} 
-     <br><mat-form-field>
-       <input matInput placeholder="name" [(ngModel)]="register.hw_name">
-     </mat-form-field>
-     <br><mat-form-field>
-       <input matInput placeholder="description" [(ngModel)]="register.hw_description">
-     </mat-form-field>
-     <br><mat-form-field>
-       <input matInput placeholder="duedate" [(ngModel)]="register.hw_duedate">
-     </mat-form-field>
-     <br><button mat-raised-button color="primary" (click)="Register()"> Create! </button>
+    <div *ngFor="let hw of hwlist; let i = index">
+            <br> base_url : {{hw[2]}}
+            <br> evaluation_url : {{hw[3]}}
+            <br><mat-form-field>
+              <input matInput placeholder="name" [(ngModel)]="register.hw_name"> 
+            </mat-form-field> 
+            <br><mat-form-field>  
+              <input matInput placeholder="description" [(ngModel)]="register.hw_description">
+            </mat-form-field>  
+            <br><mat-form-field> 
+              <input matInput placeholder="duedate" [(ngModel)]="register.hw_duedate"> 
+            </mat-form-field>     
+            <br><button mat-raised-button color="primary" (click)="Register(hw[0])"> Create! </button>  
+        <br><br>    
+    </div>
 </div>

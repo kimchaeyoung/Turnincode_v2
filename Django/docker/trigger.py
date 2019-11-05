@@ -16,14 +16,13 @@ def client_program():
         os.system("mkdir " + stdname)
     os.chdir(stdname)
 
-#    cmd = "git clone https://github.com/" + stdname + "/" + hwname + ".git > /dev/null 2>&1"
-#    os.system(cmd)
-
     cmd = 'git clone https://forCSEE:' + sudotoken + '@github.com/' + stdname + '/' + hwname +'.git'
-    cmd = cmd.split()
-    subprocess.check_output(cmd)
+    os.system(cmd)
 
-    os.chdir("../../Django")
+    os.chdir(hwname)
+    os.system("git log --pretty=oneline -1")
+
+    os.chdir("../../../Django")
 
     host = socket.gethostname()
     port = 5000

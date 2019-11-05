@@ -13,16 +13,15 @@ export class HwManageComponent implements OnInit {
   scorelist: any =[];
 
   constructor(private http:HttpClient, route: ActivatedRoute) { 
-    this.hw_id = route.snapshot.params['id']
-  }
-
-  ngOnInit() {
+    this.hw_id = route.snapshot.params['id'];
     this.http.get('./professor-page/getscoreboard/'+this.hw_id).subscribe(
         response=> {
           this.scorelist = response;
         }
-    ) 
+    ); 
+  }
 
+  ngOnInit() {
   }
 }
 

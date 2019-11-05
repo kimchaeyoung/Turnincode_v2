@@ -9,16 +9,5 @@
     </div>
 </section>
 <aside>
-  <h3 style="margin-left: 15px"> Issue </h3>
-  <hr/>
-    <div style="margin-top: 10px; margin-right: 10px" *ngFor="let hw of hwlist">
-      <div *ngIf="hw[1]==null">
-       <div class="event f">
-       <fa-icon [icon]="faBook"></fa-icon>&nbsp; <a class="router2" routerLink="register/{{hw[0]}}">{{hw[3]}}</a>
-       <a id="more">&nbsp; <fa-icon [icon]="faCaretDown"></fa-icon></a>
-       <hr/>
-      </div>
-      </div>
-    </div>
-<router-outlet></router-outlet>
+    <router-outlet></router-outlet>
 </aside>
