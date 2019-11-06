@@ -1,0 +1,28 @@
+.contents {
+    background-color: #FBFBFB;
+    height: 500px;
+    width: 100%;
+}
+.teaser-txt {
+    margin-bottom: 1vmin;
+    font-size: 40px;
+    color: white;
+    text-decoration: none;
+}
+
+.fcolor {
+    font-size: 20px;
+    color: white;
+    text-decoration:none;
+}
+
+.font {
+    margin-top: 15%;
+    float: left;
+    width: 45%;
+    text-align: center;
+}
+
+
+
+@import url(https://fonts.googleapis.com/css?family=Righteous);

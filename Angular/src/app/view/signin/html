@@ -1,0 +1,14 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css?family=Libre+Baskerville&display=swap" rel="stylesheet">
+    <div class="font">
+      <div style="margin-left: 18%; margin-right:5%"><br><br><a class="teaser-txt"> <strong>Score Your Commit Instantly.</strong></a>
+      </div>
+      <div style="margin-left: 25%; margin-right:10%">
+      <br><a class="fcolor"> <br>We designed and implemented an automated programming assignment assessment system for GitHub repositories. <br>
+Perform your tasks with Github in a better environment.</a>
+      </div>
+    </div>
+    <br><br><div style="float: right; margin-top: 10%; margin-right: 7%; width: 40%">
+    <img src="https://source.unsplash.com/aiyBwbrWWlo/600x450">    
+    </div>
+
