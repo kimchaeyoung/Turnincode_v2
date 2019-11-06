@@ -2,8 +2,8 @@ section {
     height: 100%;
     width: 20%;
     float: left;
-    color: white;
-    background-color: #292929;
+    color: black;
+    background-color: #F1F1F3;
     
 }
 aside {
@@ -18,7 +18,7 @@ aside {
 }
 .router {
   font-size: 20px;
-  color : white;
+  color : black;
   text-decoration: none
 }
 .router2 {

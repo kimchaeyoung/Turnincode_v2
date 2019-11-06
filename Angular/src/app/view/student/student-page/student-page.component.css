@@ -2,12 +2,12 @@ h3 {
     font-size: 30px;
 }
 section {
-    color: white;
+    color: black;
     height: 100%;
     width: 20%;
     float: left;
     border: 1px solid #eef1f6;
-    background-color: #292929;
+    background-color: #F1F1F3;
 }
 aside {
     height: 100%;

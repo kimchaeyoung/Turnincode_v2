@@ -11,33 +11,31 @@ def eval():
         global content1
         content1 = content_file1.read().strip()
         print(content1)
+
     with open('../../Eval/' + hwname + '/output.txt', 'r') as content_file2:
         global content2
         content2 = content_file2.read().strip()
         print(content2)
+
     global result
     if content1 == content2:
         result = "pass"
     else:
         result = "fail"
     print(result)
-#    f1 = '../../Eval/studentoutput.txt'
-#    f2 = '../../Eval/' + hwname + '/output.txt'
-#    global result
-#    if filecmp.cmp(f1, f2, shallow=False):
-#        result = "pass"
-#    else:
-#         result = "fail"
-    print(result)
 
 def code_orange():
     cmd = "docker cp ../../Repos/" + stdname + "/" + hwname + "/main.c docker:new/."
+    os.system(cmd)
+    cmd = "docker cp ../../Eval/" + hwname + "/build.sh docker:new/."
     os.system(cmd)
 
     print('orange')
 
 def code_green():
     cmd = "docker cp ../../Eval/" + hwname + "/input.txt docker:new/."
+    os.system(cmd)
+    cmd = "docker cp ../../Eval/" + hwname + "/run.sh docker:new/."
     os.system(cmd)
     print('green')
 
@@ -47,7 +45,8 @@ def code_lightGreen():
     os.system(cmd)
     with open("../../Eval/studenterror.txt", 'r') as error_file:
         error = error_file.read()
-        result = error
+        global result
+        result = "error-" + error
     print('lightGreen')
 
 def code_purple():
@@ -114,6 +113,7 @@ def server_program():
                 elif code.strip() == 'lightGreen':
                     code_lightGreen()
                     code_black()
+                    code = 'bye'
 
                 elif code.strip() == 'green':
                     code_green()

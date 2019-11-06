@@ -11,7 +11,7 @@ def code_red():
 
 def code_yellow():
     os.chdir("../new") 
-    os.system("gcc main.c 2> error.txt")
+    os.system("./build.sh 2> error.txt")
     os.chdir("../")
     print("yellow")
     with open('new/error.txt') as error_file:
@@ -22,7 +22,9 @@ def code_yellow():
             return "lightGreen"
 
 def code_blue():
-    os.system("cat new/input.txt|./new/a.out>new/studentoutput.txt")
+    os.chdir("../new")
+    os.system("cat input.txt|./run.sh>studentoutput.txt")
+    os.chdir("../")
     print("blue")
 
 def code_white():
@@ -49,7 +51,7 @@ def server_program():
         code = conn.recv(1024).decode()
         if not code:
             print("no data")
-            code_black()
+#            code_black()
             conn.close()
             server_socket.listen(2)
             conn, address = server_socket.accept()

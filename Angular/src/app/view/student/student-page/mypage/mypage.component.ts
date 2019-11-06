@@ -46,7 +46,7 @@ export class MypageComponent implements OnInit {
   runcode(){
     this.http.get('./result/'+this.hw_id).subscribe(
         response=> {
-            this.current_result = response.toString();
+            this.terminal_result = response.toString();
         },
     )
   }

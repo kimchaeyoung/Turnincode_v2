@@ -30,9 +30,7 @@ def client_program():
     client_socket = socket.socket()
     client_socket.connect((host, port))
 
-#    client_socket.send('start'.encode())
     cmd = stdname + ' ' + hwname
-#    time.sleep(1)
     client_socket.send(cmd.encode())
     result = client_socket.recv(2014).decode()
     print(result)

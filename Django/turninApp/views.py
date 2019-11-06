@@ -16,7 +16,7 @@ import subprocess
 import json
 import os.path
 
-sudotoken = "62bbfb2ca9b7d87a28bb100c6ac6f47add6aa414"
+sudotoken = "d91a3f5751a3ea1652f7ffd3276469a5f148982d"
 
 def signin(request):
     
@@ -135,14 +135,14 @@ def runcode(request, hw_id):
         commit_history = stdout[0] 
         current_score = stdout[1]
 
-        if Homework_Student.objects.get(hw=h, std=std_name).score == '':
-            hs = Homework_Student.objects.get(hw=h, std=std_name)
-            hs.score = current_score
-            hs.commit_history = commit_history
-            hs.save()
-        else:
-            hs = Homework_Student(hw=h, std=std_name, score=current_score, commit_history=commit_history)  
-            hs.save()
+#        if Homework_Student.objects.get(hw=h, std=std_name).score == '':
+#            hs = Homework_Student.objects.get(hw=h, std=std_name)
+#            hs.score = current_score
+#            hs.commit_history = commit_history
+#            hs.save()
+#        else:
+#            hs = Homework_Student(hw=h, std=std_name, score=current_score, commit_history=commit_history)  
+#            hs.save()
 
     print("current score : " , current_score)
     return JsonResponse(str(current_score), safe=False)
