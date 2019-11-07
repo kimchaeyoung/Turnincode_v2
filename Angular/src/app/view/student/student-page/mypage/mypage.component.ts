@@ -19,7 +19,7 @@ export class MypageComponent implements OnInit {
   terminal_date = '';
   terminal_commit = '';
   terminal_result = '';
-
+  hideme:any = {};
 
   constructor(private http:HttpClient, route: ActivatedRoute, private router:Router) {
 	this.hw_id = route.snapshot.params['id'];
@@ -38,6 +38,9 @@ export class MypageComponent implements OnInit {
                 this.current_user = response.toString();
             },
         );
+        Object.keys(this.hideme).forEach(h => {
+          this.hideme[h] = false;
+        });
   }
 
   ngOnInit() {
@@ -55,6 +58,15 @@ export class MypageComponent implements OnInit {
     this.terminal_date = date;
     this.terminal_commit = commit;
     this.terminal_result = result;
+  }
+  
+  onClick(index) {
+    if(this.hideme[index] == true){
+      this.hideme[index] = false;
+    }
+    else{
+      this.hideme[index] = true;
+    }
   }
 
 }

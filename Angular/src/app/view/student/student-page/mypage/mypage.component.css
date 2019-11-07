@@ -22,8 +22,10 @@ hr {
     margin-left: 2%;
 }
 .trow {
-    color: white;
-    background-color: #292929;
+    color: black;
+    background-color:#87BA32;
+    height: 3vmin;
+
 }
 h3.bold {
     font-size : 20pt;
@@ -41,10 +43,7 @@ p.bold{
     border-bottom: 1px solid #eef1f6;
 }
 .terminal{
-    border-radius: 10px;
-    margin-top: 3%;
-    background-color: black;
-    width: 70%;
+    background-color: #F6F7F4;
     height: 20vmin;
-    color: #BFC0C2;
+    color: black;
 }

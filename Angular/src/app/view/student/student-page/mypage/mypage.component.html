@@ -4,41 +4,30 @@
   <h3 class="bold"> {{hw_name}} </h3> 
   <p class="bold"> <strong> Base Url </strong> {{hw_base}} </p>
   <p class="bold"> <strong> Duedate </strong> {{hw_duedate}} </p>
-</div>
-
-<div class="mar1">
-  <div>
   <button class="l" style="padding: 5px 30px" mat-raised-button color="primary" (click)="runcode()"> 과제채점 </button>
-  </div>
-  <br/>
- <div class="terminal">
-  <br/><span style="margin-top: 3%; margin-left: 3%; font-size:20px; color: #C0C0C5"> <strong>{{terminal_date}} &nbsp;&nbsp; {{terminal_commit}}</strong><br/> <blockquote>{{terminal_result}}</blockquote> </span>
-  </div>
-</div><br/>
-
-<div class="mar3">
-  <h2 class="size bold"> Commit history </h2>
-  <table width = "70%">
-    <thead>
-    <tr class="trow">
-      <th> 날짜 </th>
-      <th> commit number </th>
-      <th> score </th>
-    </tr>
-    </thead>
-    <br/>
-  <tbody *ngFor="let s of hw_score">
-    <tr>
-      <th> </th>
-      <th> <button (click)="ShowTerminal('', s[1], s[0])">{{s[1]}}</button></th>
-      <th>
-        <ng-container *ngIf="s[0]=='pass'; else second"><a style="color: blue; text-decoration:none">{{s[0]}}</a></ng-container>
-        <ng-template #second>
-          <ng-container *ngIf="s[0]=='fail';else third"><a style="color: red; text-decoration:none">{{s[0]}}</a></ng-container>
-        </ng-template>
-        <ng-template #third><a style="color: black; text-decoration:none">{{s[0]}}</a></ng-template></th>
-    </tr>
-  </tbody>
-  </table>
 </div>
 
+<br><div class="mar3">
+    <div *ngFor="let s of hw_score; let i = index" [attr.data-index]="i">
+      <table [hidden]="s[1]==''" class="commit" style="width:70%; border:2px solid #F6F8F9">
+      <thead>
+      <tr class="trow">
+        <th (click)="onClick(i)"> </th>
+        <th> {{s[1]}} </th>
+        <th>
+          <ng-container *ngIf="s[0]=='pass'; else second"><a style="color: blue; text-decoration:none">{{s[0]}}</a></ng-container>
+          <ng-template #second>
+            <ng-container *ngIf="s[0]=='fail';else third"><a style="color: red; text-decoration:none">{{s[0]}}</a></ng-container>
+          </ng-template>
+          <ng-template #third><a style="color: black; text-decoration:none">error</a></ng-template>
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+        <tr [hidden]="hideme[i]" class="terminal">
+        <td colspan="3"> {{s[0]}} </td>
+        </tr>
+      </tbody>
+      </table>
+    </div>
+</div>
