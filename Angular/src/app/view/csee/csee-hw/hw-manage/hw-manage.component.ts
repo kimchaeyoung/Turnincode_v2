@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-hw-manage',
@@ -13,12 +13,14 @@ export class HwManageComponent implements OnInit {
   scorelist: any =[];
 
   constructor(private http:HttpClient, route: ActivatedRoute) { 
-    this.hw_id = route.snapshot.params['id'];
-    this.http.get('./professor-page/getscoreboard/'+this.hw_id).subscribe(
-        response=> {
-          this.scorelist = response;
-        }
-    ); 
+    route.params.subscribe((params: Params) => {
+        this.hw_id = params.id;
+        this.http.get('./professor-page/getscoreboard/'+this.hw_id).subscribe(
+          response=> {
+            this.scorelist = response;
+          }
+        ); 
+    });
   }
 
   ngOnInit() {

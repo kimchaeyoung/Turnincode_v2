@@ -1,5 +1,9 @@
 body{
-    color : black;
+    background: #f6f8fa;
+    margin-left:3%;
+    margin-right:35%;
+    margin-top:4%;
+    margin-bottom:10%;
 }
 hr {
     margin-left: 0px;
@@ -19,11 +23,13 @@ hr {
 }
 .mar3 {
     margin-top: 3%;
-    margin-left: 2%;
 }
 .trow {
-    color: white;
-    background-color: #292929;
+    color: black;
+    background-color: white;
+    height: 7vmin;
+    border: 2px solid #ACACAC;
+    text-decoration: none;
 }
 h3.bold {
     font-size : 20pt;
@@ -41,10 +47,8 @@ p.bold{
     border-bottom: 1px solid #eef1f6;
 }
 .terminal{
-    border-radius: 10px;
-    margin-top: 3%;
-    background-color: black;
-    width: 70%;
-    height: 20vmin;
-    color: #BFC0C2;
+    background-color: #F3F3F3;
+    height: 7vmin;
+    color: black;
+    border: 2px solid #E9ECE6;
 }

@@ -16,7 +16,7 @@ import subprocess
 import json
 import os.path
 
-sudotoken = "d91a3f5751a3ea1652f7ffd3276469a5f148982d"
+sudotoken = "4012156fc16895b0d7ca4b3448ac990a532a9102"
 
 def signin(request):
     
@@ -131,8 +131,14 @@ def runcode(request, hw_id):
     elif stdout is not None:
         stdout = stdout.decode('utf-8')
 
+        print(stdout)
+
         stdout = stdout.split("\n")
-        commit_history = stdout[0] 
+        commit_history = stdout[0]
+        print("hererererere " , commit_history)
+        commit_history = commit_history.split("-")
+        commit_number = commit_history[0].strip()
+        commit_message = commit_history[1].strip()
         current_score = stdout[1]
 
 #        if Homework_Student.objects.get(hw=h, std=std_name).score == '':
@@ -141,8 +147,8 @@ def runcode(request, hw_id):
 #            hs.commit_history = commit_history
 #            hs.save()
 #        else:
-#            hs = Homework_Student(hw=h, std=std_name, score=current_score, commit_history=commit_history)  
-#            hs.save()
+        hs = Homework_Student(hw=h, std=std_name, score=current_score, commit_number = commit_number, commit_message = commit_message)  
+        hs.save()
 
     print("current score : " , current_score)
     return JsonResponse(str(current_score), safe=False)
@@ -166,7 +172,7 @@ def getscdetail(request, hw_name, std_id):
     slist = []
     for i in hwlist:
         if i.hw.hw_name == hw_name:
-            slist.append([i.score, i.commit_history])
+            slist.append([i.score, i.commit_message, i.commit_number])
     slist = list(reversed(slist))
     scoredetail.append(slist)
             
@@ -185,8 +191,11 @@ def student_getinfo(request, hw_id):
     hs = Homework_Student.objects.filter(hw=h, std=request.user)
     hslist = [h.hw_name, h.hw_base, h.hw_description, h.hw_duedate]
     hw = []
+    datetime = ['2019-11-01 10:28:10', '2019-11-02 10:07:11', '2019-11-02 11:09:01', '2019-11-02 17:00:00', '2019-11-03 18:02:00']
+    num = 0
     for i in hs:
-        hw.append([i.score, i.commit_history])
+        hw.append([i.score, i.commit_message, i.commit_number, datetime[num]])
+        num += 1
     hw = list(reversed(hw)) 
     hslist.append(hw)    
 

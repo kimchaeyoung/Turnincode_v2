@@ -3,7 +3,7 @@
     <div style="margin-top: 10px; margin-left: 15px" *ngFor="let hw of hwlist">
       <div *ngIf="hw[1]!=null">
       <div class="f">
-       <fa-icon [icon]="faBook"></fa-icon>&nbsp; <a class="router" routerLink="scoreboard/{{hw[1]}}">{{hw[1]}}</a>
+       <fa-icon [icon]="faBook"></fa-icon>&nbsp; <a class="router" [routerLink]="['/professor-page/scoreboard', hw[1]]">{{hw[1]}}</a>
       </div>
       </div>
     </div>

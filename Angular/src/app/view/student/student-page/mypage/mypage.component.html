@@ -1,44 +1,68 @@
-<div class="mar2">
-  <h2> Homework Information </h2>
-  <hr/>
-  <h3 class="bold"> {{hw_name}} </h3> 
-  <p class="bold"> <strong> Base Url </strong> {{hw_base}} </p>
-  <p class="bold"> <strong> Duedate </strong> {{hw_duedate}} </p>
+<body>
+  <div class="Box">
+    <div class="Box-header Box-header--blue">
+      <h2 class="Box-title">{{hw_name}}</h2>
+    </div>
+    <div class="Box-body">
+      <p> <strong> BaseUrl</strong>  https://github.com/professorK/hw1</p>
+      <p> <strong> Duedate</strong>  2019-11-03 24:24:24</p>
+    </div>
+  </div>
+  <br>
+    <button class="btn btn-primary" type="button" (click)="runcode()">과제채점</button>
+  <br><br>
+
+  <div class="Box" style="margin-bottom:2%" *ngFor="let s of hw_score; let i = index" [attr.data-index]="i">
+    <div class="Box-header">
+      <span style="display:inline-block; width:25%;">{{s[3]}}</span>
+      <span style="display:inline-block; width:45%;">{{s[1]}}</span>
+      <span style="display:inline-block; width:15%;">{{s[2]}}</span>
+
+      <ng-container *ngIf="s[0]=='pass'; else second">
+        <span class="State State--green mr-2" (click)="onClick(i)" style="display:inline-block; width:13%;">PASS</span> 
+      </ng-container>
+
+      <ng-template #second>
+        <ng-container *ngIf="s[0]=='fail';else third">
+          <span class="State State--red mr-2" (click)="onClick(i)" style="display:inline-block; width:13%;">FAIL</span>
+        </ng-container>
+      </ng-template>
+
+      <ng-template #third>
+        <span class="State State--purple mr-2" (click)="onClick(i)" style="display:inline-block; width:13%;">ERROR</span> 
+      </ng-template>
+
+    </div>
+
+    <div [hidden]="hideme[i]" class="Box-body">
+      <div>dd</div>
+    </div>
+  </div>
+
+<br><div class="mar3">
+    <div *ngFor="let s of hw_score; let i = index" [attr.data-index]="i">
+      <br><table [hidden]="s[1]==''" class="commit" style="border-radius: 4px; border:1px solid #CACACA;">
+      <thead>
+      <tr class="trow">
+        <th width=150 style="word-break:break-all" (click)="onClick(i)"><a style="text-decoration:none; text-align: left">{{s[3]}}</a></th>
+        <th width=350 style="word-break:break-all"><a style="text-decoration:none; text-align: left"> {{s[1]}} </a></th>
+        <th width=100 style="word-break:break-all"><a style="text-decoration:none; color:#42933E; padding: 4px; border-radius: 4px; border:1px solid #CACACA"> {{s[2]}} </a></th>
+        <th width=100 style="word-break:break-all">
+          <ng-container *ngIf="s[0]=='pass'; else second"><a style="color: blue; text-decoration:none">{{s[0]}}</a></ng-container>
+          <ng-template #second>
+            <ng-container *ngIf="s[0]=='fail';else third"><a style="color: red; text-decoration:none">{{s[0]}}</a></ng-container>
+          </ng-template>
+          <ng-template #third><a style="color: black; text-decoration:none">error</a></ng-template>
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+        <tr [hidden]="hideme[i]" class="terminal">
+        <td colspan="4"><a style="margin-left: 2%; text-decoration: none; font-size: 15px">{{s[0]}}</a></td>
+        </tr>
+      </tbody>
+      </table>
+    </div>
 </div>
 
-<div class="mar1">
-  <div>
-  <button class="l" style="padding: 5px 30px" mat-raised-button color="primary" (click)="runcode()"> 과제채점 </button>
-  </div>
-  <br/>
- <div class="terminal">
-  <br/><span style="margin-top: 3%; margin-left: 3%; font-size:20px; color: #C0C0C5"> <strong>{{terminal_date}} &nbsp;&nbsp; {{terminal_commit}}</strong><br/> <blockquote>{{terminal_result}}</blockquote> </span>
-  </div>
-</div><br/>
-
-<div class="mar3">
-  <h2 class="size bold"> Commit history </h2>
-  <table width = "70%">
-    <thead>
-    <tr class="trow">
-      <th> 날짜 </th>
-      <th> commit number </th>
-      <th> score </th>
-    </tr>
-    </thead>
-    <br/>
-  <tbody *ngFor="let s of hw_score">
-    <tr>
-      <th> </th>
-      <th> <button (click)="ShowTerminal('', s[1], s[0])">{{s[1]}}</button></th>
-      <th>
-        <ng-container *ngIf="s[0]=='pass'; else second"><a style="color: blue; text-decoration:none">{{s[0]}}</a></ng-container>
-        <ng-template #second>
-          <ng-container *ngIf="s[0]=='fail';else third"><a style="color: red; text-decoration:none">{{s[0]}}</a></ng-container>
-        </ng-template>
-        <ng-template #third><a style="color: black; text-decoration:none">{{s[0]}}</a></ng-template></th>
-    </tr>
-  </tbody>
-  </table>
-</div>
-
+</body>

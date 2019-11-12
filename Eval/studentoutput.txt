@@ -1,2 +1,1 @@
-input file name?
-file open is not successful
+32767 jihye 32767

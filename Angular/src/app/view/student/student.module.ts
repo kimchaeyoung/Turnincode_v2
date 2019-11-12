@@ -16,10 +16,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 export const ROUTES:Routes = [
     { path: 'signup/student-signup', component: StudentSignUpComponent },    
     { 
-      path: 'student-page',
-      component: StudentPageComponent,
+      path: 'student-page', component: StudentPageComponent,
       children: [
-          { path: 'detail/:id', component: MypageComponent },
+          { path: ':id', component: MypageComponent },
       ]
     }
 ]

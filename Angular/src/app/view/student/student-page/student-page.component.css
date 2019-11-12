@@ -1,17 +1,38 @@
-h3 {
-    font-size: 30px;
-}
 section {
     color: black;
     height: 100%;
-    width: 20%;
+    width: 25%;
     float: left;
-    border: 1px solid #eef1f6;
-    background-color: #F1F1F3;
+    background-color: white;
 }
 aside {
     height: 100%;
-    width: 79.5%;
+    width: 74.5%;
     float: right;
-    border: 1px solid #eef1f6;
+    border-left: 1px solid #E2E4E8; 
+    background-color: #F7F8FA;
+}
+hr {
+    border-top: solid 1px #E2E4E8;
+    border-bottom:none;
+    border-left:none;
+    border-right:none;
+}
+.small {
+    margin-left:9%;
+    margin-right:9%;
+    margin-top:11%;
+}
+.userbox{
+   color:#2667CF;
+}
+.hwtitle {
+    color: #25292E;
+}
+.hws{
+    color:#6C737C;    
+}
+.hw {
+    color:#2667CF;
+    margin-top:1%;
 }

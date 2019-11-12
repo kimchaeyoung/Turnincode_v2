@@ -1,23 +1,36 @@
+img {
+    width: 46%;
+    height: auto;
+    max-width: 100%;
+}
+.imgbox {
+    position: absolute;
+    text-align :right; 
+    margin-top: 6%;
+    margin-right: 3%
+}
 .contents {
-    background-color: black;
-    height: 800px;
+    background-color: #2C3137;
+    height: 80%;
     width: 100%;
 }
 .teaser-txt {
-    margin-top: 85px;
     margin-bottom: 2px;
-    font-size: 50px;
+    font-size: 62px;
     color: white;
 }
 
 .fcolor {
-    font-size: 20px;
-    color: white;
+    font-size: 24px;
+    color: #ABADAF;
 }
 
 .font {
-    float: center;
-    text-align: center;
+    float: left;
+    text-align: left;
+    margin-left: 16%;
+    margin-top: 5%;
+    position: absolute;
 }
 
 @import url(https://fonts.googleapis.com/css?family=Righteous);
