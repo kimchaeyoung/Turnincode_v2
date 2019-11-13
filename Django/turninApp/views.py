@@ -17,7 +17,7 @@ import subprocess
 import json
 import os.path
 
-sudotoken = "86cf5053258d7785d4ca88ad1d60f1afba75b4da"
+sudotoken = "844326ddf73e3a67e1c500313c142df26d9ee580"
 
 def trg_acpt_col():
     accept_collabo(sudotoken)

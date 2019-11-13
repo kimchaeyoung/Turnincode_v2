@@ -33,6 +33,6 @@ class CommitList(models.Model):
     score = models.CharField(max_length=100)    
     commit_number = models.CharField(max_length=100)
     commit_message = models.CharField(max_length=100)
-    commit_time = models.DateTimeField(blank=True, null=True)
+    commit_time = models.CharField(max_length=100)
 
 
