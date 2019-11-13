@@ -4,6 +4,7 @@ from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 from .serializers import *
 from .models import *
+from .starts import *
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authtoken.views import ObtainAuthToken
@@ -16,56 +17,15 @@ import subprocess
 import json
 import os.path
 
-sudotoken = "4012156fc16895b0d7ca4b3448ac990a532a9102"
+sudotoken = "c3f553db5622b249b2ebbdad7e9e18497c98e371"
+
+def trg_acpt_col():
+    accept_collabo(sudotoken)
 
 def signin(request):
-    
-    command = 'curl -u forCSEE:' + sudotoken + ' https://api.github.com/user/repository_invitations'
-    command = command.split()
-    s = subprocess.check_output(command) 
-    s = s.decode('utf-8')
-    s = json.loads(s)
-
-    for i in s:
-      print(i['id'])
-      print(i['repository']['html_url'])
-
-      col_id = str(i['id'])
-      col_name = i['repository']['full_name']
-      col_repo = i['repository']['name']
-      user_id = i['repository']['owner']['login']
-
-
-      command = 'curl --request PATCH -i -u forCSEE:' + sudotoken + ' https://api.github.com/user/repository_invitations/' + col_id
-      command = command.split()
-      subprocess.check_output(command)
-      
-      command = 'git clone https://forCSEE:' + sudotoken + '@github.com/' + col_name +'.git'
-      command = command.split()
-      subprocess.check_output(command)
-     
-      f = open(col_repo+'/.turnincode', 'r')
-      line = f.readline()
-      line = line.rstrip('\n')
-      print(line)      
-      
-      if Student.objects.filter(student_id=user_id).exists():
-          print("student")
-          if Homework.objects.filter(hw_base=line).exists():
-              h = Homework.objects.get(hw_base=line)
-              hs = Homework_Student(hw=h, std=user_id)
-              hs.save()
-      elif Professor.objects.filter(professor_id=user_id).exists():
-          eval_repo = i['repository']['html_url'] + '.git'
-          h = Homework(hw_base=line, hw_eval=eval_repo, hw_madeby=user_id)
-          h.save()
-          print("professor")
-      f.close()
-      # .turnincode 유무 판단 
-      # 있으면, basecode url 이랑hw 모델의 base_url 과 같은것을 찾아서 학생과의 relationship을 구축 ! 
-      # 없으면, 교수라고 판단하고 아무것도 하지 않음. 
-
+    trg_acpt_col()
     return render(request, 'signin.html')
+
 
 def signup(request):
     return render(request, 'signup.html')
@@ -84,6 +44,7 @@ def success_login(request):
         return redirect('signup')
 
 def student_page(request):
+    trg_acpt_col()
     return render(request, 'student_page.html')
 
 def student_mypage(request):
@@ -99,6 +60,7 @@ def student_mypage(request):
     return HttpResponse()
 
 def professor_page(request):
+    trg_acpt_col()
     current_user = request.user
     p = Professor.objects.get(professor_id=current_user)
     if p.professor_status == True:
@@ -125,6 +87,7 @@ def runcode(request, hw_id):
 
     stdout, stderr = MyOut.communicate()
     current_score = None
+    result = []
     if stdout is None:
         print("::ERROR::trigger did not pass result::")
 
@@ -149,9 +112,10 @@ def runcode(request, hw_id):
 #        else:
         hs = Homework_Student(hw=h, std=std_name, score=current_score, commit_number = commit_number, commit_message = commit_message)  
         hs.save()
+        result = [current_score, commit_message, commit_number, hs.hw.hw_duedate]
 
     print("current score : " , current_score)
-    return JsonResponse(str(current_score), safe=False)
+    return JsonResponse(result, safe=False)
 
 def getscore(request, hw_name):
     hwlist = Homework_Student.objects.all()

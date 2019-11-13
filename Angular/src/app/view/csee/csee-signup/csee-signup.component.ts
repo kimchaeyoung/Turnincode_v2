@@ -22,7 +22,7 @@ export class CseeSignupComponent implements OnInit {
   SignUp(){
     this.userService.signupNewCsee(this.signup).subscribe(
       response => {
-          this.router.navigateByUrl('');
+          this.router.navigateByUrl('/professor-page');
       },
       error => console.log('error', error)
     )

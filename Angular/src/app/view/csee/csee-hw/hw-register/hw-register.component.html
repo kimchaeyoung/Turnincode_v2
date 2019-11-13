@@ -1,18 +1,19 @@
 <div style="margin-top:1%">
 <h1> Homework Register </h1>
+    <h3 *ngIf="message != null" style="color: gray"> {{message}} </h3>
     <div *ngFor="let hw of hwlist; let i = index">
             <br> base_url : {{hw[2]}}
             <br> evaluation_url : {{hw[3]}}
             <br><mat-form-field>
-              <input matInput placeholder="name" [(ngModel)]="register.hw_name"> 
+              <input matInput placeholder="name" [(ngModel)]="register[i]['hw_name']"> 
             </mat-form-field> 
             <br><mat-form-field>  
-              <input matInput placeholder="description" [(ngModel)]="register.hw_description">
+              <input matInput placeholder="description" [(ngModel)]="register[i]['hw_description']">
             </mat-form-field>  
             <br><mat-form-field> 
-              <input matInput placeholder="duedate" [(ngModel)]="register.hw_duedate"> 
+              <input matInput placeholder="duedate" [(ngModel)]="register[i]['hw_duedate']"> 
             </mat-form-field>     
-            <br><button mat-raised-button color="primary" (click)="Register(hw[0])"> Create! </button>  
+            <br><button mat-raised-button color="primary" (click)="Register(i,hw[0])"> Create! </button>  
         <br><br>    
     </div>
 </div>

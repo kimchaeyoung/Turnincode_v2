@@ -24,7 +24,7 @@ export class StudentSignUpComponent implements OnInit{
   SignUp(){
     this.userService.signupNewStudent(this.signup).subscribe(
       response => {
-          this.router.navigateByUrl('/');
+          this.router.navigateByUrl('/student-page');
       },
       error => console.log('error', error)
     )
