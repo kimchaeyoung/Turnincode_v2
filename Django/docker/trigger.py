@@ -21,7 +21,7 @@ def client_program():
 
     os.chdir(hwname)
 #    os.system("git log --pretty=oneline -1")
-    os.system('git log --pretty="%h - %s" -1')
+    os.system('git log --pretty="%h - %s - %cd" -1')
 
     os.chdir("../../../Django")
 

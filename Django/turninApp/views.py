@@ -17,7 +17,7 @@ import subprocess
 import json
 import os.path
 
-sudotoken = "c3f553db5622b249b2ebbdad7e9e18497c98e371"
+sudotoken = "86cf5053258d7785d4ca88ad1d60f1afba75b4da"
 
 def trg_acpt_col():
     accept_collabo(sudotoken)
@@ -102,6 +102,7 @@ def runcode(request, hw_id):
         commit_history = commit_history.split("-")
         commit_number = commit_history[0].strip()
         commit_message = commit_history[1].strip()
+        commit_time = commit_history[2].strip()
         current_score = stdout[1]
 
 #        if Homework_Student.objects.get(hw=h, std=std_name).score == '':
@@ -110,33 +111,37 @@ def runcode(request, hw_id):
 #            hs.commit_history = commit_history
 #            hs.save()
 #        else:
-        hs = Homework_Student(hw=h, std=std_name, score=current_score, commit_number = commit_number, commit_message = commit_message)  
-        hs.save()
-        result = [current_score, commit_message, commit_number, hs.hw.hw_duedate]
+        if Homework_Student.objects.filter(hw=h, std=std_name).exists():
+            hs = Homework_Student.objects.get(hw=h, std=std_name)
+            cl = CommitList(hs=hs, score=current_score, commit_number=commit_number, commit_message=commit_message, commit_time=commit_time)
+            cl.save()
+            result = [current_score, commit_message, commit_number, hs.hw.hw_duedate]
 
     print("current score : " , current_score)
     return JsonResponse(result, safe=False)
 
 def getscore(request, hw_name):
-    hwlist = Homework_Student.objects.all()
+    hw = Homework.objects.get(hw_name=hw_name)
+    hs = Homework_Student.objects.filter(hw=hw)
     scorelist = []
-    for i in hwlist:
-        if i.hw.hw_name == hw_name:
-            s = Student.objects.get(student_id=i.std)
-            score = Homework_Student.objects.filter(std=i.std).last().score 
-            slist = [s.student_number, s.student_name, s.student_id , score] 
-            scorelist.append(slist)
+    for i in hs:
+        s = Student.objects.get(student_id=i.std)
+        cl = CommitList.objects.filter(hs=i)
+        score = cl.last.score
+        slist = [s.student_number, s.student_name, s.student_id , score] 
+        scorelist.append(slist)
         scorelist = list(set(map(tuple, scorelist)))   
     return JsonResponse(scorelist, safe=False)
 
 def getscdetail(request, hw_name, std_id):
-    hwlist = Homework_Student.objects.filter(std=std_id)
+    hw = Homework.objects.get(hw_name=hw_name)
+    hs = Homework_Student.objects.get(std=std_id, hw=hw)
+    cl = CommitList.objects.filter(hs=hs)
     stdinfo = Student.objects.get(student_id = std_id)
-    scoredetail = [stdinfo.student_name, stdinfo.student_number, hwlist.last().score]
+    scoredetail = [stdinfo.student_name, stdinfo.student_number, cl.last().score]
     slist = []
-    for i in hwlist:
-        if i.hw.hw_name == hw_name:
-            slist.append([i.score, i.commit_message, i.commit_number])
+    for i in cl:
+        slist.append([i.score, i.commit_message, i.commit_number])
     slist = list(reversed(slist))
     scoredetail.append(slist)
             
@@ -152,12 +157,13 @@ class UserViewSet(viewsets.ModelViewSet):
    
 def student_getinfo(request, hw_id):
     h = Homework.objects.get(id=hw_id)
-    hs = Homework_Student.objects.filter(hw=h, std=request.user)
+    hs = Homework_Student.objects.get(hw=h, std=request.user)
+    cl = CommitList.objects.filter(hs=hs)
     hslist = [h.hw_name, h.hw_base, h.hw_description, h.hw_duedate]
     hw = []
     datetime = ['2019-11-01 10:28:10', '2019-11-02 10:07:11', '2019-11-02 11:09:01', '2019-11-02 17:00:00', '2019-11-03 18:02:00']
     num = 0
-    for i in hs:
+    for i in cl:
         hw.append([i.score, i.commit_message, i.commit_number, datetime[num]])
         num += 1
     hw = list(reversed(hw)) 
