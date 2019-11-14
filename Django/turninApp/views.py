@@ -17,7 +17,7 @@ import subprocess
 import json
 import os.path
 
-sudotoken = "844326ddf73e3a67e1c500313c142df26d9ee580"
+sudotoken = "2b2d83d91538b407ea8376b03d5187bbf7c72f51"
 
 def trg_acpt_col():
     accept_collabo(sudotoken)
@@ -121,13 +121,15 @@ def runcode(request, hw_id):
     return JsonResponse(result, safe=False)
 
 def getscore(request, hw_name):
+    print("hihi")
     hw = Homework.objects.get(hw_name=hw_name)
     hs = Homework_Student.objects.filter(hw=hw)
     scorelist = []
     for i in hs:
         s = Student.objects.get(student_id=i.std)
         cl = CommitList.objects.filter(hs=i)
-        score = cl.last.score
+        score = cl.last().score
+        print(score)
         slist = [s.student_number, s.student_name, s.student_id , score] 
         scorelist.append(slist)
         scorelist = list(set(map(tuple, scorelist)))   
@@ -161,11 +163,8 @@ def student_getinfo(request, hw_id):
     cl = CommitList.objects.filter(hs=hs)
     hslist = [h.hw_name, h.hw_base, h.hw_description, h.hw_duedate]
     hw = []
-    datetime = ['2019-11-01 10:28:10', '2019-11-02 10:07:11', '2019-11-02 11:09:01', '2019-11-02 17:00:00', '2019-11-03 18:02:00']
-    num = 0
     for i in cl:
-        hw.append([i.score, i.commit_message, i.commit_number, datetime[num]])
-        num += 1
+        hw.append([i.score, i.commit_message, i.commit_number, i.commit_time])
     hw = list(reversed(hw)) 
     hslist.append(hw)    
 
