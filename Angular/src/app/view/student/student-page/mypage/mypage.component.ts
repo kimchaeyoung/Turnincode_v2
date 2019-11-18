@@ -54,7 +54,7 @@ export class MypageComponent implements OnInit {
   runcode(){
     this.http.get('./result/'+this.hw_id).subscribe(
         response=> {
-            this.hw_score.push(response);
+            this.hw_score.unshift(response);
         },
     )
   }

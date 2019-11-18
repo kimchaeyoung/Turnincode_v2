@@ -3,17 +3,17 @@
   <table width = "100%">
   <thead>
     <tr class="trow">
-      <th> 날짜 </th>
-      <th> commit number </th>
+      <th> commit time </th>
+      <th> commit message </th>
       <th> score </th>
     </tr>
   </thead>
   <br/>
   <tbody *ngFor="let info of detail[3]">
     <tr>
-      <th> </th>
+      <th>{{info[0]}} </th>
       <th> {{info[1]}}</th>
-      <th> <a *ngIf="info.length < 10; else elseCase"> {{info[0]}} </a>
+      <th> <a *ngIf="info.length < 10; else elseCase"> {{info[2]}} </a>
           <ng-template #elseCase>
             <b>error</b>
           </ng-template>

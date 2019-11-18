@@ -1,12 +1,24 @@
 <section>
-  <h3 style="color:#87BA32; margin-left:15px"> Homeworks </h3>
-    <div style="margin-top: 10px; margin-left: 15px" *ngFor="let hw of hwlist">
-      <div *ngIf="hw[1]!=null">
-      <div class="f">
-       <fa-icon [icon]="faBook"></fa-icon>&nbsp; <a class="router" [routerLink]="['/professor-page/scoreboard', hw[1]]">{{hw[1]}}</a>
-      </div>
+  <div class="small">
+    <div class="userbox">
+      <fa-icon [icon]="faChalkboardTeacher"></fa-icon>&nbsp;
+      <a class="h4" style="text-decoration: none; color: #25292E;">{{current_user}}</a>
+    </div>
+    <hr>
+    <h4 class="hwtitle"> Homeworks </h4>
+      <br>
+    <input [(ngModel)]="searchText" class="form-control input-block" type="text" placeholder="Find a homework..." aria-label="Full-width input"/>
+      <br>
+    <div class="hws" *ngFor="let hw of hwlist">
+      <div *ngIf="hw!=null">
+        <fa-icon [icon]="faBook"></fa-icon>&nbsp; 
+        <a class="h4 hw" [routerLink]="['/professor-page/scoreboard', hw]">{{hw}}</a>
       </div>
     </div>
+    <div style="line-height:50%;">
+      <br>
+    </div>
+  </div>
 </section>
 <aside>
     <router-outlet></router-outlet>

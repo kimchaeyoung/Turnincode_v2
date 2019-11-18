@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class UserService {
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient){}
   
   signupNewStudent(userData): Observable<any> {
     return this.http.post('./sstudents/', userData);

@@ -10,6 +10,8 @@ import { ActivatedRoute, Params } from '@angular/router';
 export class HwManageComponent implements OnInit {
 
   hw_id = '';
+  hw_name = '';
+  hw_duedate = '';
   scorelist: any =[];
 
   constructor(private http:HttpClient, route: ActivatedRoute) { 
@@ -17,7 +19,9 @@ export class HwManageComponent implements OnInit {
         this.hw_id = params.id;
         this.http.get('./professor-page/getscoreboard/'+this.hw_id).subscribe(
           response=> {
-            this.scorelist = response;
+            this.hw_name = response[0];
+            this.hw_duedate = response[1];
+            this.scorelist = response[2];
           }
         ); 
     });

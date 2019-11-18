@@ -81,13 +81,17 @@ WSGI_APPLICATION = 'Turnincode.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-DATABASES = {
-  'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'turnincodedb',
+        'USER': 'turn',
+        'PASSWORD': 'capstone2019',
+        'HOST': 'turnincode.cafe24.com',
+        'PORT': '',
+        },
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -149,8 +153,8 @@ AUTHENTICATION_BACKENDS = (
  'django.contrib.auth.backends.ModelBackend',
 )
 
-SOCIAL_AUTH_GITHUB_KEY = '497f72f923233074619e'
-SOCIAL_AUTH_GITHUB_SECRET = '32065abc2af7ad7cd4860222b20461547cfa108c'
+SOCIAL_AUTH_GITHUB_KEY = 'b42121cc53376ba493d2'
+SOCIAL_AUTH_GITHUB_SECRET = 'fd63f284dd934b5b42cdab30464172596e6e0a5d'
 
 LOGIN_REDIRECT_URL = 'success-login'
 LOGOUT_URL = 'logout'

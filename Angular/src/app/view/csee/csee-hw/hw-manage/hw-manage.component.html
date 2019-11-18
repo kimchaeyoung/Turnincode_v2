@@ -1,20 +1,22 @@
-<h3 style="color:#87BA32; margin-left:15px"> Scoreboard </h3>
- <table width = "100%">
- <thead> 
-    <tr class="trow"> 
-     <th> Student number </th>
-     <th> Student name </th> 
-     <th> github ID </th>
-     <th> Score </th> 
-    </tr>
- </thead>
- <br/>
- <tbody *ngFor = "let score of scorelist">
-     <tr class="tbottom">
-       <th> <a class="router" routerLink = "{{score[2]}}"> {{score[0]}} </a></th>
-       <th> <a class="router" routerLink = "{{score[2]}}"> {{score[1]}} </a> </th>
-       <th> <a class="router" routerLink = "{{score[2]}}"> {{score[2]}} </a></th>
-       <th> {{score[3]}} </th>
-     </tr>
- </tbody>
-</table>
+<div class="smallbox">
+  <h3> Scoreboard </h3>
+  {{hw_name}}
+  {{hw_duedate}}  
+
+  <div class="Box">
+    <div class="Box-header">
+      <span class="in w25"><strong>Student Number</strong></span>
+      <span class="in w25"><strong>Student Name</strong></span>
+      <span class="in w25"><strong>Github ID</strong></span>
+      <span class="in w15"><strong>Score</strong></span>
+      <span class="in w10"><strong>Detail</strong></span>
+    </div>
+    <div class="Box-row" *ngFor = "let score of scorelist">
+      <span class="in w25">{{score[0]}}</span>
+      <span class="in w25">{{score[1]}}</span>
+      <span class="in w25">{{score[2]}}</span>
+      <span class="in w15">{{score[3]}}</span>
+      <button class="btn btn-sm in w10" type="button" routerLink ="{{score[2]}}">Detail</button>
+    </div>
+  </div>
+</div>

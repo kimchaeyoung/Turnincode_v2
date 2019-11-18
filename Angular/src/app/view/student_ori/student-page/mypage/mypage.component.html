@@ -1,0 +1,48 @@
+<body>
+ <div>
+  <div class="Box Box--condensed">
+    <div class="Box-header Box-header--blue d-flex flex-items-center">
+      <h1 class="Box-title overflow-hidden flex-auto">{{hw_name}}</h1>
+      <button class="btn btn-outline" type="button" (click)="runcode()">과제채점</button>
+    </div>
+    <div class="Box-body">
+      <h4>BaseUrl  https://github.com/CSEE/Networkhw1</h4>
+      <h4>Duedate 2019-11-23 23:59:59</h4>
+    </div>
+  </div>
+<!--
+  <br>
+    <button class="btn btn-primary" type="button" (click)="runcode()">과제채점</button>
+  <br>
+-->
+<br>
+
+  <div class="Box" style="margin-bottom:2%" *ngFor="let s of hw_score; let i = index" [attr.data-index]="i">
+    <div class="Box-header">
+      <span style="display:inline-block; width:25%;">{{s[3]}}</span>
+      <span style="display:inline-block; width:45%;">{{s[1]}}</span>
+      <span style="display:inline-block; width:15%;">{{s[2]}}</span>
+
+      <ng-container *ngIf="s[0]=='pass'; else second">
+        <span class="State State--green mr-2" (click)="onClick(i)" style="display:inline-block; width:13%;">PASS</span> 
+      </ng-container>
+
+      <ng-template #second>
+        <ng-container *ngIf="s[0]=='fail';else third">
+          <span class="State State--red mr-2" (click)="onClick(i)" style="display:inline-block; width:13%;">FAIL</span>
+        </ng-container>
+      </ng-template>
+
+      <ng-template #third>
+        <span class="State State--purple mr-2" (click)="onClick(i)" style="display:inline-block; width:13%;">ERROR</span> 
+      </ng-template>
+
+    </div>
+
+    <div [hidden]="hideme[i]" class="Box-body">
+      <div>error: expected ';' before '}' token</div>
+    </div>
+  </div>
+ </div>
+</body>
+

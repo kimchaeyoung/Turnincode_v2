@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { StudentPageComponent } from './student-page/student-page.component';
 import { MypageComponent } from './student-page/mypage/mypage.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FilterPipe } from './filter.pipe';
 
 export const ROUTES:Routes = [
     { path: 'signup/student-signup', component: StudentSignUpComponent },    
@@ -26,7 +27,7 @@ export const ROUTES:Routes = [
 
 
 @NgModule({
-  declarations: [StudentSignInComponent, StudentSignUpComponent, StudentPageComponent, MypageComponent],
+  declarations: [StudentSignInComponent, StudentSignUpComponent, StudentPageComponent, MypageComponent, FilterPipe],
   imports: [
     CommonModule,
     RouterModule.forRoot(ROUTES),
