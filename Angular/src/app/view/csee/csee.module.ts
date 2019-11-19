@@ -14,6 +14,7 @@ import { HwManageComponent } from './csee-hw/hw-manage/hw-manage.component';
 import { CseeSignupComponent } from './csee-signup/csee-signup.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HwDetailComponent } from './csee-hw/hw-detail/hw-detail.component';
+import { FilterPipe } from './filter.pipe';
 
 export const ROUTES:Routes = [
     { path: 'signup/csee', component: CseeSignupComponent },
@@ -34,7 +35,7 @@ export const ROUTES:Routes = [
 ]
 
 @NgModule({
-  declarations: [CseeLoginComponent, CseeHwComponent, HwRegisterComponent, HwManageComponent, CseeSignupComponent, HwDetailComponent],
+  declarations: [CseeLoginComponent, CseeHwComponent, HwRegisterComponent, HwManageComponent, CseeSignupComponent, HwDetailComponent, FilterPipe],
   imports: [
     CommonModule,
     RouterModule.forRoot(ROUTES),

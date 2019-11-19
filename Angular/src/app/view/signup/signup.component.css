@@ -1,14 +1,24 @@
+.button1 {
+    text-decoration: none;
+    font-size: 20px;
+    color: #0366d6; 
+}
+.button2 {
+    text-decoration: none;
+    font-size: 20px;
+    color: #28a745;
+}
 .center {
-    font-size: 40px;
-    margin-top: 10%;
     text-align: center;
+    margin-top: 20%;
 }
 .inline {
     display: inline;
 }
-.button1 {
-    margin: 80px;
-}
-.button2 {
-    margin: 80px;
+.box {
+    margin-left: 2%;
+    padding: 70px;
+    border-radius: 4px;
+    border: 2px solid #e1e4e8;
+    background-color: #fafbfc;
 }

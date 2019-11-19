@@ -9,7 +9,7 @@
       <br>
     <input [(ngModel)]="searchText" class="form-control input-block" type="text" placeholder="Find a homework..." aria-label="Full-width input"/>
       <br>
-    <div class="hws" *ngFor="let hw of hwlist">
+    <div class="hws" *ngFor="let hw of hwlist | filter : searchText">
       <div *ngIf="hw!=null">
         <fa-icon [icon]="faBook"></fa-icon>&nbsp; 
         <a class="h4 hw" [routerLink]="['/professor-page/scoreboard', hw]">{{hw}}</a>

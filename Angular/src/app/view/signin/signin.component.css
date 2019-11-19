@@ -1,3 +1,4 @@
+
 img {
     width: 46%;
     height: auto;
@@ -11,7 +12,7 @@ img {
 }
 .contents {
     background-color: #2C3137;
-    height: 80%;
+    height: 70%;
     width: 100%;
 }
 .teaser-txt {
@@ -21,7 +22,7 @@ img {
 }
 
 .fcolor {
-    font-size: 24px;
+    font-size: 20px;
     color: #ABADAF;
 }
 
@@ -29,8 +30,7 @@ img {
     float: left;
     text-align: left;
     margin-left: 16%;
-    margin-top: 5%;
+    margin-top: 7%;
     position: absolute;
 }
 
-@import url(https://fonts.googleapis.com/css?family=Righteous);
