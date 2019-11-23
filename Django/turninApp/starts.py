@@ -41,18 +41,18 @@ def accept_collabo(sudotoken):
       
       command = 'git clone https://forCSEE:' + sudotoken + '@github.com/' + col_name +'.git'
       command = command.split()
-      subprocess.check_output(command)
+      subprocess.check_call(command)
      
       f = open(col_repo+'/.turnincode', 'r')
       line = f.readline()
       line = line.rstrip('\n')
-      print(line)      
+      print(line)     
 
       if Student.objects.filter(student_id=user_id).exists():
           print("student")
           if Homework.objects.filter(hw_base=line).exists():
               h = Homework.objects.get(hw_base=line)
-              hs = Homework_Student(hw=h, std=user_id)
+              hs = Homework_Student(hw=h, std=user_id, repo_name=col_repo)
               hs.save()
 
           command = 'rm -rf ' + col_repo
@@ -61,11 +61,22 @@ def accept_collabo(sudotoken):
 
       elif Professor.objects.filter(professor_id=user_id).exists():
           eval_repo = i['repository']['html_url'] + '.git'
-          h = Homework(hw_base=line, hw_eval=eval_repo, hw_madeby=user_id)
+          hwname = line.split("/")[-1].split(".")[0]
+          h = Homework(hw_name=hwname, hw_base=line, hw_eval=eval_repo, hw_madeby=user_id)
           h.save()
           print("professor")
 
-          command = 'mv ' + col_repo + ' ../Eval'
+          command = 'chmod 755 ' + col_repo + '/build.sh'
+          os.system(command)
+          command = 'chmod 755 ' + col_repo + '/run.sh'
+          os.system(command)
+
+          os.chdir("../Eval")
+          if os.path.exists("./"+user_id) == False:
+              os.system("mkdir " + user_id)
+          os.chdir("../Django")
+
+          command = 'mv ' + col_repo + ' ../Eval/' + user_id +'/' + hwname
           command = command.split()
           subprocess.check_output(command)
 

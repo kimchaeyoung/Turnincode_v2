@@ -7,12 +7,12 @@ import time
 #agent
 
 def eval():
-    with open('../../Eval/studentoutput.txt', 'r') as content_file1:
+    with open('../../Repos/'+stdname+'/'+reponame+'/'+'studentoutput.txt', 'r') as content_file1:
         global content1
         content1 = content_file1.read().strip()
         print(content1)
 
-    with open('../../Eval/' + hwname + '/output.txt', 'r') as content_file2:
+    with open('../../Eval/' + profname + '/' + hwname + '/output.txt', 'r') as content_file2:
         global content2
         content2 = content_file2.read().strip()
         print(content2)
@@ -25,32 +25,32 @@ def eval():
     print(result)
 
 def code_orange():
-    cmd = "docker cp ../../Repos/" + stdname + "/" + hwname + "/main.c docker:new/."
+    cmd = "docker cp ../../Repos/" + stdname + "/" + reponame + "/main.c docker:new/."
     os.system(cmd)
-    cmd = "docker cp ../../Eval/" + hwname + "/build.sh docker:new/."
+    cmd = "docker cp ../../Eval/" + profname + "/" + hwname + "/build.sh docker:new/."
     os.system(cmd)
 
     print('orange')
 
 def code_green():
-    cmd = "docker cp ../../Eval/" + hwname + "/input.txt docker:new/."
+    cmd = "docker cp ../../Eval/" + profname + "/" + hwname + "/input.txt docker:new/."
     os.system(cmd)
-    cmd = "docker cp ../../Eval/" + hwname + "/run.sh docker:new/."
+    cmd = "docker cp ../../Eval/" + profname + "/" + hwname + "/run.sh docker:new/."
     os.system(cmd)
     print('green')
 
 #build_error
 def code_lightGreen():
-    cmd = "docker cp docker:new/error.txt ../../Eval/studenterror.txt"
+    cmd = "docker cp docker:new/error.txt ../../Repos/"+stdname+"/"+reponame+"/"+"studenterror.txt"
     os.system(cmd)
-    with open("../../Eval/studenterror.txt", 'r') as error_file:
+    with open("../../Repos/"+stdname+"/"+reponame+"/"+"studenterror.txt", 'r') as error_file:
         error = error_file.read()
         global result
         result = "error-" + error
     print('lightGreen')
 
 def code_purple():
-    cmd = "docker cp docker:new/studentoutput.txt ../../Eval/studentoutput.txt"
+    cmd = "docker cp docker:new/studentoutput.txt ../../Repos/"+stdname+"/"+reponame+"/"+"studentoutput.txt"
     os.system(cmd)
     eval()
     print('purple')
@@ -59,11 +59,11 @@ def code_white():
     print('white')
 
 def code_black():
-    cmd = "rm -f ../../Eval/studentoutput.txt"
+#    cmd = "rm -f ../../Repos/"+stdname+"/"+reponame+"/"+"studentoutput.txt"
 #    os.system(cmd)
-    cmd = "rm -f ../../Eval/studenterror.txt"
-    os.system(cmd)
-    cmd = "rm -rf ../../Repos/" + stdname
+#    cmd = "rm -f ../../Repos/"+stdname+"/"+reponame+"/"+"studenterror.txt"
+#    os.system(cmd)
+    cmd = "rm -rf ../../Repos/" + stdname + "/" + hwname
     os.system(cmd)
     print('black')
 
@@ -95,8 +95,12 @@ def server_program():
             stdhwnamesplit = stdhwname.split()
             global stdname
             global hwname
+            global profname
+            global reponame
             stdname = stdhwnamesplit[0]
             hwname = stdhwnamesplit[1]
+            profname = stdhwnamesplit[2]
+            reponame = stdhwnamesplit[3]
 
             code = 'red'
             while code.lower().strip() != 'bye':

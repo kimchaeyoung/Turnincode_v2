@@ -29,7 +29,7 @@ export class HwRegisterComponent implements OnInit {
   }
 
   Register(num, hw_id){
-    this.stateService.changeUsername(this.register[num]['hw_name']);
+    this.stateService.changeUsername(this.hwlist[num][1]);
     this.userService.registerHomework(this.register[num], hw_id).subscribe(
       response => {
         this.getHw();
@@ -47,7 +47,7 @@ export class HwRegisterComponent implements OnInit {
                 this.register = {};
                 if(this.hwlist != null){
                     for(i = 0; i< this.hwlist.length; i++){
-                        this.register[i] = {hw_name: '', hw_description: '', hw_duedate:''}
+                        this.register[i] = {hw_duedate:''}
                     }
                  }
                 else{

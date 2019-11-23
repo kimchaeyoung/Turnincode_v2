@@ -1,23 +1,23 @@
-<h3> {{detail[1]}}  {{detail[0]}} </h3>
-<h2> {{detail[2]}} </h2>
-  <table width = "100%">
-  <thead>
-    <tr class="trow">
-      <th> commit time </th>
-      <th> commit message </th>
-      <th> score </th>
-    </tr>
-  </thead>
-  <br/>
-  <tbody *ngFor="let info of detail[3]">
-    <tr>
-      <th>{{info[0]}} </th>
-      <th> {{info[1]}}</th>
-      <th> <a *ngIf="info.length < 10; else elseCase"> {{info[2]}} </a>
-          <ng-template #elseCase>
-            <b>error</b>
-          </ng-template>
-      </th>
-    </tr>
-  </tbody>
-  </table>
+<div class="smallbox">
+ <div class="flash flash-success">
+    {{detail[1]}} &nbsp; {{detail[0]}} <p style="float:right; font-weight:bold"> {{detail[2]}} </p>
+  </div>
+  <br>
+  <div class="Box">
+    <div class="Box-header"> 
+      <span class="in w40"><strong>Commit Time</strong></span>
+      <span class="in w40"><strong>Commit message</strong></span>
+      <span class="in w20"><strong>Score</strong></span>
+    </div>
+    <div class="Box-row" *ngFor="let info of detail[3]">
+      <span class="in w40">{{info[0]}}</span>
+      <span class="in w40">{{info[1]}}</span>
+      <span class="in w20">
+        <a *ngIf="info.length < 10; else elseCase"> {{info[2]}} </a>
+        <ng-template #elseCase>
+        <b>error</b>
+        </ng-template>
+      </span>
+    </div>
+  </div>
+</div>

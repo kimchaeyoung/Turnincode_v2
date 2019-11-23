@@ -2,7 +2,7 @@
   <div class="small">
     <div class="userbox">
       <fa-icon [icon]="faChalkboardTeacher"></fa-icon>&nbsp;
-      <a class="h4" style="text-decoration: none; color: #25292E;">{{current_user}}</a>
+      <a class="h4" style="text-decoration: none; color: #25292E;" [routerLink]="['/professor-page/register']">{{current_user}}</a>
     </div>
     <hr>
     <h4 class="hwtitle"> Homeworks </h4>
@@ -10,9 +10,9 @@
     <input [(ngModel)]="searchText" class="form-control input-block" type="text" placeholder="Find a homework..." aria-label="Full-width input"/>
       <br>
     <div class="hws" *ngFor="let hw of hwlist | filter : searchText">
-      <div *ngIf="hw!=null">
+      <div *ngIf="hw[1]!=null">
         <fa-icon [icon]="faBook"></fa-icon>&nbsp; 
-        <a class="h4 hw" [routerLink]="['/professor-page/scoreboard', hw]">{{hw}}</a>
+        <a class="h4 hw" [routerLink]="['/professor-page/scoreboard', hw[0]]">{{hw[0]}}</a>
       </div>
     </div>
     <div style="line-height:50%;">

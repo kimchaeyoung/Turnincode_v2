@@ -10,16 +10,19 @@ def client_program():
     stdname = sys.argv[1]
     hwname = sys.argv[2]
     sudotoken = sys.argv[3]
+    profname = sys.argv[4]
+    reponame = sys.argv[5]
 
     os.chdir("../Repos")
     if os.path.exists("./" + stdname) == False:
         os.system("mkdir " + stdname)
     os.chdir(stdname)
 
-    cmd = 'git clone https://forCSEE:' + sudotoken + '@github.com/' + stdname + '/' + hwname +'.git'
+
+    cmd = 'git clone https://forCSEE:' + sudotoken + '@github.com/' + stdname + '/' + reponame +'.git'
     os.system(cmd)
 
-    os.chdir(hwname)
+    os.chdir(reponame)
 #    os.system("git log --pretty=oneline -1")
     os.system('git log --pretty="%h - %s - %cd" -1')
 
@@ -31,7 +34,7 @@ def client_program():
     client_socket = socket.socket()
     client_socket.connect((host, port))
 
-    cmd = stdname + ' ' + hwname
+    cmd = stdname + ' ' + hwname + ' ' + profname + ' ' + reponame
     client_socket.send(cmd.encode())
     result = client_socket.recv(2014).decode()
     print(result)

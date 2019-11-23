@@ -1,0 +1,15 @@
+<div class="smallbox">
+  <h3>Homework Register</h3>
+  <h3 *ngIf="message != null" style="color:#6a737d">{{message}}</h3> 
+  <br>
+  <div class="Box Box--style" *ngFor="let hw of hwlist; let i = index">
+      <h5>Base_url : {{hw[2]}}</h5>
+      <h5>Evaluation_url : {{hw[3]}}</h5>
+      <hr>
+        <input class="form-control" placeholder="Duedate" [(ngModel)]="register[i]['hw_duedate']" [owlDateTimeTrigger]="dt" [owlDateTime]="dt">
+              <owl-date-time #dt></owl-date-time>
+        &nbsp;<button class="btn" type="button" (click)="Register(i,hw[0])">Create!</button>
+  </div>
+  <br>
+</div>  
+

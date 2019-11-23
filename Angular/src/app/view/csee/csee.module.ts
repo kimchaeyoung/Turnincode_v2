@@ -14,7 +14,10 @@ import { HwManageComponent } from './csee-hw/hw-manage/hw-manage.component';
 import { CseeSignupComponent } from './csee-signup/csee-signup.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HwDetailComponent } from './csee-hw/hw-detail/hw-detail.component';
-import { FilterPipe } from './filter.pipe';
+import { CseeAuthComponent } from './csee-auth/csee-auth.component';
+
+import { FilterPipe } from './filter.pipe';   
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 
 export const ROUTES:Routes = [
     { path: 'signup/csee', component: CseeSignupComponent },
@@ -32,10 +35,14 @@ export const ROUTES:Routes = [
           { path: 'scoreboard/:id/:std_id', component: HwDetailComponent },
       ]
     },
+    {
+      path: 'professor-auth',
+      component : CseeAuthComponent,
+    }
 ]
 
 @NgModule({
-  declarations: [CseeLoginComponent, CseeHwComponent, HwRegisterComponent, HwManageComponent, CseeSignupComponent, HwDetailComponent, FilterPipe],
+  declarations: [FilterPipe, CseeLoginComponent, CseeHwComponent, HwRegisterComponent, HwManageComponent, CseeSignupComponent, HwDetailComponent, CseeAuthComponent],
   imports: [
     CommonModule,
     RouterModule.forRoot(ROUTES),
@@ -45,6 +52,8 @@ export const ROUTES:Routes = [
     MatInputModule,
     BrowserAnimationsModule,
     FontAwesomeModule,
+    OwlDateTimeModule,
+    OwlNativeDateTimeModule,
   ]
 })
 export class CseeModule { }

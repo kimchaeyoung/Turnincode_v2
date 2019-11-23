@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { StudentPageComponent } from './student-page.component';
+import { CseeAuthComponent } from './csee-auth.component';
 
-describe('StudentPageComponent', () => {
-  let component: StudentPageComponent;
-  let fixture: ComponentFixture<StudentPageComponent>;
+describe('CseeAuthComponent', () => {
+  let component: CseeAuthComponent;
+  let fixture: ComponentFixture<CseeAuthComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ StudentPageComponent ]
+      declarations: [ CseeAuthComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(StudentPageComponent);
+    fixture = TestBed.createComponent(CseeAuthComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

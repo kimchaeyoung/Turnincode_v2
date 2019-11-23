@@ -12,7 +12,6 @@ export class MypageComponent implements OnInit {
   hw_id = '';
   hw_name = '';
   hw_base = '';
-  hw_description = '';
   hw_duedate = '';
   hw_score: any = [];
   current_result = '';
@@ -29,9 +28,8 @@ export class MypageComponent implements OnInit {
                 response => {
                         this.hw_name = response[0];
                         this.hw_base = response[1];
-                        this.hw_description = response[2];
-                        this.hw_duedate = response[3];
-                        this.hw_score = response[4];
+                        this.hw_duedate = response[2];
+                        this.hw_score = response[3];
                 },
                 error => console.log('error', error)
           );

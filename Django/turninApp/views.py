@@ -17,7 +17,7 @@ import subprocess
 import json
 import os.path
 
-sudotoken = "6e633d0f7f4c17edb2b177b33839a2a36e4a59e3"
+sudotoken = "c12235267ca2422cc6a75a3a1e1988e3e3f87f6a"
 
 def trg_acpt_col():
     accept_collabo(sudotoken)
@@ -37,14 +37,21 @@ def success_login(request):
     elif Student.objects.filter(student_id = current_user).exists():
         return redirect('student-page')
     elif Professor.objects.filter(professor_id = current_user).exists():
-        return redirect('professor-page')
+        p = Professor.objects.get(professor_id = current_user)
+        if p.professor_status == True:
+            return redirect('professor-page')
+        else:
+            return redirect('professor-auth')
     else:
         print("not registered user")
         return redirect('signup')
 
 def student_page(request):
     trg_acpt_col()
-    return render(request, 'student_page.html')
+    if Student.objects.filter(student_id=request.user).exists():
+        return render(request, 'student_page.html')
+    else:
+        return HttpResponse("You are not student or not registered use")
 
 def student_mypage(request):
     current_user = request.user
@@ -61,11 +68,16 @@ def student_mypage(request):
 def professor_page(request):
     trg_acpt_col()
     current_user = request.user
-    p = Professor.objects.get(professor_id=current_user)
-    if p.professor_status == True:
-        return render(request, 'professor_page.html')
-    else:
-        return HttpResponse("You don't have any permission to access professor page. Please wait for authentication")
+    if Professor.objects.filter(professor_id=current_user).exists():
+        p = Professor.objects.get(professor_id=current_user)
+        if p.professor_status == True:
+            return render(request, 'professor_page.html')
+        else:
+            return render(request, 'professor_auth.html')
+    return HttpResponse("You are not professor or not registered use")
+
+def professor_auth(request):
+    return render(request, "professor_auth.html")
 
 def current_user(request):
     current_user = request.user
@@ -74,12 +86,15 @@ def current_user(request):
 def runcode(request, hw_id):
     current_user = request.user
     h = Homework.objects.get(id=hw_id)
+    hs = Homework_Student.objects.get(hw=h, std=current_user)
+    repo_name = str(hs.repo_name)
     hw_name = str(h.hw_name)
     std_name = str(current_user)
+    prof_name = str(h.hw_madeby)
 
     cmd = "./docker/trigger " + std_name
     MyOut = subprocess.Popen(
-            "./docker/trigger.py " + std_name + " " + hw_name + " " + sudotoken,
+            "./docker/trigger.py " + std_name + " " + hw_name + " " + sudotoken + " " + prof_name + " " + repo_name,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             shell=True)
@@ -167,7 +182,7 @@ def student_getinfo(request, hw_id):
     hw_duedate = str(h.hw_duedate)
     hw_duedate = hw_duedate.split("+")[0]
 
-    hslist = [h.hw_name, h.hw_base, h.hw_description, hw_duedate]
+    hslist = [h.hw_name, h.hw_base, hw_duedate]
     hw = []
     for i in cl:
         hw.append([i.score, i.commit_message, i.commit_number, i.commit_time])
@@ -178,7 +193,7 @@ def student_getinfo(request, hw_id):
 
 def updatehw(request):
     user = request.user
-    h = Homework.objects.filter(hw_name= None, hw_madeby = user)
+    h = Homework.objects.filter(hw_duedate= None, hw_madeby = user)
     if h.exists():
         hwlist = []
         for i in h:
@@ -194,7 +209,7 @@ def gethw(request):
     if hs.exists():
         hwlist = []
         for h in hs:
-            hwlist.append(h.hw_name)
+            hwlist.append([h.hw_name, h.hw_duedate])
         return JsonResponse(hwlist, safe=False)
     else:
         print("not exist")

@@ -27,7 +27,7 @@ export class CseeSignupComponent implements OnInit {
   SignUp(){
     this.userService.signupNewCsee(this.signup).subscribe(
       response => {
-          this.router.navigateByUrl('/professor-page');
+          this.router.navigateByUrl('/professor-auth');
       },
       error => console.log('error', error)
     )

@@ -1,19 +1,21 @@
-<div style="margin-top:1%">
-<h1> Homework Register </h1>
-    <h3 *ngIf="message != null" style="color: gray"> {{message}} </h3>
-    <div *ngFor="let hw of hwlist; let i = index">
-            <br> base_url : {{hw[2]}}
-            <br> evaluation_url : {{hw[3]}}
-            <br><mat-form-field>
-              <input matInput placeholder="name" [(ngModel)]="register[i]['hw_name']"> 
-            </mat-form-field> 
-            <br><mat-form-field>  
-              <input matInput placeholder="description" [(ngModel)]="register[i]['hw_description']">
-            </mat-form-field>  
-            <br><mat-form-field> 
-              <input matInput placeholder="duedate" [(ngModel)]="register[i]['hw_duedate']"> 
-            </mat-form-field>     
-            <br><button mat-raised-button color="primary" (click)="Register(i,hw[0])"> Create! </button>  
-        <br><br>    
+<div class="smallbox">
+  <h3>Homework Register</h3>
+  <h3 *ngIf="message != null" style="color:#6a737d">{{message}}</h3> 
+  <br>
+  <div *ngFor="let hw of hwlist; let i = index">
+   <div class="Box Box--condensed">
+    <div class="flash flash-full flash-warn">
+      <h1 class="Box-title overflow-hsidden flex-auto" style="color: black"> {{hw[1]}}</h1>
     </div>
+    <div class="Box-body">
+      <h5>Base url : {{hw[2]}}</h5>
+      <h5>Evaluation url : {{hw[3]}}</h5>
+      <hr>
+        <input class="form-control" placeholder="Duedate" [(ngModel)]="register[i]['hw_duedate']" [owlDateTimeTrigger]="dt" [owlDateTime]="dt">
+              <owl-date-time #dt></owl-date-time>
+        &nbsp;<button class="btn btn-primary mr-2" type="button" (click)="Register(i,hw[0])">Create!</button>
+    </div>
+   </div>
+   <br>
+  </div>
 </div>

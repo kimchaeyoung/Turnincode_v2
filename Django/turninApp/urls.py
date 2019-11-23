@@ -31,6 +31,7 @@ urlpatterns = [
     path('student-page/', views.student_page, name='student-page'),
     path('student-mypage/', views.student_mypage, name='student-mypage'),
     path('professor-page/', views.professor_page, name='professor-page'),
+    path('professor-auth/', views.professor_auth, name='professor-auth'),
     path('professor-page/getregister/', views.updatehw, name='updatehw'),
     url(r'^student-page/getinfo/(?P<hw_id>[^/]+)/$', views.student_getinfo, name='student_getinfo'),
     url(r'^professor-page/getscoreboard/(?P<hw_name>[^/]+)/$', views.getscore),

@@ -1,11 +1,11 @@
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+@import "~ng-pick-datetime/assets/style/picker.min.css";
 
 html, body {
   margin: 0;
   height: 100%;
   color: black;
   font-family: 'Muli', sans-serif;
-  background-color: #fafbfc;
 }
 
 

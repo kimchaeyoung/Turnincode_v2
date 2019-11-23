@@ -1,0 +1,41 @@
+.smallbox {
+    margin-left:4%;
+    margin-right:35%;
+    margin-top:3%;
+}
+#example-textarea{
+    height:20%;
+}
+form{
+    margin-bottom:2%;
+}
+
+.Box--style {
+    background-color: #fffdef;
+    margin: 2%;
+    padding: 2%;
+}    
+
+.Box--pink-000 {
+    background-color:#ffeef8/*pink-000*/;
+    border-color:#ea4aaa;
+}
+
+.Box--green-000 {
+    background-color:#f0fff4/*green-000*/;
+    border-color:#28a745;
+    margin-bottom:2%;  
+}
+
+.body--green {
+    border-color:#28a745;
+}
+
+.Box--yellow-000 {
+    background-color:#fffdef;
+    border-color:#ffd33d;
+}
+
+.Box--blue {
+    background-color:green;
+}
