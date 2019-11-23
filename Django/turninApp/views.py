@@ -17,7 +17,7 @@ import subprocess
 import json
 import os.path
 
-sudotoken = "c12235267ca2422cc6a75a3a1e1988e3e3f87f6a"
+sudotoken = "d7656e858b2c0e20f88f1db7c8090cee8366a398"
 
 def trg_acpt_col():
     accept_collabo(sudotoken)
@@ -135,8 +135,8 @@ def runcode(request, hw_id):
     print("current score : " , current_score)
     return JsonResponse(result, safe=False)
 
-def getscore(request, hw_name):
-    hw = Homework.objects.get(hw_name=hw_name)
+def getscore(request, hw_id):
+    hw = Homework.objects.get(id=hw_id)
     hs = Homework_Student.objects.filter(hw=hw)
     hw_duedate = str(hw.hw_duedate)
     hw_duedate = hw_duedate.split("+")[0]
@@ -153,8 +153,8 @@ def getscore(request, hw_name):
     scorelist.append(forprof)
     return JsonResponse(scorelist, safe=False)
 
-def getscdetail(request, hw_name, std_id):
-    hw = Homework.objects.get(hw_name=hw_name)
+def getscdetail(request, hw_id, std_id):
+    hw = Homework.objects.get(id=hw_id)
     hs = Homework_Student.objects.get(std=std_id, hw=hw)
     cl = CommitList.objects.filter(hs=hs)
     stdinfo = Student.objects.get(student_id = std_id)
@@ -209,7 +209,7 @@ def gethw(request):
     if hs.exists():
         hwlist = []
         for h in hs:
-            hwlist.append([h.hw_name, h.hw_duedate])
+            hwlist.append([h.hw_name, h.hw_duedate, h.id])
         return JsonResponse(hwlist, safe=False)
     else:
         print("not exist")
