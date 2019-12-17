@@ -7,15 +7,24 @@
     <div class="Box-header"> 
       <span class="in w40"><strong>Commit Time</strong></span>
       <span class="in w40"><strong>Commit message</strong></span>
-      <span class="in w20"><strong>Score</strong></span>
+      <span class="in w20"><strong>Result</strong></span>
     </div>
     <div class="Box-row" *ngFor="let info of detail[3]">
       <span class="in w40">{{info[0]}}</span>
       <span class="in w40">{{info[1]}}</span>
       <span class="in w20">
-        <a *ngIf="info.length < 10; else elseCase"> {{info[2]}} </a>
-        <ng-template #elseCase>
-        <b>error</b>
+        <ng-container *ngIf="info[2]=='pass'; else second">
+        pass
+        </ng-container>
+
+        <ng-template #second>
+        <ng-container *ngIf="info[2]=='fail';else third">
+        fail
+        </ng-container>
+        </ng-template>
+
+        <ng-template #third>
+        error
         </ng-template>
       </span>
     </div>

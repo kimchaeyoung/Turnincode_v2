@@ -34,7 +34,10 @@ export class CseeHwComponent implements OnInit {
     );
   
     this.stateService.username.subscribe(result => {
-        this.hwlist.push([result, "2019"]);
+        this.http.get('./gethw').subscribe(
+          response => {
+            this.hwlist = response;
+          });
     });
    
   }

@@ -21,16 +21,11 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 
 export const ROUTES:Routes = [
     { path: 'signup/csee', component: CseeSignupComponent },
-    {
-      path: 'professor-page',
-      redirectTo : '/professor-page/register',
-      pathMatch : 'full'
-    },
     { 
       path: 'professor-page', 
       component: CseeHwComponent,
       children : [
-          { path: 'register', component: HwRegisterComponent},    
+          { path: '', component: HwRegisterComponent},    
           { path: 'scoreboard/:id', component: HwManageComponent },
           { path: 'scoreboard/:id/:std_id', component: HwDetailComponent },
       ]

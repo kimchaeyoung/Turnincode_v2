@@ -14,16 +14,12 @@ def client_program():
     reponame = sys.argv[5]
 
     os.chdir("../Repos")
-    if os.path.exists("./" + stdname) == False:
-        os.system("mkdir " + stdname)
     os.chdir(stdname)
+    os.chdir(reponame)
+    cmd = 'git pull > /dev/null'
 
-
-    cmd = 'git clone https://forCSEE:' + sudotoken + '@github.com/' + stdname + '/' + reponame +'.git'
     os.system(cmd)
 
-    os.chdir(reponame)
-#    os.system("git log --pretty=oneline -1")
     os.system('git log --pretty="%h - %s - %cd" -1')
 
     os.chdir("../../../Django")

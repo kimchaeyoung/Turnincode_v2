@@ -6,18 +6,35 @@
   <br>
   <div class="Box">
     <div class="Box-header">
-      <span class="in w25"><strong>Student Number</strong></span>
-      <span class="in w25"><strong>Student Name</strong></span>
+      <span class="in w30"><strong>Student Number</strong></span>
+      <span class="in w30"><strong>Student Name</strong></span>
+<!--
       <span class="in w25"><strong>Github ID</strong></span>
-      <span class="in w15"><strong>Score</strong></span>
-      <span class="in w10"><strong>Detail</strong></span>
+-->
+      <span class="in w25"><strong>Result</strong></span>
+      <span class="in w15"><strong>Detail</strong></span>
     </div>
     <div class="Box-row" *ngFor = "let score of scorelist">
-      <span class="in w25">{{score[0]}}</span>
-      <span class="in w25">{{score[1]}}</span>
-      <span class="in w25">{{score[2]}}</span>
-      <span class="in w15">{{score[3]}}</span>
-      <button class="btn btn-sm in w10" type="button" routerLink ="{{score[2]}}">Detail</button>
+      <span class="in w30">{{score[0]}}</span>
+      <span class="in w30">{{score[1]}}</span>
+
+      <span class="in w25">
+        <ng-container *ngIf="score[3]=='pass'; else second">
+        pass
+        </ng-container>
+
+        <ng-template #second>
+        <ng-container *ngIf="score[3]=='fail';else third"> 
+        fail
+        </ng-container>
+        </ng-template>
+
+        <ng-template #third>
+        error
+        </ng-template>        
+      </span>
+
+      <button class="btn btn-sm in w15" type="button" routerLink ="{{score[2]}}">Detail</button>
     </div>
   </div>
 </div>

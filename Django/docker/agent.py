@@ -25,7 +25,9 @@ def eval():
     print(result)
 
 def code_orange():
-    cmd = "docker cp ../../Repos/" + stdname + "/" + reponame + "/main.c docker:new/."
+#    cmd = "docker cp ../../Repos/" + stdname + "/" + reponame + "/* docker:new/."
+    cmd = "docker cp ../../Repos/" + stdname + "/" + reponame + "/. docker:new/."
+    print(cmd)
     os.system(cmd)
     cmd = "docker cp ../../Eval/" + profname + "/" + hwname + "/build.sh docker:new/."
     os.system(cmd)
@@ -63,8 +65,8 @@ def code_black():
 #    os.system(cmd)
 #    cmd = "rm -f ../../Repos/"+stdname+"/"+reponame+"/"+"studenterror.txt"
 #    os.system(cmd)
-    cmd = "rm -rf ../../Repos/" + stdname + "/" + hwname
-    os.system(cmd)
+#    cmd = "rm -rf ../../Repos/" + stdname + "/" + reponame
+#    os.system(cmd)
     print('black')
 
 def server_program():

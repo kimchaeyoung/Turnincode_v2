@@ -19,7 +19,7 @@ export class MypageComponent implements OnInit {
   terminal_date = '';
   terminal_commit = '';
   terminal_result = '';
-  hideme:any = {};
+  hideme = {};
 
   constructor(private http:HttpClient, route: ActivatedRoute) {
         route.params.subscribe((params: Params) => {
@@ -30,7 +30,8 @@ export class MypageComponent implements OnInit {
                         this.hw_base = response[1];
                         this.hw_duedate = response[2];
                         this.hw_score = response[3];
-                },
+
+               },
                 error => console.log('error', error)
           );
         });
@@ -41,9 +42,6 @@ export class MypageComponent implements OnInit {
             },
         );
 
-        Object.keys(this.hideme).forEach(h => {
-          this.hideme[h] = true;
-        });
   }
 
   ngOnInit() {

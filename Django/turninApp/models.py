@@ -23,10 +23,16 @@ class Homework(models.Model):
     hw_duedate = models.DateTimeField(blank=True, null=True)
     hw_madeby = models.CharField(max_length=50)
 
+    def __str__(self):
+       return self.hw_name
+
 class Homework_Student(models.Model):
     hw = models.ForeignKey(Homework, related_name="homework", on_delete=models.CASCADE)
     std = models.CharField(max_length=50)
     repo_name = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.std
     
 class CommitList(models.Model):
     hs = models.ForeignKey(Homework_Student, related_name="hs", on_delete=models.CASCADE)
@@ -35,4 +41,5 @@ class CommitList(models.Model):
     commit_message = models.CharField(max_length=100)
     commit_time = models.CharField(max_length=100)
 
-
+    def __str__(self):
+        return self.score

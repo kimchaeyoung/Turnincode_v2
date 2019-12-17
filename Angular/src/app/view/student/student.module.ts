@@ -13,12 +13,14 @@ import { StudentPageComponent } from './student-page/student-page.component';
 import { MypageComponent } from './student-page/mypage/mypage.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FilterPipe } from './filter.pipe';
+import { TutorialComponent } from './student-page/tutorial/tutorial.component';
 
 export const ROUTES:Routes = [
     { path: 'signup/student-signup', component: StudentSignUpComponent },    
     { 
       path: 'student-page', component: StudentPageComponent,
       children: [
+          { path: '', component: TutorialComponent},
           { path: ':id', component: MypageComponent },
       ]
     }
@@ -27,7 +29,7 @@ export const ROUTES:Routes = [
 
 
 @NgModule({
-  declarations: [StudentSignInComponent, StudentSignUpComponent, StudentPageComponent, MypageComponent, FilterPipe],
+  declarations: [StudentSignInComponent, StudentSignUpComponent, StudentPageComponent, MypageComponent, FilterPipe, TutorialComponent],
   imports: [
     CommonModule,
     RouterModule.forRoot(ROUTES),

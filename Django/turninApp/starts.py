@@ -52,10 +52,17 @@ def accept_collabo(sudotoken):
           print("student")
           if Homework.objects.filter(hw_base=line).exists():
               h = Homework.objects.get(hw_base=line)
-              hs = Homework_Student(hw=h, std=user_id, repo_name=col_repo)
-              hs.save()
+              if not Homework_Student.objects.filter(hw=h, std=user_id, repo_name=col_repo).exists():
+                  hs = Homework_Student(hw=h, std=user_id, repo_name=col_repo)
+                  hs.save()
 
-          command = 'rm -rf ' + col_repo
+          os.chdir("../Repos")
+          if os.path.exists("./" + user_id) == False:
+              os.system("mkdir " + user_id)
+          os.chdir("../Django")
+
+
+          command = 'mv -f ' + col_repo + ' ../Repos/' + user_id + '/' + col_repo
           command = command.split()
           subprocess.check_output(command)
 
