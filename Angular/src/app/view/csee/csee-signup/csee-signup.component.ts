@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../user.service';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-csee-signup',
@@ -11,18 +12,22 @@ import { Router } from '@angular/router';
 export class CseeSignupComponent implements OnInit {
   signup;
 
-  constructor(private userService: UserService, private router:Router) { }
+  constructor(private http: HttpClient, private userService: UserService, private router:Router) { }
 
   ngOnInit() {
-    this.signup = {
-      professor_id: '',
-      professor_name: ''
-    };
+    this.http.get('./current_user').subscribe(
+      response => {
+        this.signup = {
+          professor_id: response.toString(),
+          professor_name: ''
+        };
+      }
+    )
   }
   SignUp(){
     this.userService.signupNewCsee(this.signup).subscribe(
       response => {
-          this.router.navigateByUrl('');
+          this.router.navigateByUrl('/professor-auth');
       },
       error => console.log('error', error)
     )

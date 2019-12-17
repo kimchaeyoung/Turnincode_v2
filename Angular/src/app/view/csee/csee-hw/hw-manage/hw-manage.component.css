@@ -1,0 +1,21 @@
+.smallbox {
+    margin-left:4%;
+    margin-right:35%;
+    margin-top:3%;
+}
+
+.in {
+    display:inline-block;
+}
+
+.w15 {
+    width:15%;
+}
+
+.w25 {
+    width: 25%;
+}
+
+.w30 {
+    width:30%;
+}

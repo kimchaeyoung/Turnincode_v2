@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../user.service';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-student-sign-up',
@@ -12,19 +13,23 @@ import { Router } from '@angular/router';
 export class StudentSignUpComponent implements OnInit{
   signup;
 
-  constructor(private userService:UserService, private router:Router){}
+  constructor(private http:HttpClient, private userService:UserService, private router:Router){}
 
   ngOnInit(){
-    this.signup = {
-      student_id: '',
-      student_name: '',
-      student_number: '',
-    };
+    this.http.get('./current_user').subscribe(
+      response => {
+        this.signup = {
+          student_id: response.toString(),
+          student_name: '',
+          student_number: '',
+        };
+      },
+    )
   }
   SignUp(){
     this.userService.signupNewStudent(this.signup).subscribe(
       response => {
-          this.router.navigateByUrl('/');
+          this.router.navigateByUrl('/student-page');
       },
       error => console.log('error', error)
     )

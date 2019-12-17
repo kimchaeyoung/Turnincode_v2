@@ -1,5 +1,18 @@
-<h3>Sign Up</h3>
-  <h5>choose your mode</h5>
-  <button routerLink="student-signup"> student </button>
-  <button routerLink="csee"> professor </button>
-
+<!DOCTYPE html>
+<html>
+<head>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<script src="https://kit.fontawesome.com/d6dd2c6584.js" crossorigin="anonymous"></script>
+<link href="https://fonts.googleapis.com/css?family=Libre+Baskerville&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="center">
+    <div class="inline box">
+      <a class="button1" routerLink="student-signup"><fa-icon [icon]="faUser" size="2x" [styles]="{'color': '#0366d6'}"></fa-icon>&nbsp;Student</a>
+    </div>
+    <div class="inline box">
+      <a class="button2" routerLink="csee"><fa-icon [icon]="faSchool" size="2x" [styles]="{'color': '#28a745'}"></fa-icon>&nbsp;Professor</a>
+    </div>
+</div>
+</body>
+</html>

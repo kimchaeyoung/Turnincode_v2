@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'turninApp.apps.TurninappConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,7 +42,6 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'corsheaders',
     'social_django',
-    'turninApp.apps.TurninappConfig',
 ]
 
 MIDDLEWARE = [
@@ -81,13 +81,17 @@ WSGI_APPLICATION = 'Turnincode.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'djangodb',
+        'USER': 'turnin',
+        'PASSWORD': 'capstone2019',
+        'HOST': 'turnincode.cafe24.com',
+        'PORT': '',
+        },
     }
-}
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -113,7 +117,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Seoul'
 
 USE_I18N = True
 
@@ -149,7 +153,9 @@ AUTHENTICATION_BACKENDS = (
  'django.contrib.auth.backends.ModelBackend',
 )
 
-SOCIAL_AUTH_GITHUB_KEY = 'abed2d6bd220b1c01507'
-SOCIAL_AUTH_GITHUB_SECRET = 'ee1776778dd1280478b06fc13d220a521b5333a0'
+SOCIAL_AUTH_GITHUB_KEY = 'b42121cc53376ba493d2'
+SOCIAL_AUTH_GITHUB_SECRET = 'fd63f284dd934b5b42cdab30464172596e6e0a5d'
 
 LOGIN_REDIRECT_URL = 'success-login'
+LOGOUT_URL = 'logout'
+LOGOUT_REDIRECT_URL = 'signin'

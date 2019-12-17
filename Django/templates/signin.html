@@ -1,22 +1,69 @@
+<style>
+body {
+    background-color: #2C3137;
+}
+#signin {
+    -webkit-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+    -moz-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+    -ms-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+    -o-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+    transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+    display: block;
+    text-decoration: none;
+    border-radius: 4px;
+    padding: 20px 40px;
+    text-decoration: none;
+}
+
+#signin.button {
+    color: white;
+    box-shadow: #28a745  0 0px 0px 40px inset;
+}
+
+#signin.button:hover {
+    color: rgba(255, 255, 255, 0.85);
+    box-shadow: #144620 0 0px 0px 40px inset;
+
+}
+
+footer {
+    background-color: #2C3137;
+    height: 30%;
+}
+.put {
+    display: inline-block;
+}
+.buttonbox {
+    float: left;
+    margin-left: 16%;
+}
+</style>
+
 {% load static %}
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Student</title>
+    <title>Turnincode</title>
     <base href="/">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-  </head>
-  <body>
+    <script src="https://kit.fontawesome.com/d6dd2c6584.js" crossorigin="anonymous"></script>
     <app-root></app-root>
     <script type="text/javascript" src="{% static 'runtime.js' %}"></script>
     <script type="text/javascript" src="{% static 'polyfills.js' %}"></script>
     <script type="text/javascript" src="{% static 'styles.js' %}"></script>
     <script type="text/javascript" src="{% static 'vendor.js' %}"></script>
     <script type="text/javascript" src="{% static 'main.js' %}"></script>
-  </body>
-</html>
-<div style="text-align:center">
-      <br><button style="color:black" onclick="window.location.href='{% url 'social:begin' 'github' %}'">Sign In</a><br>
+  </head>
+  <footer>
+    <div class="buttonbox">
+    {% if not user.is_authenticated %}
+      <div id="signin" class="mar button" onclick="window.location.href='{% url 'social:begin' 'github' %}'" >Sign In!</div>
+    {% else %}
+      <div class="put"><a id="signin" class="button" onclick="window.location.href='{% url 'logout' %}'" >Sign Out!</a></div>
+      &nbsp;&nbsp;<div class="put"><a id="signin" class="button" onclick="window.location.href='{% url 'success-login' %}'" >My Page</a></div>
+    {% endif %}
     </div>
+  </footer>
+</html>
 

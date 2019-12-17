@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit } from '@angular/core';
 import { UserService } from '../../../user.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { StateService } from '../../../state.service';
 
 @Component({
   selector: 'app-hw-register',
@@ -9,26 +11,51 @@ import { Router } from '@angular/router';
   providers: [UserService]
 })
 export class HwRegisterComponent implements OnInit {
-  register;
+  register = {};
+  hwlist : any = [];  
+  message = '';
 
-  constructor(private userService: UserService, private router:Router) { }
+  username: string;
+
+  constructor(private stateService : StateService, private http:HttpClient, route: ActivatedRoute, private userService: UserService, private router:Router)
+  { 
+    this.getHw();
+  }
 
   ngOnInit() {
-    this.register = {
-      hw_name: '',
-      hw_base: '',
-      hw_eval: '',
-      hw_description: '',
-      hw_duedate: '',
-    };
+    this.stateService.username.subscribe(result => {
+        this.username = result;
+    });
   }
-  Register(){
-    this.userService.registerHomework(this.register).subscribe(
+
+  Register(num, hw_id){
+    this.stateService.changeUsername(this.hwlist[num][1]);
+    this.userService.registerHomework(this.register[num], hw_id).subscribe(
       response => {
-        this.router.navigateByUrl('professor-page/manage');
+        this.getHw();
+        this.router.navigateByUrl('professor-page/register');
       },
       error => console.log('error', error)
     )
   }
+ 
+ getHw(){
+  this.http.get('./professor-page/getregister/').subscribe(
+            response=> {
+                this.hwlist = response;
+                let i;
+                this.register = {};
+                if(this.hwlist != null){
+                    for(i = 0; i< this.hwlist.length; i++){
+                        this.register[i] = {hw_duedate:''}
+                    }
+                 }
+                else{
+                    this.message = '과제를 등록해주세요';
+                }
+            }
+        ); 
+   }
+ 
 }
 

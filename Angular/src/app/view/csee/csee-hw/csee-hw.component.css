@@ -1,0 +1,40 @@
+section {
+    height: 100%;
+    width: 25%;
+    float: left;
+    background-color: white;
+}
+aside {
+    height: 100%;
+    width: 74.5%;
+    float: right;
+    border-left: 1px solid #e1e4e8/*gray-200*/;
+    background-color: #f6f8fa;/*gray-100*/
+}
+hr {
+    border-top: solid 1px #e1e4e8/*gray-200*/;
+    border-bottom:none;
+    border-left:none;
+    border-right:none;
+}
+.small {
+    margin-left:9%;
+    margin-right:9%;
+    margin-top:11%;
+}
+.userbox{
+    color: #28a745;/*green-500*/
+}
+.hwtitle {
+    color: #24292e;/*gray-900*/ 
+}
+.hws {
+    color:#6a737d;/*gray-500*/
+}
+.hw {
+    color: #2f363d;
+    /*color: #24292e;*/
+    /*color: #b08800;/*#28a745;green-500*/
+    margin-top:1%;
+}
+

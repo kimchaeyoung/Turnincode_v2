@@ -1,9 +1,40 @@
-<ul>
-  <li *ngFor="let hw of hwlist; let i = index">
-    <h4>{{i}}: {{hw.hw_name}}</h4>
-    <p> {{hw.hw_ink}}</p>
-    <p> {{hw.hw_description}}</p>
-    <p> {{hw.hw_duedate}}</p>
-  </li>
-</ul>
+<div class="smallbox">
+  <h3> Scoreboard </h3>
+  <div class="box-shadow-large p-3">
+      {{hw_name}} <p style="float:right"> {{hw_duedate}} </p>
+  </div>
+  <br>
+  <div class="Box">
+    <div class="Box-header">
+      <span class="in w30"><strong>Student Number</strong></span>
+      <span class="in w30"><strong>Student Name</strong></span>
+<!--
+      <span class="in w25"><strong>Github ID</strong></span>
+-->
+      <span class="in w25"><strong>Result</strong></span>
+      <span class="in w15"><strong>Detail</strong></span>
+    </div>
+    <div class="Box-row" *ngFor = "let score of scorelist">
+      <span class="in w30">{{score[0]}}</span>
+      <span class="in w30">{{score[1]}}</span>
 
+      <span class="in w25">
+        <ng-container *ngIf="score[3]=='pass'; else second">
+        pass
+        </ng-container>
+
+        <ng-template #second>
+        <ng-container *ngIf="score[3]=='fail';else third"> 
+        fail
+        </ng-container>
+        </ng-template>
+
+        <ng-template #third>
+        error
+        </ng-template>        
+      </span>
+
+      <button class="btn btn-sm in w15" type="button" routerLink ="{{score[2]}}">Detail</button>
+    </div>
+  </div>
+</div>

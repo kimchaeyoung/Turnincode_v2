@@ -1,21 +1,21 @@
-<h1> Homework Register </h1>
-    <label for="homeworkName">hw_name:</label>
-    <input type="text" name="name" id="homeworkName" maxlength="140"
-           required [(ngModel)]="register.hw_name"/>
-
-    <br><label for="homeworkName">basecode_url:</label>
-    <input type="text" name="basecode_url" id="baseUrl" maxlength="140"
-           required [(ngModel)]="register.hw_base"/>
- 
-    <br><label for="homeworkName">evaluation_url:</label>
-    <input type="text" name="evaluation_url" id="evalUrl" maxlength="140"
-           required [(ngModel)]="register.hw_eval"/>
- 
-    <br><label for="homeworkDescription">description:</label>
-    <input type="text" name="description" id="homeworkDescription" maxlength="140"
-           required [(ngModel)]="register.hw_description"/>
-
-    <br><label for="homeworkDuedate">duedate:</label>
-    <input type="datetime-local" name="duedate" id="homeworkDuedate" maxlength="140"
-           required [(ngModel)]="register.hw_duedate"/>
-    <br><button (click)="Register()"> Create! </button>
+<div class="smallbox">
+  <h3>Homework Register</h3>
+  <h3 *ngIf="message != null" style="color:#6a737d">{{message}}</h3> 
+  <br>
+  <div *ngFor="let hw of hwlist; let i = index">
+   <div class="Box Box--condensed">
+    <div class="flash flash-full flash-warn">
+      <h1 class="Box-title overflow-hsidden flex-auto" style="color: black"> {{hw[1]}}</h1>
+    </div>
+    <div class="Box-body">
+      <h5>Base url : {{hw[2]}}</h5>
+      <h5>Evaluation url : {{hw[3]}}</h5>
+      <hr>
+        <input class="form-control" placeholder="Duedate" [(ngModel)]="register[i]['hw_duedate']" [owlDateTimeTrigger]="dt" [owlDateTime]="dt">
+              <owl-date-time #dt></owl-date-time>
+        &nbsp;<button class="btn btn-primary mr-2" type="button" (click)="Register(i,hw[0])">Create!</button>
+    </div>
+   </div>
+   <br>
+  </div>
+</div>
